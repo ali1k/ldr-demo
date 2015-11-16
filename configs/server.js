@@ -48,9 +48,6 @@ export default {
         'http://babelnet.org/rdf/': {
             host: 'babelnet.org', port: 80, path: '/sparql', useDefaultGraph: 1, type: 'virtuoso'
         }
- //       'http://risis.eu/cordisH2020': {
-//            host: 'sparql.risis.eculture.labs.vu.nl', port: 80, path: '/'
-//        },
     },
     dbpediaLookupService: [
         { host: 'lookup.dbpedia.org' }
