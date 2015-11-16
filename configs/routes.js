@@ -50,6 +50,17 @@ export default {
             done();
         }
     },
+    lotus: {
+        //if no id is provided -> will start by defaultGraphName in reactor.config
+        path: '/lotus',
+        method: 'get',
+        handler: require('../components/Lotus'),
+        label: 'Lotus',
+        action: (context, payload, done) => {
+            context.dispatch('UPDATE_PAGE_TITLE', { pageTitle: appFullTitle + ' | LOTUS Search Engine'});
+            done();
+        }
+    },
     dataset: {
         //if no id is provided -> will start by defaultGraphName in reactor.config
         path: '/dataset/:page?/:id?',
