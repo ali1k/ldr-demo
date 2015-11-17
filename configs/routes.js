@@ -5,16 +5,16 @@ import loadFacets from '../actions/loadFacets';
 import {appFullTitle, appShortTitle, authGraphName, baseResourceDomain} from '../configs/general';
 
 export default {
-    home: {
-        path: '/',
-        method: 'get',
-        handler: require('../components/Home'),
-        label: appShortTitle,
-        action: (context, payload, done) => {
-            context.dispatch('UPDATE_PAGE_TITLE', { pageTitle: appFullTitle + ' | Home'});
-            done();
-        }
-    },
+    // home: {
+    //     path: '/',
+    //     method: 'get',
+    //     handler: require('../components/Home'),
+    //     label: appShortTitle,
+    //     action: (context, payload, done) => {
+    //         context.dispatch('UPDATE_PAGE_TITLE', { pageTitle: appFullTitle + ' | Home'});
+    //         done();
+    //     }
+    // },
     about: {
         path: '/about',
         method: 'get',
@@ -41,12 +41,12 @@ export default {
     },
     datasets: {
         //if no id is provided -> will start by defaultGraphName in reactor.config
-        path: '/datasets',
+        path: '/',
         method: 'get',
         handler: require('../components/Datasets'),
         label: 'Datasets',
         action: (context, payload, done) => {
-            context.dispatch('UPDATE_PAGE_TITLE', { pageTitle: appFullTitle + ' | Datasets'});
+            context.dispatch('UPDATE_PAGE_TITLE', { pageTitle: appFullTitle + ' | Demo'});
             done();
         }
     },

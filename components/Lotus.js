@@ -119,10 +119,16 @@ class Lotus extends React.Component {
               </div>
               <div className="ui row">
                 <div className="column">
-
                     <div className="ui relaxed">
-                        {this.props.LotusStore.isComplete ? '' : <span><img src="/assets/img/loader.gif" alt="loading..."/> searching...</span>}
+                        {this.props.LotusStore.isComplete ? '' : <span className="ui active"><img src="/assets/img/loader.gif" alt="loading..."/> </span>}
                         {list.length ? <div><b>{counter}</b> resource(s) listed below: {list}</div> : ''}
+                    </div>
+                </div>
+              </div>
+              <div className="ui row">
+                <div className="center aligned column">
+                    <div className="ui relaxed">
+                        powered by <a href="http://lotus.lodlaundromat.org" target="_blank">LOTUS</a>.
                     </div>
                 </div>
               </div>
