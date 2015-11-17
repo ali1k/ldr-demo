@@ -91,7 +91,7 @@ class Lotus extends React.Component {
                     <div className="ui">
                         <div className="ui fluid category search">
                           <div className="ui large icon input">
-                            <input ref="keyword" className="prompt" type="text" placeholder="Search in Linked Open Data..." style={{width: '500'}} onKeyDown={this.handleKeyDown.bind(this)}/>
+                            <input ref="keyword" className="prompt" type="text" placeholder="Search on Linked Open Data..." style={{width: '500'}} onKeyDown={this.handleKeyDown.bind(this)}/>
                             <i className="search icon"></i>
                           </div>
                           &nbsp;<button className="ui grey circular button" onClick={this.handleSearch.bind(this)}>LOD Search</button>
