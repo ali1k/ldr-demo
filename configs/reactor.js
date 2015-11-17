@@ -109,7 +109,7 @@ export default {
                 objectIEditor: ['BasicIndividualInput'],
                 extendedOEditor: ['BasicIndividualDetailEdit'],
                 extendedOViewer: ['BasicIndividualDetailView'],
-                shortenURI: 1
+                truncateURI: 1
             }
         },
         //property value = object
@@ -740,4 +740,3 @@ export default {
         }
     }
 };
-
