@@ -1,7 +1,8 @@
 'use strict';
 import rp from 'request-promise';
 import LotusUtil from './utils/LotusUtil';
-const LotusEndpoint = 'http://lotus.lodlaundromat.org';
+//const LotusEndpoint = 'http://lotus.lodlaundromat.org';
+const LotusEndpoint = 'http://lotus.fii800.eculture.labs.vu.nl';
 let query, size, algorithm, langTag;
 let utilObject = new LotusUtil();
 
