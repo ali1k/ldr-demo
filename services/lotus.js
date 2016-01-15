@@ -17,7 +17,7 @@ export default {
             algorithm = params.algorithm ? params.algorithm : 'terms';
             langTag = params.langTag ? params.langTag : '';
             //send request
-            rp({method: 'get', headers: {'Accept': 'application/json'}, accept: 'application/json', uri: LotusEndpoint +'/retrieve?match=' + algorithm + '/?string=' + query + '&size=' + size + '&langtag=' + langTag}).then(function(res){
+            rp({method: 'get', headers: {'Accept': 'application/json'}, accept: 'application/json', uri: LotusEndpoint +'/retrieve?match=' + algorithm + '&string=' + query + '&size=' + size + '&langtag=' + langTag}).then(function(res){
                 callback(null, {
                     suggestions: utilObject.parseLotusLookup(res)
                 });
