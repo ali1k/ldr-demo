@@ -39,7 +39,12 @@ export default {
         },
         'http://www.freme-project.eu/datasets/cordis': {
             list: [
-                'http://www.w3.org/1999/02/22-rdf-syntax-ns#type', 'http://www.freme-project.eu/datasets/cordis/projectTopics',
+                'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+                'http://www.freme-project.eu/datasets/cordis/programme',
+                'http://www.freme-project.eu/datasets/cordis/projectFundingScheme',
+                'http://www.freme-project.eu/datasets/cordis/projectFundingScheme',
+                'http://www.freme-project.eu/datasets/cordis/projectTopics',
+                'http://www.freme-project.eu/datasets/cordis/status',
                 'http://www.freme-project.eu/datasets/cordis/activityType'
             ],
             config: {
