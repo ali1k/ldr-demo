@@ -40,6 +40,10 @@ export default {
                 resourceFocusType: ['http://risis.eu/cordisH2020/vocab/SignedGrantAgreement'],
                 readOnly: 1,
             },
+            'http://www.freme-project.eu/datasets/cordis': {
+                resourceFocusType: ['http://dbpedia.org/ontology/ResearchProject'],
+                readOnly: 1,
+            },
             'http://drugbank.bio2rdf.org/sparql': {
                 resourceFocusType: ['http://bio2rdf.org/drugbank_vocabulary:Drug'],
                 readOnly: 1,
