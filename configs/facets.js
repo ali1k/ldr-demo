@@ -67,6 +67,14 @@ export default {
 
             }
         },
+        'http://drugbank.bio2rdf.org/sparql': {
+            list: [
+                'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'
+            ],
+            config: {
+
+            }
+        },
         'http://babelnet.org/rdf/': {
             list: [
                 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type', 'http://www.lemon-model.net/lemon#language', 'http://www.lexinfo.net/ontology/2.0/lexinfo#partOfSpeech', 'http://www.lemon-model.net/lemon#sense'

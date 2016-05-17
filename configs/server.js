@@ -9,6 +9,9 @@ export default {
         'http://lsq.aksw.org/sparql': {
             host: 'lsq.aksw.org', port: 80, path: '/sparql', useDefaultGraph: 1, type: 'virtuoso'
         },
+        'http://drugbank.bio2rdf.org/sparql': {
+            host: 'drugbank.bio2rdf.org', port: 80, path: '/sparql', useDefaultGraph: 1, type: 'virtuoso'
+        },
         'http://lodlaundromat.org/sparql/': {
             host: 'lodlaundromat.org', port: 80, path: '/sparql', useDefaultGraph: 1, type: 'virtuoso'
         },

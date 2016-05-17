@@ -20,6 +20,10 @@ export default {
                 resourceFocusType: ['http://rdfs.org/ns/void#Dataset'],
                 readOnly: 0
             },
+            'http://drugbank.bio2rdf.org/sparql': {
+                resourceFocusType: ['http://bio2rdf.org/pharmgkb_vocabulary:Drug'],
+                readOnly: 0
+            },
             'http://orgref.org': {
                 resourceFocusType: ['http://xmlns.com/foaf/Organization'],
                 readOnly: 1,
