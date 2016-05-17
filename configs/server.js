@@ -52,7 +52,7 @@ export default {
             host: 'babelnet.org', port: 80, path: '/sparql', useDefaultGraph: 1, type: 'virtuoso'
         },
         'http://www.freme-project.eu/datasets/cordis': {
-            host: 'sparql.risis.ops.few.vu.nl', port: 80, path: '/', type: 'virtuoso'
+            host: 'sparql.risis.d2s.labs.vu.nl', port: 80, path: '/', type: 'virtuoso'
         }
     },
     dbpediaLookupService: [
