@@ -48,6 +48,10 @@ export default {
                 resourceFocusType: ['http://dbpedia.org/ontology/ResearchProject'],
                 readOnly: 1,
             },
+            'http://world.openfoodfacts.org/': {
+                resourceFocusType: ['http://data.lirmm.fr/ontologies/food#Food', 'http://data.lirmm.fr/ontologies/food#FoodProduct', 'http://data.lirmm.fr/ontologies/food#Ingredient'],
+                readOnly: 1,
+            },
             'http://drugbank.bio2rdf.org/sparql': {
                 resourceFocusType: ['http://bio2rdf.org/drugbank_vocabulary:Drug'],
                 readOnly: 1,
