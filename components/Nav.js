@@ -28,7 +28,7 @@ class Nav extends React.Component {
         }
         return (
             <nav ref="defaultNavbar" className="ui blue menu inverted navbar page grid">
-                    <a className="brand item" href="http://ld-r.org/"><img style={{height: '20', width: '20'}} className="ui mini image" src="/assets/img/ld-reactor.gif" alt="ld-reactor" /></a>
+                    <a className="brand item" href="http://ld-r.org/"><img style={{height: 20, width: 20}} className="ui mini image" src="/assets/img/ld-reactor.gif" alt="ld-reactor" /></a>
                     <a className="item" href="http://ld-r.org/" data-section="home">LD-R</a>
                     <a className="item" href="http://ld-r.org/docs/quickstart.html" data-section="quickstart">
                       Quick Start
