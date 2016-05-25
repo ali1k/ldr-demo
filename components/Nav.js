@@ -35,6 +35,9 @@ class Nav extends React.Component {
                     </a>
                     <NavLink routeName="datasets" className="item" activeclassName="active" href="/">Demo</NavLink>
                     <div className="right menu">
+                        <a href="/public/js/stats.html" className="ui item link" target="_blank" title="components stat">
+                                <i className="lab icon"></i>
+                        </a>
                         <div className="item link" onClick={this.showHelpModal}>
                                 <i className="small help circle icon"></i>
                         </div>
