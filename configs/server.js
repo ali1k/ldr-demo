@@ -56,6 +56,9 @@ export default {
         },
         'http://world.openfoodfacts.org/': {
             host: 'sparql.sms.risis.eu', port: 80, path: '/', type: 'virtuoso'
+        },
+        'http://grid.ac': {
+            host: 'sparql.sms.risis.eu', port: 80, path: '/', type: 'virtuoso'
         }
     },
     dbpediaLookupService: [

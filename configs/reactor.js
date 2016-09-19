@@ -32,6 +32,10 @@ export default {
                 resourceFocusType: ['http://swrc.ontoware.org/ontology#InProceedings'],
                 readOnly: 1,
             },
+            'http://grid.ac': {
+                resourceFocusType: ['http://xmlns.com/foaf/0.1/Organization'],
+                readOnly: 1,
+            },
             'http://live.dbpedia.org': {
                 resourceFocusType: ['http://dbpedia.org/ontology/University'],
                 readOnly: 1
@@ -132,7 +136,6 @@ export default {
         },
         //---------depth 2------------
         dataset_resource: {
-
         },
         dataset_property: {
             'http://risis.eu/cordisH2020': {
