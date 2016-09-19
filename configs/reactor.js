@@ -33,10 +33,10 @@ export default {
                 readOnly: 1
             },
             'http://grid.ac': {
+                resourceFocusType: ['http://xmlns.com/foaf/0.1/Organization'],
                 readOnly: 1
             },
             'https://ec.europa.eu/jrc/en/language-technologies/jrc-names': {
-                resourceFocusType: ['http://xmlns.com/foaf/0.1/Organization'],
                 readOnly: 1,
             },
             'http://live.dbpedia.org': {
@@ -106,7 +106,7 @@ export default {
 	'http://geo.risis.eu/rvo-nl': {
 		readOnly: 1,
 		resourceFocusType: ['http://geo.risis.eu/vocabulary/rvo-nl/Project']
-	}	
+	}
         },
         resource: {
             'generic': {
