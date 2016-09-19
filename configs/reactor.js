@@ -26,13 +26,16 @@ export default {
             },
             'http://orgref.org': {
                 resourceFocusType: ['http://xmlns.com/foaf/Organization'],
-                readOnly: 1,
+                readOnly: 1
             },
             'http://data.semanticweb.org/sparql': {
                 resourceFocusType: ['http://swrc.ontoware.org/ontology#InProceedings'],
-                readOnly: 1,
+                readOnly: 1
             },
             'http://grid.ac': {
+                readOnly: 1
+            },
+            'https://ec.europa.eu/jrc/en/language-technologies/jrc-names': {
                 resourceFocusType: ['http://xmlns.com/foaf/0.1/Organization'],
                 readOnly: 1,
             },
