@@ -56,6 +56,12 @@ export default {
         },
         'http://world.openfoodfacts.org/': {
             host: 'sparql.sms.risis.eu', port: 80, path: '/', type: 'virtuoso'
+        },
+        'http://geo.risis.eu/rvo-nl': {
+            host: 'sparql.sms.risis.eu', port: 80, path: '/', type: 'virtuoso'
+        },
+        'http://geo.risis.eu/oecd': {
+            host: 'sparql.sms.risis.eu', port: 80, path: '/', type: 'virtuoso'
         }
     },
     dbpediaLookupService: [

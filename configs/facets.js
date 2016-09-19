@@ -162,6 +162,24 @@ export default {
                     hasLinkedValue: 1
                 }
             }
+        },
+        'http://geo.risis.eu/rvo-nl': {
+            list: [
+                'http://www.w3.org/1999/02/22-rdf-syntax-ns#type', 'http://www.europeana.eu/schemas/edm/year', 'http://purl.org/dc/terms/subject', 'http://geo.risis.eu/vocabulary/rvo-nl/status'
+            ],
+            config: {
+
+            }
+        },
+        'http://geo.risis.eu/oecd': {
+            list: [
+                'http://www.w3.org/1999/02/22-rdf-syntax-ns#type', 'http://geo.risis.eu/vocabulary/oecd/isCore', 'http://geo.risis.eu/vocabulary/oecd/ISO'
+            ],
+            config: {
+                'http://geo.risis.eu/vocabulary/oecd/ISO': {
+                    label: ['Country']
+                },
+            }
         }
     }
 };

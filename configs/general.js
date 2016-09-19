@@ -16,5 +16,6 @@ export default {
     //will enable email notifications
     enableEmailNotifications: 1,
     //will put all update actions in log folder
-    enableLogs: 1
+    enableLogs: 1,
+googleAnalyticsID: 'UA-82324877-1'
 };

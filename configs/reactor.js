@@ -95,7 +95,11 @@ export default {
             'http://lsq.aksw.org/sparql': {
                 readOnly: 1,
                 resourceFocusType: ['http://spinrdf.org/sp#Select', 'http://spinrdf.org/sp#Ask', 'http://spinrdf.org/sp#Construct', 'http://spinrdf.org/sp#Describe']
-            }
+            },
+	'http://geo.risis.eu/rvo-nl': {
+		readOnly: 1,
+		resourceFocusType: ['http://geo.risis.eu/vocabulary/rvo-nl/Project']
+	}	
         },
         resource: {
             'generic': {
