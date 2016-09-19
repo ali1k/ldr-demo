@@ -61,6 +61,12 @@ export default {
             host: 'sparql.sms.risis.eu', port: 80, path: '/', type: 'virtuoso'
         },
         'http://geo.risis.eu/oecd': {
+        	host: 'sparql.sms.risis.eu', port: 80, path: '/', type: 'virtuoso'
+	},
+	'http://grid.ac': {
+            host: 'sparql.sms.risis.eu', port: 80, path: '/', type: 'virtuoso'
+        },
+        'https://ec.europa.eu/jrc/en/language-technologies/jrc-names': {
             host: 'sparql.sms.risis.eu', port: 80, path: '/', type: 'virtuoso'
         }
     },
