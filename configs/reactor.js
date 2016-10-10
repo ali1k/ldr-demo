@@ -18,95 +18,79 @@ export default {
             },
             'http://ld-r.org/datasets/void': {
                 resourceFocusType: ['http://rdfs.org/ns/void#Dataset'],
-                readOnly: 0
+                readOnly: 0,
+                datasetLabel: ['Examples of editable datasets']
             },
             'http://drugbank.bio2rdf.org/sparql': {
-                resourceFocusType: ['http://bio2rdf.org/pharmgkb_vocabulary:Drug'],
-                readOnly: 0
+                resourceFocusType: ['http://bio2rdf.org/drugbank_vocabulary:Drug'],
+                readOnly: 0,
+                datasetLabel: ['DrugBank Dataset']
             },
-            'http://orgref.org': {
-                resourceFocusType: ['http://xmlns.com/foaf/Organization'],
-                readOnly: 1
-            },
-            'http://data.semanticweb.org/sparql': {
-                resourceFocusType: ['http://swrc.ontoware.org/ontology#InProceedings'],
-                readOnly: 1
-            },
-            'http://grid.ac': {
-                resourceFocusType: ['http://xmlns.com/foaf/0.1/Organization'],
-                readOnly: 1
-            },
-            'https://ec.europa.eu/jrc/en/language-technologies/jrc-names': {
+            'http://clinicaltrials.bio2rdf.org/sparql': {
+                resourceFocusType: ['http://bio2rdf.org/clinicaltrials_vocabulary:Clinical-Study'],
                 readOnly: 1,
-            },
-            'http://live.dbpedia.org': {
-                resourceFocusType: ['http://dbpedia.org/ontology/University'],
-                readOnly: 1
-            },
-            'http://nl.dbpedia.org': {
-                resourceFocusType: ['http://xmlns.com/foaf/0.1/Person'],
-                readOnly: 1
-            },
-            'http://risis.eu/cordisH2020': {
-                resourceFocusType: ['http://risis.eu/cordisH2020/vocab/SignedGrantAgreement'],
-                readOnly: 1,
-            },
-            'http://www.freme-project.eu/datasets/cordis': {
-                resourceFocusType: ['http://dbpedia.org/ontology/ResearchProject'],
-                readOnly: 1,
+                datasetLabel: ['Clinical Trials Dataset']
             },
             'http://world.openfoodfacts.org/': {
                 resourceFocusType: ['http://data.lirmm.fr/ontologies/food#Food', 'http://data.lirmm.fr/ontologies/food#FoodProduct', 'http://data.lirmm.fr/ontologies/food#Ingredient'],
                 readOnly: 1,
+                datasetLabel: ['OpenFoodFacts Dataset']
             },
-            'http://drugbank.bio2rdf.org/sparql': {
-                resourceFocusType: ['http://bio2rdf.org/drugbank_vocabulary:Drug'],
+            'http://data.semanticweb.org/sparql': {
+                resourceFocusType: ['http://swrc.ontoware.org/ontology#InProceedings'],
                 readOnly: 1,
+                datasetLabel: ['Semantic Web Dogfood Dataset (SW Publications)']
             },
-            'http://clinicaltrials.bio2rdf.org/sparql': {
-                resourceFocusType: ['http://bio2rdf.org/clinicaltrials_vocabulary:Clinical-Study'],
-                readOnly: 1
-            },
-            'http://enipedia.tudelft.nl/data/CORDIS': {
-                resourceFocusType: ['http://www.aktors.org/ontology/portal#Project'],
+            'http://live.dbpedia.org': {
+                resourceFocusType: ['http://dbpedia.org/ontology/University'],
                 readOnly: 1,
+                datasetLabel: ['Live DBpedia Dataset']
+            },
+            'http://nl.dbpedia.org': {
+                resourceFocusType: ['http://xmlns.com/foaf/0.1/Person'],
+                readOnly: 1,
+                datasetLabel: ['Dutch DBpedia Dataset']
+            },
+            'http://risis.eu/cordisH2020': {
+                resourceFocusType: ['http://risis.eu/cordisH2020/vocab/SignedGrantAgreement'],
+                readOnly: 1,
+                datasetLabel: ['Cordis H2020 Projects Dataset']
             },
             'http://babelnet.org/rdf/': {
                 resourceFocusType: ['http://www.lemon-model.net/lemon#LexicalEntry'],
-                readOnly: 1
+                readOnly: 1,
+                datasetLabel: ['BabelNet Dataset']
             },
             'http://linkedgeodata.org': {
                 resourceFocusType: ['http://linkedgeodata.org/ontology/University'],
-                readOnly: 1
+                readOnly: 1,
+                datasetLabel: ['LinkedGeoData Dataset']
             },
             'http://www.bbc.co.uk/nature/': {
                 resourceFocusType: ['http://xmlns.com/foaf/0.1/Document'],
-                readOnly: 1
+                readOnly: 1,
+                datasetLabel: ['BBC Nature Dataset']
             },
             'http://www.linklion.org:8890/sparql': {
                 resourceFocusType: ['http://www.linklion.org/ontology#Link'],
-                readOnly: 1
+                readOnly: 1,
+                datasetLabel: ['Linkion Dataset']
             },
             'http://www.contextdatacloud.org': {
                 resourceFocusType: ['http://www.contextdatacloud.org/ontology/WeatherSituation', 'http://www.contextdatacloud.org/ontology/LocationEntity'],
-                readOnly: 1
-            },
-            'http://sonicbanana.cs.wright.edu:8890/sparql': {
-                resourceFocusType: ['http://knoesis.wright.edu/ssw/ont/weather.owl#RainfallObservation', 'http://knoesis.wright.edu/ssw/ont/weather.owl#SnowfallObservation'],
-                readOnly: 1
+                readOnly: 1,
+                datasetLabel: ['Context Data Clooud Dataset']
             },
             'http://lodlaundromat.org/sparql/': {
                 readOnly: 1,
-                resourceFocusType: ['http://lodlaundromat.org/ontology/ArchiveEntry']
+                resourceFocusType: ['http://lodlaundromat.org/ontology/ArchiveEntry'],
+                datasetLabel: ['lodlaundromat Dataset']
             },
             'http://lsq.aksw.org/sparql': {
                 readOnly: 1,
-                resourceFocusType: ['http://spinrdf.org/sp#Select', 'http://spinrdf.org/sp#Ask', 'http://spinrdf.org/sp#Construct', 'http://spinrdf.org/sp#Describe']
-            },
-	'http://geo.risis.eu/rvo-nl': {
-		readOnly: 1,
-		resourceFocusType: ['http://geo.risis.eu/vocabulary/rvo-nl/Project']
-	}
+                resourceFocusType: ['http://spinrdf.org/sp#Select', 'http://spinrdf.org/sp#Ask', 'http://spinrdf.org/sp#Construct', 'http://spinrdf.org/sp#Describe'],
+                datasetLabel: ['Linked SPARQL Queries Dataset']
+            }
         },
         resource: {
             'generic': {

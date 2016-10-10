@@ -8,13 +8,6 @@ export default {
 
             }
         },
-	'http://orgref.org': {
-		list: [
-		'http://www.w3.org/1999/02/22-rdf-syntax-ns#type', 'http://dbpedia.org/ontology/iso6392Code'
-		],
-		config: {
-		}
-	},
         'http://www.contextdatacloud.org': {
 
             list: [
@@ -27,28 +20,6 @@ export default {
                 'http://www.w3.org/2001/vcard-rdf/3.0#locality': {
                     label: ['Location']
                 }
-            }
-        },
-        'http://enipedia.tudelft.nl/data/CORDIS': {
-            list: [
-                'http://www.w3.org/1999/02/22-rdf-syntax-ns#type', 'http://www.aktors.org/ontology/portal#addresses-generic-area-of-interest'
-            ],
-            config: {
-
-            }
-        },
-        'http://www.freme-project.eu/datasets/cordis': {
-            list: [
-                'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
-                'http://www.freme-project.eu/datasets/cordis/programme',
-                'http://www.freme-project.eu/datasets/cordis/projectFundingScheme',
-                'http://www.freme-project.eu/datasets/cordis/projectFundingScheme',
-                'http://www.freme-project.eu/datasets/cordis/projectTopics',
-                'http://www.freme-project.eu/datasets/cordis/status',
-                'http://www.freme-project.eu/datasets/cordis/activityType'
-            ],
-            config: {
-
             }
         },
         'http://world.openfoodfacts.org/': {
@@ -75,30 +46,6 @@ export default {
 
             }
         },
-        'http://drugbank.bio2rdf.org/sparql': {
-            list: [
-                'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'
-            ],
-            config: {
-
-            }
-        },
-        'http://grid.ac': {
-            list: [
-                'http://www.w3.org/1999/02/22-rdf-syntax-ns#type', 'http://www.grid.ac/ontology/establishedYear'
-            ],
-            config: {
-
-            }
-        },
-        'https://ec.europa.eu/jrc/en/language-technologies/jrc-names': {
-            list: [
-                'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'
-            ],
-            config: {
-
-            }
-        },
         'http://babelnet.org/rdf/': {
             list: [
                 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type', 'http://www.lemon-model.net/lemon#language', 'http://www.lexinfo.net/ontology/2.0/lexinfo#partOfSpeech', 'http://www.lemon-model.net/lemon#sense'
@@ -114,7 +61,7 @@ export default {
 
             }
         },
-                'http://lsq.aksw.org/sparql': {
+        'http://lsq.aksw.org/sparql': {
             list: [
                 'http://lsq.aksw.org/vocab#endpoint',
                 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
@@ -177,24 +124,6 @@ export default {
                     label: ['Topic'],
                     hasLinkedValue: 1
                 }
-            }
-        },
-        'http://geo.risis.eu/rvo-nl': {
-            list: [
-                'http://www.w3.org/1999/02/22-rdf-syntax-ns#type', 'http://www.europeana.eu/schemas/edm/year', 'http://purl.org/dc/terms/subject', 'http://geo.risis.eu/vocabulary/rvo-nl/status'
-            ],
-            config: {
-
-            }
-        },
-        'http://geo.risis.eu/oecd': {
-            list: [
-                'http://www.w3.org/1999/02/22-rdf-syntax-ns#type', 'http://geo.risis.eu/vocabulary/oecd/isCore', 'http://geo.risis.eu/vocabulary/oecd/ISO'
-            ],
-            config: {
-                'http://geo.risis.eu/vocabulary/oecd/ISO': {
-                    label: ['Country']
-                },
             }
         }
     }
