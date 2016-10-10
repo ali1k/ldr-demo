@@ -23,7 +23,7 @@ export default {
             },
             'http://drugbank.bio2rdf.org/sparql': {
                 resourceFocusType: ['http://bio2rdf.org/drugbank_vocabulary:Drug'],
-                readOnly: 0,
+                readOnly: 1,
                 datasetLabel: ['DrugBank Dataset']
             },
             'http://clinicaltrials.bio2rdf.org/sparql': {
