@@ -34,7 +34,8 @@ export default {
             'http://world.openfoodfacts.org/': {
                 resourceFocusType: ['http://data.lirmm.fr/ontologies/food#Food', 'http://data.lirmm.fr/ontologies/food#FoodProduct', 'http://data.lirmm.fr/ontologies/food#Ingredient'],
                 readOnly: 1,
-                datasetLabel: ['OpenFoodFacts Dataset']
+                datasetLabel: ['OpenFoodFacts Dataset'],
+                resourceLabelProperty : ['http://data.lirmm.fr/ontologies/food#name']
             },
             'http://data.semanticweb.org/sparql': {
                 resourceFocusType: ['http://swrc.ontoware.org/ontology#InProceedings'],
@@ -54,12 +55,14 @@ export default {
             'http://risis.eu/cordisH2020': {
                 resourceFocusType: ['http://risis.eu/cordisH2020/vocab/SignedGrantAgreement'],
                 readOnly: 1,
-                datasetLabel: ['Cordis H2020 Projects Dataset']
+                datasetLabel: ['Cordis H2020 Projects Dataset'],
+                resourceLabelProperty : ['http://purl.org/dc/terms/title']
             },
             'http://babelnet.org/rdf/': {
                 resourceFocusType: ['http://www.lemon-model.net/lemon#LexicalEntry'],
                 readOnly: 1,
-                datasetLabel: ['BabelNet Dataset']
+                datasetLabel: ['BabelNet Dataset'],
+                resourceLabelProperty : ['http://www.w3.org/2000/01/rdf-schema#label']
             },
             'http://linkedgeodata.org': {
                 resourceFocusType: ['http://linkedgeodata.org/ontology/University'],
@@ -79,7 +82,8 @@ export default {
             'http://www.contextdatacloud.org': {
                 resourceFocusType: ['http://www.contextdatacloud.org/ontology/WeatherSituation', 'http://www.contextdatacloud.org/ontology/LocationEntity'],
                 readOnly: 1,
-                datasetLabel: ['Context Data Clooud Dataset']
+                datasetLabel: ['Context Data Clooud Dataset'],
+                resourceLabelProperty : ['http://purl.org/goodrelations/v1#name']
             },
             'http://lodlaundromat.org/sparql/': {
                 readOnly: 1,
@@ -89,7 +93,8 @@ export default {
             'http://lsq.aksw.org/sparql': {
                 readOnly: 1,
                 resourceFocusType: ['http://spinrdf.org/sp#Select', 'http://spinrdf.org/sp#Ask', 'http://spinrdf.org/sp#Construct', 'http://spinrdf.org/sp#Describe'],
-                datasetLabel: ['Linked SPARQL Queries Dataset']
+                datasetLabel: ['Linked SPARQL Queries Dataset'],
+                resourceLabelProperty : ['http://spinrdf.org/sp#text']
             }
         },
         resource: {
