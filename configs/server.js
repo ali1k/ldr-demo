@@ -57,22 +57,7 @@ export default {
         'http://babelnet.org/rdf/': {
             host: 'babelnet.org', port: 80, path: '/sparql', useDefaultGraph: 1, type: 'virtuoso'
         },
-        'http://www.freme-project.eu/datasets/cordis': {
-            host: 'sparql.sms.risis.eu', port: 80, path: '/', type: 'virtuoso'
-        },
         'http://world.openfoodfacts.org/': {
-            host: 'sparql.sms.risis.eu', port: 80, path: '/', type: 'virtuoso'
-        },
-        'http://geo.risis.eu/rvo-nl': {
-            host: 'sparql.sms.risis.eu', port: 80, path: '/', type: 'virtuoso'
-        },
-        'http://geo.risis.eu/oecd': {
-        	host: 'sparql.sms.risis.eu', port: 80, path: '/', type: 'virtuoso'
-	},
-	'http://grid.ac': {
-            host: 'sparql.sms.risis.eu', port: 80, path: '/', type: 'virtuoso'
-        },
-        'https://ec.europa.eu/jrc/en/language-technologies/jrc-names': {
             host: 'sparql.sms.risis.eu', port: 80, path: '/', type: 'virtuoso'
         }
     },
