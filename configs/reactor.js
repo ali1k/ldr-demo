@@ -42,6 +42,12 @@ export default {
                 readOnly: 1,
                 datasetLabel: ['Semantic Web Dogfood Dataset (SW Publications)']
             },
+            'http://dblp.l3s.de/d2r/sparql': {
+                resourceFocusType: ['http://swrc.ontoware.org/ontology#Article'],
+                readOnly: 1,
+                datasetLabel: ['DBLP Publications Dataset'],
+                resourceLabelProperty: ['http://purl.org/dc/elements/1.1/title']
+            },
             'http://live.dbpedia.org': {
                 resourceFocusType: ['http://dbpedia.org/ontology/University'],
                 readOnly: 1,
@@ -68,6 +74,12 @@ export default {
                 resourceFocusType: ['http://linkedgeodata.org/ontology/University'],
                 readOnly: 1,
                 datasetLabel: ['LinkedGeoData Dataset']
+            },
+            'http://data.linkedmdb.org/sparql': {
+                resourceFocusType: ['http://data.linkedmdb.org/resource/movie/film'],
+                readOnly: 1,
+                datasetLabel: ['Linked IMDB Movie Dataset'],
+                resourceLabelProperty: ['http://purl.org/dc/terms/title']
             },
             'http://www.bbc.co.uk/nature/': {
                 resourceFocusType: ['http://xmlns.com/foaf/0.1/Document'],
