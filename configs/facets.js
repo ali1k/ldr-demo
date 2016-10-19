@@ -31,6 +31,14 @@ export default {
             }
         },
         /*
+        'http://dblp.l3s.de/d2r/sparql': {
+            list: [
+                'http://www.w3.org/1999/02/22-rdf-syntax-ns#type', 'http://purl.org/dc/terms/issued', 'http://swrc.ontoware.org/ontology#journal'
+            ],
+            config: {
+
+            }
+        },
         'http://data.linkedmdb.org/sparql': {
             list: [
                 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type', 'http://data.linkedmdb.org/resource/movie/language', 'http://data.linkedmdb.org/resource/movie/genre', 'http://data.linkedmdb.org/resource/movie/director', 'http://data.linkedmdb.org/resource/movie/writer',
