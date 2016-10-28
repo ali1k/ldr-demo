@@ -4,9 +4,10 @@ let config = require ('./dev.config');
 let shell = require ('shelljs');
 let DashboardPlugin = require('webpack-dashboard/plugin');
 
-const host = process.env.HOST || '0.0.0.0';
-const mainPort = (process.env.PORT) || 3000;
-const devPort = (mainPort + 1) || 3001;
+const host = process.env.HOST ? process.env.HOST : '0.0.0.0';
+const mainPort = process.env.PORT ? parseInt(process.env.PORT) : 3000;
+const devPort = process.env.PORT ? parseInt(process.env.PORT) + 1 : 3001;
+
 
 const options = {
     //contentBase: `http://${host}:${port}`,
@@ -17,10 +18,10 @@ const options = {
     publicPath: config.output.publicPath,
     proxy: {
         '*': { target: `http://${host}:${devPort}` }
+    },
+    stats: {
+        colors: true
     }
-    //stats: {
-        //colors: true
-    //}
 };
 
 const compiler = webpack(config);
