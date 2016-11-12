@@ -69,7 +69,7 @@ export default {
         label: 'Dataset',
         action: (context, payload, done) => {
             let datasetURI, page;
-            datasetURI = payload.params.id;
+            datasetURI = decodeURIComponent(payload.params.id);
             if (!datasetURI) {
                 datasetURI = 0;
             }
@@ -77,7 +77,11 @@ export default {
             if (!page) {
                 page = 1;
             }
-            context.executeAction(loadDataset, { id: decodeURIComponent(datasetURI), page: page}, done);
+            //do not allow to browse user graph
+            if(datasetURI===authDatasetURI[0]){
+                datasetURI = 0
+            }
+            context.executeAction(loadDataset, { id: datasetURI, page: page}, done);
         }
     },
     resource: {
