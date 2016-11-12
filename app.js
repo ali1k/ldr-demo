@@ -12,12 +12,14 @@ import DBpediaStore from './stores/DBpediaStore';
 import DBpediaGMapStore from './stores/DBpediaGMapStore';
 import FacetedBrowserStore from './stores/FacetedBrowserStore';
 import LotusStore from './stores/LotusStore';
+import DatasetsStore from './stores/DatasetsStore';
 
 let app = new Fluxible({
     component: Application,
     stores: [
         RouteStore,
         ApplicationStore,
+        DatasetsStore,
         DatasetStore,
         UserStore,
         ResourceStore,

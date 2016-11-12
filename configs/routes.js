@@ -1,8 +1,9 @@
+import loadDatasets from '../actions/loadDatasets';
 import loadDataset from '../actions/loadDataset';
 import loadResource from '../actions/loadResource';
 import loadUsersList from '../actions/loadUsersList';
 import loadFacets from '../actions/loadFacets';
-import {appFullTitle, appShortTitle, authGraphName, baseResourceDomain} from '../configs/general';
+import {appFullTitle, appShortTitle, authDatasetURI, baseResourceDomain} from '../configs/general';
 
 export default {
     // home: {
@@ -31,12 +32,12 @@ export default {
         handler: require('../components/FacetedBrowser'),
         label: 'Faceted Browser',
         action: (context, payload, done) => {
-            let graphName, page;
-            graphName = payload.params.id;
-            if (!graphName) {
-                graphName = 0;
+            let datasetURI, page;
+            datasetURI = payload.params.id;
+            if (!datasetURI) {
+                datasetURI = 0;
             }
-            context.executeAction(loadFacets, {mode: 'init', id: graphName, selection: 0, page: 1}, done);
+            context.executeAction(loadFacets, {mode: 'init', id: decodeURIComponent(datasetURI), selection: 0, page: 1}, done);
         }
     },
     datasets: {
@@ -62,22 +63,22 @@ export default {
         }
     },
     dataset: {
-        //if no id is provided -> will start by defaultGraphName in reactor.config
+        //if no id is provided -> will start by defaultDatasetURI in reactor.config
         path: '/dataset/:page?/:id?',
         method: 'get',
         handler: require('../components/reactors/DatasetReactor'),
         label: 'Dataset',
         action: (context, payload, done) => {
-            let graphName, page;
-            graphName = payload.params.id;
-            page = payload.params.page;
-            if (!graphName) {
-                graphName = 0;
+            let datasetURI, page;
+            datasetURI = payload.params.id;
+            if (!datasetURI) {
+                datasetURI = 0;
             }
+            page = payload.params.page;
             if (!page) {
                 page = 1;
             }
-            context.executeAction(loadDataset, { id: graphName, page: page}, done);
+            context.executeAction(loadDataset, { id: decodeURIComponent(datasetURI), page: page}, done);
         }
     },
     resource: {
@@ -95,11 +96,11 @@ export default {
             if(!propertyPath){
                 propertyPath = [];
             }
-            let graphName = payload.params.did;
-            if (!graphName) {
-                graphName = 0;
+            let datasetURI = payload.params.did;
+            if (!datasetURI) {
+                datasetURI = 0;
             }
-            context.executeAction(loadResource, { dataset: graphName, resource: decodeURIComponent(payload.params.rid), category: category, propertyPath: propertyPath}, done);
+            context.executeAction(loadResource, { dataset: decodeURIComponent(datasetURI), resource: decodeURIComponent(payload.params.rid), category: category, propertyPath: propertyPath}, done);
         }
     },
     user: {
@@ -109,7 +110,7 @@ export default {
         label: 'User',
         action: (context, payload, done) => {
             let category = 0;
-            context.executeAction(loadResource, { dataset: authGraphName, resource: baseResourceDomain + '/user/' + decodeURIComponent(payload.params.id), category: category}, done);
+            context.executeAction(loadResource, { dataset: authDatasetURI[0], resource: baseResourceDomain + '/user/' + decodeURIComponent(payload.params.id), category: category}, done);
         }
     },
     users: {
