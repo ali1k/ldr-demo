@@ -32,14 +32,14 @@ class Nav extends React.Component {
         }
         return (
             <nav ref="defaultNavbar" className="ui blue menu inverted navbar page grid">
-                    <NavLink routeName="home" className="brand item" activeClass="active">
+                    <NavLink routeName="home" className="brand item" href='http://ld-r.org'>
                         {this.props.loading ? <img src="/assets/img/loader.gif" alt="loading..." style={{height: 30, width: 30}} /> : <img style={{height: 22, width: 22}} className="ui mini image" src="/assets/img/ld-reactor.gif" alt="ld-reactor" />}
                     </NavLink>
                     <a className="item" href="http://ld-r.org/" data-section="home">LD-R</a>
                     <a className="item" href="http://ld-r.org/docs/quickstart.html" data-section="quickstart">
                       Quick Start
                     </a>
-                    <NavLink routeName="datasets" className="item" activeclassName="active" href="/">Demo</NavLink>
+                    <NavLink routeName="datasets" className="item" href="/">Demo</NavLink>
                     <div className="right menu">
                         <a href="/public/js/stats.html" className="ui item link" target="_blank" title="components stat">
                                 <i className="lab icon"></i>

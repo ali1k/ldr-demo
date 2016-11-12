@@ -91,7 +91,7 @@ class Lotus extends React.Component {
                     <div className="ui">
                         <div className="ui fluid category search">
                           <div className="ui large icon input">
-                            <input ref="keyword" className="prompt" type="text" placeholder="Search on Linked Open Data..." style={{width: '500'}} onKeyDown={this.handleKeyDown.bind(this)}/>
+                            <input ref="keyword" className="prompt" type="text" placeholder="Search on Linked Open Data..." style={{width: 500}} onKeyDown={this.handleKeyDown.bind(this)}/>
                             <i className="search icon"></i>
                           </div>
                           &nbsp;<button className="ui grey circular button" onClick={this.handleSearch.bind(this)}>LOD Search</button>
@@ -101,9 +101,9 @@ class Lotus extends React.Component {
                               {!this.state.advancedMode ? '' : <div><div className="ui left aligned warning message">
                                 <i className="close icon" onClick={this.handleAdvanced.bind(this)}></i>
                                 <div>
-                                    <div className="ui labeled input"><div className="ui yellow label">Max. Results Size</div><input ref="resultsSize" type="text" style={{width: '80'}} defaultValue={this.state.resultsSize} onChange={this.handleResultsSize.bind(this)} /></div>
-                                    <div className="ui labeled input"><div className="ui yellow label">Language</div><input ref="langTag" type="text" style={{width: '80'}} defaultValue={this.state.langTag} onChange={this.handleLanguage.bind(this)} /></div>
-                                    <div className="ui labeled input"><div className="ui yellow label">String Similarity Method</div><select style={{width: '120'}} className="ui search dropdown" ref="algorithm" value={this.state.algorithm} onChange={this.handleAlgorithm.bind(this)}>
+                                    <div className="ui labeled input"><div className="ui yellow label">Max. Results Size</div><input ref="resultsSize" type="text" style={{width: 80}} defaultValue={this.state.resultsSize} onChange={this.handleResultsSize.bind(this)} /></div>
+                                    <div className="ui labeled input"><div className="ui yellow label">Language</div><input ref="langTag" type="text" style={{width: 80}} defaultValue={this.state.langTag} onChange={this.handleLanguage.bind(this)} /></div>
+                                    <div className="ui labeled input"><div className="ui yellow label">String Similarity Method</div><select style={{width: 120}} className="ui search dropdown" ref="algorithm" value={this.state.algorithm} onChange={this.handleAlgorithm.bind(this)}>
                                         <option value="terms"> terms </option>
                                         <option value="phrase"> phrase </option>
                                         <option value="conjunct"> conjunct </option>

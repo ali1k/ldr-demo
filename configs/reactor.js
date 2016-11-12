@@ -12,9 +12,21 @@ export default {
                 maxNumberOfResourcesOnPage: 20,
                 datasetReactor: ['Dataset']
             },
+            //authentication graph
             'http://ld-r.org/users': {
                 readOnly: 0,
-                dynamicResourceDomain: ['http://ld-r.org/user'],
+                resourceFocusType: ['https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#User'],
+                resourceLabelProperty: ['http://xmlns.com/foaf/0.1/accountName']
+            },
+            'http://ld-r.org/configurations': {
+                readOnly: 0,
+                allowResourceClone: 1,
+                allowPropertyDelete: 1,
+                allowResourceNew: 1,
+                allowPropertyNew: 1,
+                resourceFocusType: ['https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#ReactorConfig', 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#ServerConfig', 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#FacetsConfig'],
+                datasetLabel: ['LD-R Configurations'],
+                resourceLabelProperty: ['http://www.w3.org/2000/01/rdf-schema#label']
             },
             'http://ld-r.org/datasets/void': {
                 resourceFocusType: ['http://rdfs.org/ns/void#Dataset'],
@@ -117,10 +129,6 @@ export default {
                 //used when creating random resources
                 dynamicResourceDomain: ['http://example.org'],
                 resourceReactor: ['Resource']
-            },
-            'http://rdf.risis.eu/dataset/example/1.0/void.ttl#example_rdf_dataset': {
-                usePropertyCategories: 1,
-                propertyCategories: ['overview', 'people', 'date', 'legalAspects', 'technicalAspects']
             }
         },
         property: {
@@ -133,17 +141,26 @@ export default {
                 objectIEditor: ['BasicIndividualInput'],
                 extendedOEditor: ['BasicIndividualDetailEdit'],
                 extendedOViewer: ['BasicIndividualDetailView'],
-                truncateURI: 1
-            }
-        },
-        //property value = object
-        object: {
-            'generic': {
-
+                shortenURI: 1
+            },
+            'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#cloneOf': {
+                readOnly: 1,
+                allowPropertyDelete: 0
+            },
+            'http://www.w3.org/1999/02/22-rdf-syntax-ns#type': {
+                allowPropertyDelete: 0,
+                objectIViewer: ['PrefixBasedView'],
+                objectIEditor: ['PrefixBasedInput']
             }
         },
         //---------depth 2------------
         dataset_resource: {
+            'http://ld-r.org/users': {
+                'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#User' :{
+                    treatAsResourceType: 1,
+                    resourceReactor: ['UserResource']
+                }
+            }
         },
         dataset_property: {
             'http://risis.eu/cordisH2020': {
@@ -664,6 +681,77 @@ export default {
                     ]
                 }
             },
+            //for configuration manager
+            'http://ld-r.org/configurations': {
+                'http://www.w3.org/2000/01/rdf-schema#label': {
+                    allowPropertyDelete: 0
+                },
+                'http://www.w3.org/1999/02/22-rdf-syntax-ns#type': {
+                    isHidden: 0,
+                    shortenURI: 0
+                },
+                'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#scope': {
+                    hint: ['Determines the type of scope in LD-R'],
+                    objectIEditor: ['BasicOptionInput'],
+                    objectIViewer: ['BasicOptionView'],
+                    options: [
+                        {label: 'Dataset', value: 'D'},
+                        {label: 'Resource', value: 'R'},
+                        {label: 'Property', value: 'P'},
+                        {label: 'Dataset-Resource', value: 'DR'},
+                        {label: 'Dataset-Property', value: 'DP'},
+                        {label: 'Resource-Property', value: 'RP'},
+                        {label: 'Dataset-Resource-Property', value: 'DRP'},
+                    ]
+                },
+                'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#dataset': {
+                    shortenURI: 0
+                },
+                'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#property': {
+                    shortenURI: 0,
+                    objectIViewer: ['PrefixBasedView'],
+                    objectIEditor: ['PrefixBasedInput']
+                },
+                'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#resource': {
+                    shortenURI: 0,
+                    objectIViewer: ['PrefixBasedView'],
+                    objectIEditor: ['PrefixBasedInput']
+                },
+                'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#resourceFocusType': {
+                    shortenURI: 0,
+                    objectIViewer: ['PrefixBasedView'],
+                    objectIEditor: ['PrefixBasedInput']
+                },
+                'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#resourceLabelProperty': {
+                    shortenURI: 0,
+                    objectIViewer: ['PrefixBasedView'],
+                    objectIEditor: ['PrefixBasedInput']
+                },
+                'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#config': {
+                    label: ['Configuration']
+                },
+                'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#list': {
+                    shortenURI: 0,
+                    objectIViewer: ['PrefixBasedView'],
+                    objectIEditor: ['PrefixBasedInput']
+                },
+                'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#treatAsResourceType': {
+                    label: ['Treat as Resource Type'],
+                    hint: ['If set to true, will consider resource URI as type URI for resource'],
+                    objectIViewer:['ToggleView'],
+                    objectIEditor:['ToggleEdit'],
+                    onValue: ['1'],
+                    offValue: ['0']
+                },
+                'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#useReasoning': {
+                    label: ['Use Reasoning?'],
+                    objectIViewer:['ToggleView'],
+                    objectIEditor:['ToggleEdit'],
+                    onValue: ['1'],
+                    offValue: ['0']
+                }
+            },
+            //for user page
             'http://ld-r.org/users': {
                 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type': {
                     isHidden: 1
@@ -687,8 +775,8 @@ export default {
                     objectIViewer: ['PasswordView'],
                     objectIEditor: ['PasswordInput']
                 },
-                'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#editorOfGraph': {
-                    label: ['Editor of Graph'],
+                'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#editorOfDataset': {
+                    label: ['Editor of Dataset'],
                     allowNewValue: 1
                 },
                 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#editorOfResource': {
@@ -732,33 +820,11 @@ export default {
                 }
             }
         },
-        dataset_object: {
-
-        },
         resource_property: {
-
-        },
-        resource_object: {
-
-        },
-        property_object: {
 
         },
         //---------depth 3------------
         dataset_resource_property: {
-
-        },
-        dataset_resource_object: {
-
-        },
-        dataset_property_object: {
-
-        },
-        resource_property_object: {
-
-        },
-        //---------depth 4------------
-        dataset_resource_property_object: {
 
         }
     }

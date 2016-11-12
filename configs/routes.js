@@ -47,8 +47,7 @@ export default {
         handler: require('../components/Datasets'),
         label: 'Datasets',
         action: (context, payload, done) => {
-            context.dispatch('UPDATE_PAGE_TITLE', { pageTitle: appFullTitle + ' | Demo'});
-            done();
+            context.executeAction(loadDatasets, {}, done);
         }
     },
     lotus: {
