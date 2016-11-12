@@ -129,6 +129,10 @@ export default {
                 //used when creating random resources
                 dynamicResourceDomain: ['http://example.org'],
                 resourceReactor: ['Resource']
+            },
+            'http://rdf.risis.eu/dataset/example/1.0/void.ttl#example_rdf_dataset': {
+                usePropertyCategories: 1,
+                propertyCategories: ['overview', 'people', 'date', 'legalAspects', 'technicalAspects']
             }
         },
         property: {
