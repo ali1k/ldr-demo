@@ -50,10 +50,13 @@ export default {
         */
         'http://drugbank.bio2rdf.org/sparql': {
             list: [
-                'http://www.w3.org/1999/02/22-rdf-syntax-ns#type', 'http://bio2rdf.org/drugbank_vocabulary:group', 'http://bio2rdf.org/drugbank_vocabulary:affected-organism', 'http://bio2rdf.org/drugbank_vocabulary:category'
+                'http://www.w3.org/1999/02/22-rdf-syntax-ns#type', 'http://bio2rdf.org/drugbank_vocabulary:group', 'http://bio2rdf.org/drugbank_vocabulary:affected-organism', 'http://bio2rdf.org/drugbank_vocabulary:category',
+                'http://bio2rdf.org/drugbank_vocabulary:target->http://bio2rdf.org/drugbank_vocabulary:gene-name'
             ],
             config: {
-
+                'http://bio2rdf.org/drugbank_vocabulary:target->http://bio2rdf.org/drugbank_vocabulary:gene-name' : {
+                    label: ['Target Gene']
+                }
             }
         },
         'http://data.semanticweb.org/sparql': {
