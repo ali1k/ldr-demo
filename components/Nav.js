@@ -16,6 +16,9 @@ class Nav extends React.Component {
         let user = this.context.getUser();
         // console.log(user);
         let userMenu;
+        let configMenu = <a href={'/browse/' + encodeURIComponent(configDatasetURI)} className="ui item link" title="Configuration Manager">
+            <i className="ui black settings icon"></i>
+        </a>;
         if(enableAuthentication){
             if(user){
                 userMenu = <div className="ui right dropdown item">
@@ -28,6 +31,7 @@ class Nav extends React.Component {
                             </div>;
             }else{
                 userMenu = <div className="ui right item"> <a className="ui mini circular teal button" href="/login">Sign-in</a> &nbsp;  <a href="/register" className="ui mini circular yellow button">Register</a> </div>;
+                configMenu = '';
             }
         }
         return (
@@ -48,9 +52,7 @@ class Nav extends React.Component {
                                 <i className="small help circle icon"></i>
                         </div>
                         {(enableDynamicReactorConfiguration || enableDynamicServerConfiguration || enableDynamicfacetsConfiguration) ?
-                            <a href={'/browse/' + encodeURIComponent(configDatasetURI)} className="ui item link" title="Configuration Manager">
-                                <i className="ui black settings icon"></i>
-                            </a>
+                            configMenu
                         : ''}
                         <a href="http://github.com/ali1k/ld-r" className="ui item link">
                                 <i className="github circle icon"></i> Github
