@@ -1,11 +1,12 @@
 'use strict';
 import async from 'async';
 import Configurator from './Configurator';
+import {checkAccess} from './helpers';
 function compareProps(a,b) {
     if (a.property < b.property)
         return -1;
     if (a.property > b.property)
-            return 1;
+        return 1;
     return 0;
 }
 class ResourceUtil {
@@ -25,7 +26,7 @@ class ResourceUtil {
         property = property.charAt(0).toUpperCase() + property.slice(1);
         return property;
     }
-    parseProperties(body, datasetURI, resourceURI, category, propertyPath, callback) {
+    parseProperties(user, body, datasetURI, resourceURI, category, propertyPath, callback) {
         let configurator = new Configurator();
         let configExceptional = {},
             config = {},
@@ -51,7 +52,7 @@ class ResourceUtil {
         title = rpIndex.title;
         resourceType = rpIndex.resourceType;
         //resource config
-        configurator.prepareResourceConfig(1, datasetURI, resourceURI, resourceType, (rconfig)=> {
+        configurator.prepareResourceConfig(user, 1, datasetURI, resourceURI, resourceType, (rconfig)=> {
             if (rconfig.usePropertyCategories) {
                 //allow filter by category
                 if (!category) {
@@ -66,7 +67,7 @@ class ResourceUtil {
             if (propertyPath && propertyPath.length) {
                 asyncTasks.push(function(callback){
                     //it is only for property path
-                    configurator.preparePropertyConfig(1, datasetURI, resourceURI, resourceType, propertyPath[1], (res)=> {
+                    configurator.preparePropertyConfig(user, 1, datasetURI, resourceURI, resourceType, propertyPath[1], (res)=> {
                         configExceptional = res;
                         callback();
                     });
@@ -74,7 +75,7 @@ class ResourceUtil {
             }
             for(let propURI in rpIndex.propIndex){
                 asyncTasks.push(function(callback2){
-                    configurator.preparePropertyConfig(1, datasetURI, resourceURI, resourceType, propURI, (config)=> {
+                    configurator.preparePropertyConfig(user, 1, datasetURI, resourceURI, resourceType, propURI, (config)=> {
                         //handle categories
 
                         if (filterByCategory) {
@@ -105,7 +106,7 @@ class ResourceUtil {
                     });
                 });
             }
-            let modifiedConfig;
+            let modifiedConfig, accessLevel, userIsCreator=0;
             //run all tasks in parallel
             async.parallelLimit(asyncTasks, 10, ()=>{
                 output.forEach(function(el) {
@@ -121,6 +122,14 @@ class ResourceUtil {
                             }
                         });
                     }
+                    if(user){
+                        if(user.id == el.instances[0].value) {
+                            userIsCreator = 1;
+                        }
+                        accessLevel=checkAccess(user, datasetURI, resourceURI, el.propertyURI);
+                        modifiedConfig.access =accessLevel.access;
+                    }
+
                     finalOutput.push({
                         propertyURI: el.propertyURI,
                         property: el.property,
@@ -130,22 +139,43 @@ class ResourceUtil {
                 });
                 //sort final output in a consistent way
                 finalOutput.sort(compareProps);
-                //make the right title for resource if propertyLabel is defined in config
-                let newTitel = title;
-                if (rconfig && rconfig.resourceLabelProperty && rconfig.resourceLabelProperty.length) {
-                    newTitel = '';
-                    let tmpArr = [];
+                //handle permissions
+                if(userIsCreator){
                     finalOutput.forEach(function(el) {
-                        if (rconfig.resourceLabelProperty.indexOf(el.propertyURI) !== -1) {
-                            tmpArr.push(el.instances[0].value);
+                        if(!el.config.readOnly){
+                            el.config.readOnly = 0;
+                            delete el.config.access;
                         }
                     });
-                    if (tmpArr.length) {
-                        newTitel = tmpArr.join('-');
-                    } else {
-                        newTitel = title;
+                }else{
+                    finalOutput.forEach(function(el) {
+                        if(!el.config.readOnly){
+                            el.config.readOnly = el.config.access ? 0 : 1;
+                            delete el.config.access;
+                        }
+                    });
+                }
+                //make the right title for resource if propertyLabel is defined in config
+                let newTitel = title;
+                if(rconfig){
+                    rconfig.userIsCreator = userIsCreator;
+                    if (rconfig.resourceLabelProperty && rconfig.resourceLabelProperty.length) {
+                        newTitel = '';
+                        let tmpArr = [];
+                        finalOutput.forEach(function(el) {
+                            if (rconfig.resourceLabelProperty.indexOf(el.propertyURI) !== -1) {
+                                tmpArr.push(el.instances[0].value);
+                            }
+                        });
+
+                        if (tmpArr.length) {
+                            newTitel = tmpArr.join('-');
+                        } else {
+                            newTitel = title;
+                        }
                     }
                 }
+
                 callback( {
                     props: finalOutput,
                     title: newTitel,
@@ -212,11 +242,11 @@ class ResourceUtil {
         }
         return extensions[index].config;
     }
-    parseObjectProperties(body, datasetURI, resourceURI, propertyURI, callback) {
+    parseObjectProperties(user, body, datasetURI, resourceURI, propertyURI, callback) {
         let title, objectType = '';
         let configurator = new Configurator();
         let config = {};
-        configurator.preparePropertyConfig(1, datasetURI, resourceURI, 0, propertyURI, (configExceptional)=> {
+        configurator.preparePropertyConfig(user, 1, datasetURI, resourceURI, 0, propertyURI, (configExceptional)=> {
             let self = this;
             let parsed = JSON.parse(body);
             let output = [],
@@ -225,7 +255,7 @@ class ResourceUtil {
             if (parsed.results.bindings.length) {
                 parsed.results.bindings.forEach(function(el) {
                     asyncTasks.push(function(callback){
-                        configurator.preparePropertyConfig(1, datasetURI, resourceURI, 0, el.p.value, (config)=> {
+                        configurator.preparePropertyConfig(user, 1, datasetURI, resourceURI, 0, el.p.value, (config)=> {
                             if (el.p.value === 'http://purl.org/dc/terms/title') {
                                 title = el.o.value;
                             } else if (el.p.value === 'http://www.w3.org/2000/01/rdf-schema#label') {
@@ -304,49 +334,6 @@ class ResourceUtil {
             }
         });
         return out;
-    }
-    includesProperty(list, resource, property) {
-        let out = false;
-        list.forEach(function(el) {
-            if (el.r === resource && el.p === property) {
-                out = true;
-                return out;
-            }
-        });
-        return out;
-    }
-    checkAccess(user, graph, resource, property) {
-        if (parseInt(user.isSuperUser)) {
-            return {
-                access: true,
-                type: 'full'
-            };
-        } else {
-            if (graph && user.editorOfDataset.indexOf(graph) !== -1) {
-                return {
-                    access: true,
-                    type: 'full'
-                };
-            } else {
-                if (resource && user.editorOfResource.indexOf(resource) !== -1) {
-                    return {
-                        access: true,
-                        type: 'full'
-                    };
-                } else {
-                    if (property && this.includesProperty(user.editorOfProperty, resource, property)) {
-                        return {
-                            access: true,
-                            type: 'partial'
-                        };
-                    } else {
-                        return {
-                            access: false
-                        };
-                    }
-                }
-            }
-        }
     }
     //--------------------------------------------------------
 }

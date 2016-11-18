@@ -49,7 +49,7 @@ export default {
                 user = {accountName: 'open'};
             }
             //graph name used for server settings and configs
-            getDynamicEndpointParameters(datasetURI, (endpointParameters)=>{
+            getDynamicEndpointParameters(user, datasetURI, (endpointParameters)=>{
                 graphName = endpointParameters.graphName;
                 resourceURI = params.resource;
                 propertyPath = decodeURIComponent(params.propertyPath);
@@ -63,7 +63,7 @@ export default {
                 let props;
                 rp.get({uri: getHTTPGetURL(getHTTPQuery('read', query, endpointParameters, outputFormat)), headers: headers}).then(function(res){
                     //exceptional case for user properties: we hide some admin props from normal users
-                    utilObject.parseProperties(res, datasetURI, resourceURI, category, propertyPath, (cres)=> {
+                    utilObject.parseProperties(user, res, datasetURI, resourceURI, category, propertyPath, (cres)=> {
                         if(datasetURI === authDatasetURI[0] && !parseInt(user.isSuperUser)){
                             props = utilObject.deleteAdminProperties(cres.props);
                         }else{
@@ -109,13 +109,13 @@ export default {
             }else{
                 user = {accountName: 'open'};
             }
-            getDynamicEndpointParameters(datasetURI, (endpointParameters)=>{
+            getDynamicEndpointParameters(user, datasetURI, (endpointParameters)=>{
                 graphName = endpointParameters.graphName;
                 query = queryObject.getPrefixes() + queryObject.getProperties(endpointParameters, graphName, objectURI);
                 //build http uri
                 //send request
                 rp.get({uri: getHTTPGetURL(getHTTPQuery('read', query, endpointParameters, outputFormat)), headers: headers}).then(function(res){
-                    utilObject.parseObjectProperties(res, datasetURI, resourceURI, propertyURI, (cres)=> {
+                    utilObject.parseObjectProperties(user, res, datasetURI, resourceURI, propertyURI, (cres)=> {
                         callback(null, {
                             objectURI: objectURI,
                             objectType: cres.objectType,
@@ -146,17 +146,19 @@ export default {
                 }else{
                     //check if user permitted to do the update action
                     user = req.user;
+                    /*todo:fix permission on update!
                     accessLevel = utilObject.checkAccess(user, datasetURI, params.resourceURI, params.propertyURI);
                     if(!accessLevel.access){
                         //action not allowed!
                         callback(null, {category: params.category});
                         return 0;
                     }
+                    */
                 }
             }else{
                 user = {accountName: 'open'};
             }
-            getDynamicEndpointParameters(datasetURI, (endpointParameters)=>{
+            getDynamicEndpointParameters(user, datasetURI, (endpointParameters)=>{
                 graphName = endpointParameters.graphName;
                 query = queryObject.getPrefixes() + queryObject.addTriple(endpointParameters, graphName, params.resourceURI, params.propertyURI, params.objectValue, params.valueType, params.dataType);
                 //build http uri
@@ -185,17 +187,19 @@ export default {
                     return 0;
                 }else{
                     user = req.user;
+                    /*todo:fix permission on update!
                     accessLevel = utilObject.checkAccess(user, datasetURI, params.resourceURI, params.propertyURI);
                     if(!accessLevel.access){
                         //action not allowed!
                         callback(null, {category: params.category});
                         return 0;
                     }
+                    */
                 }
             }else{
                 user = {accountName: 'open'};
             }
-            getDynamicEndpointParameters(datasetURI, (endpointParameters)=>{
+            getDynamicEndpointParameters(user, datasetURI, (endpointParameters)=>{
                 graphName = endpointParameters.graphName;
                 query = queryObject.getPrefixes() + queryObject.updateObjectTriples(endpointParameters, graphName, params.resourceURI, params.propertyURI, params.oldObjectValue, params.newObjectValue, params.valueType, params.dataType, params.detailData);
                 async.parallel([
@@ -268,57 +272,23 @@ export default {
             if(datasetURI.slice(-1) === '/'){
                 newResourceURI = datasetURI + 'c' + Math.round(+new Date() / 1000);
             }
-            getDynamicEndpointParameters(datasetURI, (endpointParameters)=>{
+            getDynamicEndpointParameters(user, datasetURI, (endpointParameters)=>{
                 graphName = endpointParameters.graphName;
-                query = queryObject.getPrefixes() + queryObject.cloneResource(endpointParameters, graphName, params.resourceURI, newResourceURI);
-                async.parallel([
-                    (cback) => {
-                        //send request
-                        HTTPQueryObject = getHTTPQuery('update', query, endpointParameters, outputFormat);
-                        rp.post({uri: HTTPQueryObject.uri, form: HTTPQueryObject.params}).then(function(res){
-                            if(enableLogs){
-                                log.info('\n User: ' + user.accountName + ' \n Query: \n' + query);
-                            }
-                            cback();
-                        }).catch(function (err) {
-                            console.log(err);
-                            if(enableLogs){
-                                log.error('\n User: ' + user.accountName + '\n Status Code: \n' + err.statusCode + '\n Error Msg: \n' + err.message);
-                            }
-                            cback();
-                        });
-                    },
-                    (cback) => {
-                        //we should add this resource into user's profile too
-                        if(enableAuthentication){
-                            let query2 = queryObject.getPrefixes() + queryObject.addTriple(endpointParameters, prepareDG(authDatasetURI[0]).g, user.id, 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#editorOfResource', newResourceURI, 'uri', '');
-                            //send request
-                            HTTPQueryObject = getHTTPQuery('update', query2, endpointParameters, outputFormat);
-                            rp.post({uri: HTTPQueryObject.uri, form: HTTPQueryObject.params}).then(function(res){
-                                if(enableLogs){
-                                    log.info('\n User: ' + user.accountName + ' \n Query: \n' + query);
-                                }
-                                cback();
-                            }).catch(function (err) {
-                                console.log(err);
-                                if(enableLogs){
-                                    log.error('\n User: ' + user.accountName + '\n Status Code: \n' + err.statusCode + '\n Error Msg: \n' + err.message);
-                                }
-                                cback();
-                            });
-                        }else{
-                            cback();
-                        }
+                query = queryObject.getPrefixes() + queryObject.cloneResource(endpointParameters, user, graphName, params.resourceURI, newResourceURI);
+                HTTPQueryObject = getHTTPQuery('update', query, endpointParameters, outputFormat);
+                rp.post({uri: HTTPQueryObject.uri, form: HTTPQueryObject.params}).then(function(res){
+                    if(enableLogs){
+                        log.info('\n User: ' + user.accountName + ' \n Query: \n' + query);
                     }
-                ],
-                // final callback
-                (err, results) => {
-                    if (err){
-                        callback(null, {datasetURI: datasetURI, resourceURI: newResourceURI});
-                        return;
+                    callback(null, {datasetURI: datasetURI, resourceURI: newResourceURI});
+                }).catch(function (err) {
+                    console.log(err);
+                    if(enableLogs){
+                        log.error('\n User: ' + user.accountName + '\n Status Code: \n' + err.statusCode + '\n Error Msg: \n' + err.message);
                     }
                     callback(null, {datasetURI: datasetURI, resourceURI: newResourceURI});
                 });
+
             });
         } else if (resource === 'resource.property') {
             datasetURI = params.dataset;
@@ -334,7 +304,7 @@ export default {
             }else{
                 user = {accountName: 'open'};
             }
-            getDynamicEndpointParameters(datasetURI, (endpointParameters)=>{
+            getDynamicEndpointParameters(user, datasetURI, (endpointParameters)=>{
                 graphName = endpointParameters.graphName;
                 query = queryObject.getPrefixes() + queryObject.addTriple(endpointParameters, graphName, params.resourceURI, params.propertyURI, params.objectValue, 'literal', '');
                 //build http uri
@@ -372,58 +342,19 @@ export default {
             if(datasetURI.slice(-1) === '/'){
                 newResourceURI = datasetURI + 'n' + Math.round(+new Date() / 1000);
             }
-            getDynamicEndpointParameters(datasetURI, (endpointParameters)=>{
+            getDynamicEndpointParameters(user, datasetURI, (endpointParameters)=>{
                 graphName = endpointParameters.graphName;
-                query = queryObject.getPrefixes() + queryObject.newResource(endpointParameters, graphName, newResourceURI);
-                async.parallel([
-                    (cback) => {
-                        //send request
-                        HTTPQueryObject = getHTTPQuery('update', query, endpointParameters, outputFormat);
-                        rp.post({uri: HTTPQueryObject.uri, form: HTTPQueryObject.params}).then(function(res){
-                            if(enableLogs){
-                                log.info('\n User: ' + user.accountName + ' \n Query: \n' + query);
-                            }
-                            cback();
-                        }).catch(function (err) {
-                            console.log(err);
-                            if(enableLogs){
-                                log.error('\n User: ' + user.accountName + '\n Status Code: \n' + err.statusCode + '\n Error Msg: \n' + err.message);
-                            }
-                            cback();
-                        });
-                    },
-                    (cback) => {
-                        //we should add this resource into user's profile too
-                        if(enableAuthentication){
-                            let query2 = queryObject.getPrefixes() + queryObject.addTriple(endpointParameters, prepareDG(authDatasetURI[0]).g, user.id, 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#editorOfResource', newResourceURI, 'uri', '');
-                            if(params.isNewDataset){
-                                //when a new dataset is created
-                                query2 = query2 + ' ; ' + queryObject.addTriple(endpointParameters, prepareDG(authDatasetURI[0]).g, user.id, 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#editorOfDataset', datasetURI, 'uri', '');
-                            }
-                            //send request
-                            HTTPQueryObject = getHTTPQuery('update', query2, endpointParameters, outputFormat);
-                            rp.post({uri: HTTPQueryObject.uri, form: HTTPQueryObject.params}).then(function(res){
-                                if(enableLogs){
-                                    log.info('\n User: ' + user.accountName + ' \n Query: \n' + query);
-                                }
-                                cback();
-                            }).catch(function (err) {
-                                console.log(err);
-                                if(enableLogs){
-                                    log.error('\n User: ' + user.accountName + '\n Status Code: \n' + err.statusCode + '\n Error Msg: \n' + err.message);
-                                }
-                                cback();
-                            });
-                        }else{
-                            cback();
-                        }
+                query = queryObject.getPrefixes() + queryObject.newResource(endpointParameters, user, graphName, newResourceURI);
+                HTTPQueryObject = getHTTPQuery('update', query, endpointParameters, outputFormat);
+                rp.post({uri: HTTPQueryObject.uri, form: HTTPQueryObject.params}).then(function(res){
+                    if(enableLogs){
+                        log.info('\n User: ' + user.accountName + ' \n Query: \n' + query);
                     }
-                ],
-                // final callback
-                (err, results) => {
-                    if (err){
-                        callback(null, {datasetURI: datasetURI, resourceURI: newResourceURI});
-                        return;
+                    callback(null, {datasetURI: datasetURI, resourceURI: newResourceURI});
+                }).catch(function (err) {
+                    console.log(err);
+                    if(enableLogs){
+                        log.error('\n User: ' + user.accountName + '\n Status Code: \n' + err.statusCode + '\n Error Msg: \n' + err.message);
                     }
                     callback(null, {datasetURI: datasetURI, resourceURI: newResourceURI});
                 });
@@ -431,12 +362,12 @@ export default {
 
         } else if (resource === 'resource.newReactorConfig') {
             datasetURI = params.dataset;
-            createASampleReactorConfig(params.scope, datasetURI, params.resourceURI, params.propertyURI, params.options, (res)=>{
+            createASampleReactorConfig(req.user, params.scope, datasetURI, params.resourceURI, params.propertyURI, params.options, (res)=>{
                 callback(null, {datasetURI: configDatasetURI[0], resourceURI: res, redirect: params.redirect});
             });
         }else if (resource === 'resource.newFacetsConfig') {
             let sresourceURI = configDatasetURI[0] + '/c' + Math.round(+new Date() / 1000);;
-            createASampleFacetsConfig(sresourceURI, params.dataset, (res)=>{
+            createASampleFacetsConfig(req.user, sresourceURI, params.dataset, (res)=>{
                 callback(null, {datasetURI: configDatasetURI[0], resourceURI: sresourceURI, redirect: params.redirect});
             });
         }
@@ -453,17 +384,19 @@ export default {
                     return 0;
                 }else{
                     user = req.user;
+                    /*todo:fix permission on update!
                     accessLevel = utilObject.checkAccess(user, datasetURI, params.resourceURI, params.propertyURI);
                     if(!accessLevel.access){
                         //action not allowed!
                         callback(null, {category: params.category});
                         return 0;
                     }
+                    */
                 }
             }else{
                 user = {accountName: 'open'};
             }
-            getDynamicEndpointParameters(datasetURI, (endpointParameters)=>{
+            getDynamicEndpointParameters(user, datasetURI, (endpointParameters)=>{
                 graphName = endpointParameters.graphName;
                 query = queryObject.getPrefixes() + queryObject.updateTriple(endpointParameters, graphName, params.resourceURI, params.propertyURI, params.oldObjectValue, params.newObjectValue, params.valueType, params.dataType);
                 //build http uri
@@ -493,6 +426,7 @@ export default {
                     return 0;
                 }else{
                     user = req.user;
+                    /*todo:fix permission on update!
                     accessLevel = utilObject.checkAccess(user, datasetURI, params.resourceURI, params.propertyURI);
                     if(!accessLevel.access){
                         //action not allowed!
@@ -506,11 +440,12 @@ export default {
                         callback(null, {category: params.category});
                         return 0;
                     }
+                    */
                 }
             }else{
                 user = {accountName: 'open'};
             }
-            getDynamicEndpointParameters(datasetURI, (endpointParameters)=>{
+            getDynamicEndpointParameters(user, datasetURI, (endpointParameters)=>{
                 graphName = endpointParameters.graphName;
                 query = queryObject.getPrefixes() + queryObject.updateObjectTriples(endpointParameters, graphName, params.resourceURI, params.propertyURI, params.oldObjectValue, params.newObjectValue, params.valueType, params.dataType, params.detailData);
                 //build http uri
@@ -540,17 +475,19 @@ export default {
                     return 0;
                 }else{
                     user = req.user;
+                    /*todo:fix permission on update!
                     accessLevel = utilObject.checkAccess(user, datasetURI, datasetURI, params.propertyURI);
                     if(!accessLevel.access){
                         //action not allowed!
                         callback(null, {category: params.category});
                         return 0;
                     }
+                    */
                 }
             }else{
                 user = {accountName: 'open'};
             }
-            getDynamicEndpointParameters(datasetURI, (endpointParameters)=>{
+            getDynamicEndpointParameters(user, datasetURI, (endpointParameters)=>{
                 graphName = endpointParameters.graphName;
                 query = queryObject.getPrefixes() + queryObject.updateTriples(endpointParameters, graphName, params.resourceURI, params.propertyURI, params.changes);
                 //build http uri
@@ -583,17 +520,19 @@ export default {
                     return 0;
                 }else{
                     user = req.user;
+                    /*todo:fix permission on update!
                     accessLevel = utilObject.checkAccess(user, datasetURI, params.resourceURI, params.propertyURI);
                     if(!accessLevel.access){
                         //action not allowed!
                         callback(null, {category: params.category});
                         return 0;
                     }
+                    */
                 }
             }else{
                 user = {accountName: 'open'};
             }
-            getDynamicEndpointParameters(datasetURI, (endpointParameters)=>{
+            getDynamicEndpointParameters(user, datasetURI, (endpointParameters)=>{
                 graphName = endpointParameters.graphName;
                 query = queryObject.getPrefixes() + queryObject.deleteTriple(endpointParameters, graphName, params.resourceURI, params.propertyURI, params.objectValue, params.valueType, params.dataType);
                 //build http uri
@@ -622,16 +561,18 @@ export default {
                     callback(null, {category: params.category});
                 }else{
                     user = req.user;
+                    /*todo:fix permission on update!
                     accessLevel = utilObject.checkAccess(user, datasetURI, params.resourceURI, params.propertyURI);
                     if(!accessLevel.access){
                         //action not allowed!
                         callback(null, {category: params.category});
                     }
+                    */
                 }
             }else{
                 user = {accountName: 'open'};
             }
-            getDynamicEndpointParameters(datasetURI, (endpointParameters)=>{
+            getDynamicEndpointParameters(user, datasetURI, (endpointParameters)=>{
                 graphName = endpointParameters.graphName;
                 query = queryObject.getPrefixes() + queryObject.deleteTriples(endpointParameters, graphName, params.resourceURI, params.propertyURI, params.changes);
                 //build http uri
@@ -659,16 +600,18 @@ export default {
                     callback(null, {category: params.category});
                 }else{
                     user = req.user;
+                    /*todo:fix permission on update!
                     accessLevel = utilObject.checkAccess(user, datasetURI, params.resourceURI, params.propertyURI);
                     if(!accessLevel.access){
                         //action not allowed!
                         callback(null, {category: params.category});
                     }
+                    */
                 }
             }else{
                 user = {accountName: 'open'};
             }
-            getDynamicEndpointParameters(datasetURI, (endpointParameters)=>{
+            getDynamicEndpointParameters(user, datasetURI, (endpointParameters)=>{
                 graphName = endpointParameters.graphName;
                 //delete all values
                 query = queryObject.getPrefixes() + queryObject.deleteTriple(endpointParameters, graphName, params.resourceURI, params.propertyURI, 0, 0, 0);
