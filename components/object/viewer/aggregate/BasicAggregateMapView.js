@@ -5,24 +5,25 @@ import LeafletMapView from '../common/LeafletMapView';
 class BasicAggregateMapView extends React.Component {
     getFocusPoint(val, components) {
         let focusPoint = {lat: 52.379189, lng: 4.899431};
-        if(val.indexOf('POLYGON') !== -1 || val.indexOf('Polygon') !== -1 ){
+        if(val.indexOf('MULTIPOLYGON') !== -1 || val.indexOf('MultiPolygon') !== -1 ){
+            focusPoint = {lat: parseFloat(components[0][0][0].y), lng: parseFloat(components[0][0][0].x)};
+        }else if(val.indexOf('POLYGON') !== -1 || val.indexOf('Polygon') !== -1 ){
             focusPoint = {lat: parseFloat(components[0][0].y), lng: parseFloat(components[0][0].x)};
-            if(!focusPoint.lat || focusPoint.lat==='NaN' || !focusPoint.lng || focusPoint.lng==='NaN'){
+            if(!focusPoint.lat || isNaN(focusPoint.lat) || !focusPoint.lng || isNaN(focusPoint.lng)){
                 focusPoint = {lat: parseFloat(components[0][1].y), lng: parseFloat(components[0][1].x)};
             }
-        }else if(val.indexOf('MULTIPOLYGON') !== -1 || val.indexOf('MultiPolygon') !== -1 ){
-            focusPoint = {lat: parseFloat(components[0][0][0].y), lng: parseFloat(components[0][0][0].x)};
+        } else if(val.indexOf('MULTILINESTRING') !== -1 || val.indexOf('MultiLineString') !== -1 ){
+            focusPoint = {lat: parseFloat(components[0][0].y), lng: parseFloat(components[0][0].x)};
         }else if(val.indexOf('LINESTRING') !== -1 || val.indexOf('LineString') !== -1 ){
             focusPoint = {lat: parseFloat(components[0].y), lng: parseFloat(components[0].x)};
-        }else if(val.indexOf('MULTILINESTRING') !== -1 || val.indexOf('MultiLineString') !== -1 ){
-            focusPoint = {lat: parseFloat(components[0][0].y), lng: parseFloat(components[0][0].x)};
         }
+
         return focusPoint;
     }
     render() {
         let self = this;
         let val, outputDIV, coordinates, long, lat, data, coordinatesArr=[], shapesArr=[], focusPoint;
-        let zoomLevel = 8;
+        let zoomLevel = 9;
         if(this.props.config && this.props.config.zoomLevel){
             zoomLevel = this.props.config.zoomLevel;
         }
@@ -52,13 +53,24 @@ class BasicAggregateMapView extends React.Component {
             }else{
                 val = node.value.replace('POINT(', '').replace(')', '');
                 coordinates = val.split(' ');
-                long = parseFloat(coordinates[0]);
-                lat = parseFloat(coordinates[1]);
-                if((self.props.config && self.props.config.swapLongLat) || self.props.swapLongLat){
-                    long = parseFloat(coordinates[1]);
-                    lat = parseFloat(coordinates[0]);
+                try {
+                    long = parseFloat(coordinates[0]);
+                    lat = parseFloat(coordinates[1]);
+                    if((self.props.config && self.props.config.swapLongLat) || self.props.swapLongLat){
+                        long = parseFloat(coordinates[1]);
+                        lat = parseFloat(coordinates[0]);
+                    }
+                    if(isNaN(long) || isNaN(lat)){
+                        //error
+                    }else{
+                        coordinatesArr.push({position: {lat: lat, lng: long}, key: node.value});
+                    }
+
                 }
-                coordinatesArr.push({position: {lat: lat, lng: long}, key: node.value});
+                catch(err) {
+                    console.log(err.message);
+                }
+
             }
 
         });
