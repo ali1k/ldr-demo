@@ -36,4 +36,4 @@ app.plug(fetchrPlugin({
 }));
 app.plug(authPlugin({}));
 
-module.exports = app;
+export default app;
