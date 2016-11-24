@@ -83,13 +83,18 @@ export default {
             callback(dynamicReactorDS, dynamicFacetsDS);
         });
     },
+    createASampleServerConfig: function(user, datasetURI, options, callback) {
+        dynamicConfigurator.createASampleServerConfig(user, datasetURI, options, (res)=> {
+            callback(res);
+        });
+    },
     createASampleReactorConfig: function(user, scope, datasetURI, resourceURI, propertyURI, options, callback) {
         dynamicConfigurator.createASampleReactorConfig(user, scope, datasetURI, resourceURI, propertyURI, options, (res)=> {
             callback(res);
         });
     },
-    createASampleFacetsConfig: function(user, configURI, datasetURI, callback) {
-        dynamicConfigurator.createASampleFacetsConfig(user, configURI, datasetURI, (res)=> {
+    createASampleFacetsConfig: function(user, configURI, datasetURI, options, callback) {
+        dynamicConfigurator.createASampleFacetsConfig(user, configURI, datasetURI, options, (res)=> {
             callback(res);
         });
     }

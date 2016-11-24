@@ -26,10 +26,20 @@ export default {
             done();
         }
     },
+    newDataset: {
+        path: '/newDataset',
+        method: 'get',
+        handler: require('../components/NewDataset'),
+        label: 'NewDataset',
+        action: (context, payload, done) => {
+            context.dispatch('UPDATE_PAGE_TITLE', { pageTitle: appFullTitle + ' | Add a new dataset'});
+            done();
+        }
+    },
     facets: {
         path: '/browse/:id?',
         method: 'get',
-        handler: require('../components/FacetedBrowser'),
+        handler: require('../components/dataset/FacetedBrowser'),
         label: 'Faceted Browser',
         action: (context, payload, done) => {
             let datasetURI, page;
