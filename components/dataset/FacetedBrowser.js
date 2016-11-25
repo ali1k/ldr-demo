@@ -11,7 +11,19 @@ import ResourceListPager from './ResourceListPager';
 class FacetedBrowser extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {selection: {}};
+        this.state = {selection: {}, expandedFacet: 0, hideFirstCol: false};
+    }
+    toggleFirstCol(){
+        this.setState({hideFirstCol: !this.state.hideFirstCol})
+    }
+    toggleExpandFacet(propertyURI){
+        this.toggleFirstCol();
+        if(this.state.expandedFacet){
+            this.setState({expandedFacet: 0})
+        }else{
+            this.setState({expandedFacet: propertyURI})
+        }
+
     }
     gotoPage(page) {
         this.context.executeAction(loadFacets, {mode: 'second', id: this.props.FacetedBrowserStore.datasetURI, page: page, selection: { prevSelection: this.state.selection}});
@@ -183,22 +195,35 @@ class FacetedBrowser extends React.Component {
                 if(self.props.FacetedBrowserStore.facets[node.value] && self.props.FacetedBrowserStore.facets[node.value].length){
                     showFactes = 1;
                     //console.log(self.findIndexInProperties(properties, node.value));
-                    return (
-                        <Facet onCheck={self.handleOnCheck.bind(self, 2, self.props.FacetedBrowserStore.facets[node.value][0].valueType, self.props.FacetedBrowserStore.facets[node.value][0].dataType)} key={self.findIndexInProperties(properties, node.value)} spec={{propertyURI: node.value, property: self.getPropertyLabel(node.value), instances: self.props.FacetedBrowserStore.facets[node.value]}} config={self.getPropertyConfig(self.props.FacetedBrowserStore.datasetURI, node.value)} datasetURI={self.props.FacetedBrowserStore.datasetURI}/>
-                    );
+                    if(self.state.expandedFacet){
+                        if(self.state.expandedFacet===node.value){
+                            return (
+                                <Facet minHeight={400} maxHeight={600} onCheck={self.handleOnCheck.bind(self, 2, self.props.FacetedBrowserStore.facets[node.value][0].valueType, self.props.FacetedBrowserStore.facets[node.value][0].dataType)} key={self.findIndexInProperties(properties, node.value)} spec={{propertyURI: node.value, property: self.getPropertyLabel(node.value), instances: self.props.FacetedBrowserStore.facets[node.value]}} config={self.getPropertyConfig(self.props.FacetedBrowserStore.datasetURI, node.value)} datasetURI={self.props.FacetedBrowserStore.datasetURI} toggleExpandFacet={self.toggleExpandFacet.bind(self)}/>
+                            );
+                        }
+                    }else{
+                        return (
+                            <Facet onCheck={self.handleOnCheck.bind(self, 2, self.props.FacetedBrowserStore.facets[node.value][0].valueType, self.props.FacetedBrowserStore.facets[node.value][0].dataType)} key={self.findIndexInProperties(properties, node.value)} spec={{propertyURI: node.value, property: self.getPropertyLabel(node.value), instances: self.props.FacetedBrowserStore.facets[node.value]}} config={self.getPropertyConfig(self.props.FacetedBrowserStore.datasetURI, node.value)} datasetURI={self.props.FacetedBrowserStore.datasetURI} toggleExpandFacet={self.toggleExpandFacet.bind(self)}/>
+                        );
+                    }
                 }else{
                     return undefined;
                 }
             });
             let pagerSize = showFactes ? 5 : 10;
             let resSize = showFactes ? 'seven' : 'eleven';
-            let facetsDIV = showFactes ? <div className="ui stackable five wide column">{list}</div> : '';
+            let facetsDIV
+            if(this.state.hideFirstCol){
+                facetsDIV = showFactes ? <div className="ui stackable nine wide column">{list}</div> : '';
+            }else{
+                facetsDIV = showFactes ? <div className="ui stackable five wide column">{list}</div> : '';
+            }
             let resourceDIV;
             let dcnf = this.props.FacetedBrowserStore.datasetConfig;
             let cnf = this.props.FacetedBrowserStore.config;
-            let datasetTitle = <a target="_blank" href={this.props.FacetedBrowserStore.datasetURI}> {this.props.FacetedBrowserStore.datasetURI} </a>;
+            let datasetTitle = <a target="_blank" href={'/dataset/1/'+encodeURIComponent(this.props.FacetedBrowserStore.datasetURI)}> {this.props.FacetedBrowserStore.datasetURI} </a>;
             if(dcnf.datasetLabel){
-                datasetTitle = <a target="_blank" href={this.props.FacetedBrowserStore.datasetURI}> {dcnf.datasetLabel} </a>;
+                datasetTitle = <a target="_blank" href={'/dataset/1/'+encodeURIComponent(this.props.FacetedBrowserStore.datasetURI)}> {dcnf.datasetLabel} </a>;
             }
             if(dcnf.allowInlineConfig){
                 configDiv = <a onClick={this.createFConfig.bind(this, this.props.FacetedBrowserStore.datasetURI)} className="ui icon mini black circular button"><i className="ui settings icon"></i> </a>;
@@ -206,8 +231,7 @@ class FacetedBrowser extends React.Component {
             if(this.props.FacetedBrowserStore.total){
                 resourceDIV = <div className="ui segment">
                                 <h3 className="ui header">
-                                    <span className="ui blue circular label">{this.addCommas(this.props.FacetedBrowserStore.total)}</span> Resources from {datasetTitle}
-
+                                    {this.props.FacetedBrowserStore.total ? <a target="_blank" href={'/export/NTriples/' + encodeURIComponent(this.props.FacetedBrowserStore.datasetURI)}><span className="ui black circular label">{this.addCommas(this.props.FacetedBrowserStore.total)}</span></a> : ''} Resources from {datasetTitle}
                                  </h3>
                                 <ResourceList resources={this.props.FacetedBrowserStore.resources} datasetURI={this.props.FacetedBrowserStore.datasetURI} OpenInNewTab={true} isBig={!showFactes} config={dcnf}/>
                                 <ResourceListPager handleClick={this.gotoPage.bind(this)} datasetURI={this.props.FacetedBrowserStore.datasetURI} total={this.props.FacetedBrowserStore.total} threshold={pagerSize} currentPage={this.props.FacetedBrowserStore.page}/>
@@ -215,10 +239,12 @@ class FacetedBrowser extends React.Component {
             }
             return (
                 <div className="ui page grid" ref="facetedBrowser">
+                    {this.state.hideFirstCol ? '' :
                         <div className="ui stackable four wide column">
-                            <Facet color="green" onCheck={this.handleOnCheck.bind(this, 1, 'uri', '')} key="master" maxHeight={500} minHeight={300} spec={{property: '', propertyURI: '', instances: properties}} config={{label: 'Selected Properties'}} datasetURI={this.props.FacetedBrowserStore.datasetURI}/>
+                            <Facet color="green" onCheck={this.handleOnCheck.bind(this, 1, 'uri', '')} key="master" maxHeight={500} minHeight={300} spec={{property: '', propertyURI: '', instances: properties}} config={{label: 'Selected Properties'}} datasetURI={this.props.FacetedBrowserStore.datasetURI} />
                             {configDiv}
                         </div>
+                    }
                         {facetsDIV}
                         <div className={'ui stackable ' + resSize + ' wide column'}>
                             {resourceDIV}
