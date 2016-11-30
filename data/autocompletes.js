@@ -97,7 +97,7 @@ module.exports = {
         {title: 'ToggleView'},
         {title: 'TwoLetterCountryView'},
         {title: 'BasicAggregateMapView'},
-        {title: 'DBpediaGoogleMapView'},
+        {title: 'DBpediaMapView'},
         {title: 'BasicCalendarInput'},
         {title: 'BasicTextareaInput'},
         {title: 'DBpediaInput'},
@@ -107,6 +107,7 @@ module.exports = {
         {title: 'ToggleEdit'},
         {title: 'TagListBrowser'},
         {title: 'GeoListBrowser'},
-        {title: 'CheckListBrowser'}
+        {title: 'CheckListBrowser'},
+        {title: 'BarChartBrowser'}
     ]
 }
