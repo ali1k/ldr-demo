@@ -12,6 +12,7 @@ module.exports = {
             {title: 'ldr:dataset'},
             {title: 'ldr:resource'},
             {title: 'ldr:property'},
+            {title: 'ldr:scope'},
             {title: 'ldr:list'},
             {title: 'ldr:label'},
             {title: 'ldr:datasetLabel'},
@@ -27,6 +28,7 @@ module.exports = {
             {title: 'ldr:resourceLabelProperty'},
             {title: 'ldr:maxNumberOfResourcesOnPage'},
             {title: 'ldr:readOnly'},
+            {title: 'ldr:openInNewWindows'},
             {title: 'ldr:resourceReactor'},
             {title: 'ldr:usePropertyCategories'},
             {title: 'ldr:propertyCategories'},
@@ -65,7 +67,9 @@ module.exports = {
             {title: 'ldr:height'},
             {title: 'ldr:width'},
             {title: 'ldr:allowUserDefinedValue'},
-            {title: 'ldr:calendarFormat'}
+            {title: 'ldr:calendarFormat'},
+            {title: 'ldr:containerDatasetURI'},
+            {title: 'ldr:hasLinkedValue'}
         ],
         ldrLiterals: [
             {title: 'OrgResource'},
