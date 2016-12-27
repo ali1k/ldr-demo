@@ -37,12 +37,12 @@ class Datasets extends React.Component {
             return -1;
         if (parseFloat(a.position) > parseFloat(b.position))
             return 1;
-        //sort by alphabets    
-        if(a.datasetLabel && b.datasetLabel){
-            if(a.datasetLabel < b.datasetLabel){
+        //sort by alphabets
+        if(a.features && b.features && a.features.datasetLabel && b.features.datasetLabel){
+            if(a.features.datasetLabel < b.features.datasetLabel){
                 return -1;
             }
-            if(a.datasetLabel > b.datasetLabel){
+            if(a.features.datasetLabel > b.features.datasetLabel){
                 return 1;
             }
         }
