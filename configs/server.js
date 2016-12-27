@@ -4,8 +4,7 @@ export default {
     serverPort: [4000],
     sparqlEndpoint: {
         'generic': {
-            //host: 'localhost', port: 8890, path: '/sparql'
-            host: 'vt.ali.ops.few.vu.nl', port: 80, path: '/sparql'
+            host: 'localhost', port: 8890, path: '/sparql'
             //host: 'localhost', port: 3020, path: '/sparql/', endpointType: 'ClioPatria'
         },
         'http://dblp.l3s.de/d2r/sparql': {
