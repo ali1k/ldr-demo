@@ -82,12 +82,6 @@ export default {
                 readOnly: 1,
                 datasetLabel: ['LinkedGeoData Dataset']
             },
-            'http://data.linkedmdb.org/sparql': {
-                resourceFocusType: ['http://data.linkedmdb.org/resource/movie/film'],
-                readOnly: 1,
-                datasetLabel: ['Linked IMDB Movie Dataset'],
-                resourceLabelProperty: ['http://purl.org/dc/terms/title']
-            },
             'http://lodlaundromat.org/sparql/': {
                 readOnly: 1,
                 resourceFocusType: ['http://lodlaundromat.org/ontology/ArchiveEntry'],

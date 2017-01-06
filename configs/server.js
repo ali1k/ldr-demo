@@ -10,9 +10,6 @@ export default {
         'http://dblp.l3s.de/d2r/sparql': {
             host: 'dblp.l3s.de', port: 80, path: '/d2r/sparql', graphName: 'default', endpointType: 'sesame'
         },
-        'http://data.linkedmdb.org/sparql': {
-            host: 'data.linkedmdb.org', port: 80, path: '/sparql', graphName: 'default', endpointType: 'stardog'
-        },
         'http://lsq.aksw.org/sparql': {
             host: 'lsq.aksw.org', port: 80, path: '/sparql', graphName: 'default', endpointType: 'virtuoso'
         },
