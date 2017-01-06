@@ -77,12 +77,6 @@ export default {
                 datasetLabel: ['Cordis H2020 Projects Dataset'],
                 resourceLabelProperty : ['http://purl.org/dc/terms/title']
             },
-            'http://babelnet.org/rdf/': {
-                resourceFocusType: ['http://www.lemon-model.net/lemon#LexicalEntry'],
-                readOnly: 1,
-                datasetLabel: ['BabelNet Dataset'],
-                resourceLabelProperty : ['http://www.w3.org/2000/01/rdf-schema#label']
-            },
             'http://linkedgeodata.org': {
                 resourceFocusType: ['http://linkedgeodata.org/ontology/University'],
                 readOnly: 1,
@@ -93,22 +87,6 @@ export default {
                 readOnly: 1,
                 datasetLabel: ['Linked IMDB Movie Dataset'],
                 resourceLabelProperty: ['http://purl.org/dc/terms/title']
-            },
-            'http://www.bbc.co.uk/nature/': {
-                resourceFocusType: ['http://xmlns.com/foaf/0.1/Document'],
-                readOnly: 1,
-                datasetLabel: ['BBC Nature Dataset']
-            },
-            'http://www.linklion.org:8890/sparql': {
-                resourceFocusType: ['http://www.linklion.org/ontology#Link'],
-                readOnly: 1,
-                datasetLabel: ['Linkion Dataset']
-            },
-            'http://www.contextdatacloud.org': {
-                resourceFocusType: ['http://www.contextdatacloud.org/ontology/WeatherSituation', 'http://www.contextdatacloud.org/ontology/LocationEntity'],
-                readOnly: 1,
-                datasetLabel: ['Context Data Clooud Dataset'],
-                resourceLabelProperty : ['http://purl.org/goodrelations/v1#name']
             },
             'http://lodlaundromat.org/sparql/': {
                 readOnly: 1,

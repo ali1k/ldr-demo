@@ -11,7 +11,7 @@ export default {
             host: 'dblp.l3s.de', port: 80, path: '/d2r/sparql', graphName: 'default', endpointType: 'sesame'
         },
         'http://data.linkedmdb.org/sparql': {
-            host: 'data.linkedmdb.org', port: 80, path: '/sparql', graphName: 'default', endpointType: 'sesame'
+            host: 'data.linkedmdb.org', port: 80, path: '/sparql', graphName: 'default', endpointType: 'stardog'
         },
         'http://lsq.aksw.org/sparql': {
             host: 'lsq.aksw.org', port: 80, path: '/sparql', graphName: 'default', endpointType: 'virtuoso'
@@ -21,12 +21,6 @@ export default {
         },
         'http://lodlaundromat.org/sparql/': {
             host: 'lodlaundromat.org', port: 80, path: '/sparql', graphName: 'default', endpointType: 'virtuoso'
-        },
-        'http://www.contextdatacloud.org': {
-            host: 'www.contextdatacloud.org', port: 8890, path: '/sparql', useDefaultGraph: 0, endpointType: 'virtuoso'
-        },
-        'http://www.linklion.org:8890/sparql': {
-            host: 'www.linklion.org', port: 8890, path: '/sparql', graphName: 'default', endpointType: 'virtuoso'
         },
         'http://clinicaltrials.bio2rdf.org/sparql': {
             host: 'clinicaltrials.bio2rdf.org', port: 80, path: '/sparql', graphName: 'default', endpointType: 'virtuoso'
@@ -49,14 +43,8 @@ export default {
         'http://drugbank.bio2rdf.org/sparql': {
             host: 'drugbank.bio2rdf.org', port: 80, path: '/sparql', graphName: 'default', endpointType: 'virtuoso'
         },
-        'http://www.bbc.co.uk/nature/': {
-            host: 'lod.openlinksw.com', port: 80, path: '/sparql'
-        },
         'http://data.semanticweb.org/sparql': {
             host: 'data.semanticweb.org', port: 80, path: '/sparql', graphName: 'default', endpointType: 'sesame'
-        },
-        'http://babelnet.org/rdf/': {
-            host: 'babelnet.org', port: 80, path: '/sparql', graphName: 'default', endpointType: 'virtuoso'
         },
         'http://world.openfoodfacts.org/': {
             host: 'sparql.sms.risis.eu', port: 80, path: '/', endpointType: 'virtuoso'

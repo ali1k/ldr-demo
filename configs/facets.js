@@ -8,20 +8,6 @@ export default {
 
             }
         },
-        'http://www.contextdatacloud.org': {
-
-            list: [
-                'http://www.w3.org/2001/vcard-rdf/3.0#locality', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',  'http://www.contextdatacloud.org/ontology/hasLocationCategory'
-            ],
-            config: {
-                'http://www.contextdatacloud.org/ontology/hasLocationCategory': {
-                    label: ['Category']
-                },
-                'http://www.w3.org/2001/vcard-rdf/3.0#locality': {
-                    label: ['Location']
-                }
-            }
-        },
         'http://world.openfoodfacts.org/': {
             list: [
                 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'
@@ -62,14 +48,6 @@ export default {
         'http://data.semanticweb.org/sparql': {
             list: [
                 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type', 'http://swrc.ontoware.org/ontology#year'
-            ],
-            config: {
-
-            }
-        },
-        'http://babelnet.org/rdf/': {
-            list: [
-                'http://www.w3.org/1999/02/22-rdf-syntax-ns#type', 'http://www.lemon-model.net/lemon#language', 'http://www.lexinfo.net/ontology/2.0/lexinfo#partOfSpeech', 'http://www.lemon-model.net/lemon#sense'
             ],
             config: {
 
