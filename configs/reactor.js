@@ -432,17 +432,23 @@ export default {
                 'http://purl.org/dc/terms/created': {
                     label: ['Created date'],
                     category: ['date'],
-                    hint: ['A point or period of time associated with an event in the life-cycle of the resource. The value should be formatted as date and time format - ISO 8601']
+                    hint: ['A point or period of time associated with an event in the life-cycle of the resource. The value should be formatted as date and time format - ISO 8601'],
+                    objectIEditor: ['BasicCalendarInput'],
+                    allowNewValue: 1
                 },
                 'http://purl.org/dc/terms/issued': {
                     label: ['Date issued'],
                     category: ['date'],
-                    hint: ['A point or period of time associated with an event in the life-cycle of the resource. The value should be formatted as date and time format - ISO 8601.']
+                    hint: ['A point or period of time associated with an event in the life-cycle of the resource. The value should be formatted as date and time format - ISO 8601.'],
+                    objectIEditor: ['BasicCalendarInput'],
+                    allowNewValue: 1
                 },
                 'http://purl.org/dc/terms/modified': {
                     label: ['Date modified'],
                     category: ['date'],
-                    hint: ['A point or period of time associated with an event in the life-cycle of the resource. The value should be formatted as date and time format - ISO 8601']
+                    hint: ['A point or period of time associated with an event in the life-cycle of the resource. The value should be formatted as date and time format - ISO 8601'],
+                    objectIEditor: ['BasicCalendarInput'],
+                    allowNewValue: 1
                 },
                 'http://purl.org/dc/terms/license': {
                     category: ['legalAspects'],
@@ -627,8 +633,8 @@ export default {
                                         config: {
                                             label: ['Start date'],
                                             category: ['date'],
-                                            hint: ['Start date of the time coverage.']
-                                        }
+                                            hint: ['Start date of the time coverage.'],
+                                            objectIEditor: ['BasicCalendarInput']                                        }
                                     },
                                     {
                                         spec: {
@@ -638,7 +644,8 @@ export default {
                                         config: {
                                             label: ['End date'],
                                             category: ['date'],
-                                            hint: ['End date of the time coverage.']
+                                            hint: ['End date of the time coverage.'],
+                                            objectIEditor: ['BasicCalendarInput']
                                         }
                                     }
                                 ]
