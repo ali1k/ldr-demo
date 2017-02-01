@@ -3,6 +3,8 @@
 
 # Linked Data Reactor
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/ali1k/ldr-demo.svg)](https://greenkeeper.io/)
+
 Linked Data Reactor (LD-Reactor or LD-R) is a framework to develop reactive and reusable User Interface components for Linked Data applications. LD-Reactor utilizes Facebook's ReactJS components, Flux architecture and Yahoo!'s Fluxible framework for isomorphic Web applications. It also exploits Semantic-UI framework for flexible UI themes. LD-Reactor aims to apply the idea of component-based application development into RDF data model hence enhancing current user interfaces to view, browse and edit Linked Data.
 
 ## Quick Start
