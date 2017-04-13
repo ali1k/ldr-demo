@@ -5,3 +5,4 @@ logs/*.log
 tmp.js
 plugins/email/config.js
 *.lock
+react-codemod
