@@ -134,40 +134,6 @@ export default {
             }
         },
         dataset_property: {
-            'http://risis.eu/cordisH2020': {
-                'http://risis.eu/cordisH2020/vocab/projectParticipant': {
-                    label: ['Participants'],
-                    objectIViewer: ['BasicLinkedIndividualView']
-                },
-                'http://www.geonames.org/ontology#countryCode': {
-                    label: ['Country'],
-                    objectIViewer: ['TwoLetterCountryView']
-                },
-                'http://risis.eu/cordisH2020/resource/organizationType': {
-                    label: ['Organization Type'],
-                    objectIViewer: ['BasicLinkedIndividualView']
-                },
-                'http://risis.eu/cordisH2020/vocab/fundingScheme': {
-                    label: ['Funding Scheme'],
-                    objectIViewer: ['BasicLinkedIndividualView']
-                },
-                'http://risis.eu/cordisH2020/vocab/legalBasis': {
-                    label: ['Legal Basis'],
-                    objectIViewer: ['BasicLinkedIndividualView']
-                },
-                'http://risis.eu/cordisH2020/vocab/topic': {
-                    label: ['Topic'],
-                    objectIViewer: ['BasicLinkedIndividualView']
-                },
-                'http://risis.eu/cordisH2020/vocab/projectParticipation': {
-                    label: ['Project Participation'],
-                    objectIViewer: ['BasicLinkedIndividualView']
-                },
-                'http://risis.eu/cordisH2020/vocab/signedGrant': {
-                    label: ['Signed Grant'],
-                    objectIViewer: ['BasicLinkedIndividualView']
-                }
-            },
             'http://ld-r.org/datasets/void': {
                 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type': {
                     //it will not affect the sub properties in detail
