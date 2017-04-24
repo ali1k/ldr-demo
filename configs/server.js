@@ -4,8 +4,11 @@ export default {
     serverPort: [4000],
     sparqlEndpoint: {
         'generic': {
-            host: 'localhost', port: 8890, path: '/sparql'
-            //host: 'localhost', port: 3020, path: '/sparql/', endpointType: 'ClioPatria'
+            host: 'localhost', port: 3020, path: '/sparql/', endpointType: 'ClioPatria'
+            //host: 'localhost', port: 8890, path: '/sparql'
+        },
+        'http://localhost:5820/testDB/query': {
+            host: 'localhost', port: 5820, path: '/testDB/query', graphName: 'default', endpointType: 'stardog', useReasoning: 1
         },
         'http://dblp.l3s.de/d2r/sparql': {
             host: 'dblp.l3s.de', port: 80, path: '/d2r/sparql', graphName: 'default', endpointType: 'sesame'

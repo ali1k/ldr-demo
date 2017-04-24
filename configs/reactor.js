@@ -61,7 +61,7 @@ export default {
                 datasetLabel: ['DBLP Publications Dataset'],
                 resourceLabelProperty: ['http://purl.org/dc/elements/1.1/title']
             },
-            'http://live.dbpedia.org': {
+            'http://live.dbpedia.org/sparql': {
                 resourceFocusType: ['http://dbpedia.org/ontology/University'],
                 readOnly: 1,
                 datasetLabel: ['Live DBpedia Dataset']
@@ -71,12 +71,6 @@ export default {
                 readOnly: 1,
                 datasetLabel: ['Dutch DBpedia Dataset']
             },
-            'http://risis.eu/cordisH2020': {
-                resourceFocusType: ['http://risis.eu/cordisH2020/vocab/SignedGrantAgreement'],
-                readOnly: 1,
-                datasetLabel: ['Cordis H2020 Projects Dataset'],
-                resourceLabelProperty : ['http://purl.org/dc/terms/title']
-            },
             'http://linkedgeodata.org': {
                 resourceFocusType: ['http://linkedgeodata.org/ontology/University'],
                 readOnly: 1,
@@ -85,7 +79,7 @@ export default {
             'http://lodlaundromat.org/sparql/': {
                 readOnly: 1,
                 resourceFocusType: ['http://lodlaundromat.org/ontology/ArchiveEntry'],
-                datasetLabel: ['lodlaundromat Dataset']
+                datasetLabel: ['LODLaundromat Dataset']
             },
             'http://lsq.aksw.org/sparql': {
                 readOnly: 1,
