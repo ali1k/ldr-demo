@@ -6,3 +6,4 @@ tmp.js
 plugins/email/config.js
 *.lock
 react-codemod
+.DS_Store
