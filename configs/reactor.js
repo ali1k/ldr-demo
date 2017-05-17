@@ -506,7 +506,7 @@ export default {
                         {label: 'Tabular (Spreadsheet) Model', value: 'Tabular Model'},
                         {label: 'Unstructured', value: 'Unstructured'}
                     ],
-                    placeholder: ["Enter the value for other data model..."],
+                    placeholder: ['Enter the value for other data model...'],
                     defaultValue: ['Relational Model'],
                     allowUserDefinedValue: 1
                 },
@@ -542,7 +542,7 @@ export default {
                                     {label: 'Policy', value: 'http://purl.org/dc/terms/Policy'},
                                     {label: 'Policy Evaluation', value: 'http://rdf.risis.eu/metadata/PolicyEvaluation'}
                                 ],
-                                placeholder: ["Enter the URI for your specific entity type..."],
+                                placeholder: ['Enter the URI for your specific entity type...'],
                                 allowUserDefinedValue: 1
                             }
                         },
