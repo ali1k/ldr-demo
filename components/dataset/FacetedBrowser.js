@@ -158,6 +158,8 @@ class FacetedBrowser extends React.Component {
             if(!status){
                 //empty the selection
                 delete this.state.selection[value];
+                //empty invert
+                delete this.state.invert[value];
             }else{
                 //initiate facet
                 this.state.selection[value] = [];
@@ -239,9 +241,11 @@ class FacetedBrowser extends React.Component {
         //check erros first
         if(this.props.FacetedBrowserStore.error){
             return (
-                <div className="ui page grid" ref="facetedBrowser">
-                    <div className="ui column">
-                        <div className="ui warning message"><h2>{this.props.FacetedBrowserStore.error}</h2></div>
+                <div className="ui fluid container ldr-padding" ref="facetedBrowser">
+                    <div className="ui grid">
+                        <div className="ui column">
+                            <div className="ui warning message"><h2>{this.props.FacetedBrowserStore.error}</h2></div>
+                        </div>
                     </div>
                 </div>
             )
