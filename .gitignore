@@ -3,6 +3,7 @@ build
 *.log
 logs/*.log
 tmp.js
+configs/server.js
 plugins/email/config.js
 *.lock
 react-codemod
