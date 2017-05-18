@@ -34,6 +34,7 @@ export default {
                 readOnly: 0,
                 datasetLabel: ['Examples of editable datasets']
             },
+            /*
             'http://drugbank.bio2rdf.org/sparql': {
                 resourceFocusType: ['http://bio2rdf.org/drugbank_vocabulary:Drug'],
                 resourceLabelProperty: ['http://purl.org/dc/terms/title'],
@@ -45,6 +46,7 @@ export default {
                 readOnly: 1,
                 datasetLabel: ['Clinical Trials Dataset']
             },
+            */
             'http://data.semanticweb.org/sparql': {
                 resourceFocusType: ['http://swrc.ontoware.org/ontology#InProceedings'],
                 readOnly: 1,
