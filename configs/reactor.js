@@ -36,6 +36,7 @@ export default {
             },
             'http://drugbank.bio2rdf.org/sparql': {
                 resourceFocusType: ['http://bio2rdf.org/drugbank_vocabulary:Drug'],
+                resourceLabelProperty: ['http://purl.org/dc/terms/title'],
                 readOnly: 1,
                 datasetLabel: ['DrugBank Dataset']
             },
@@ -44,22 +45,10 @@ export default {
                 readOnly: 1,
                 datasetLabel: ['Clinical Trials Dataset']
             },
-            'http://world.openfoodfacts.org/': {
-                resourceFocusType: ['http://data.lirmm.fr/ontologies/food#Food', 'http://data.lirmm.fr/ontologies/food#FoodProduct', 'http://data.lirmm.fr/ontologies/food#Ingredient'],
-                readOnly: 1,
-                datasetLabel: ['OpenFoodFacts Dataset'],
-                resourceLabelProperty : ['http://data.lirmm.fr/ontologies/food#name']
-            },
             'http://data.semanticweb.org/sparql': {
                 resourceFocusType: ['http://swrc.ontoware.org/ontology#InProceedings'],
                 readOnly: 1,
                 datasetLabel: ['Semantic Web Dogfood Dataset (SW Publications)']
-            },
-            'http://dblp.l3s.de/d2r/sparql': {
-                resourceFocusType: ['http://swrc.ontoware.org/ontology#Article'],
-                readOnly: 1,
-                datasetLabel: ['DBLP Publications Dataset'],
-                resourceLabelProperty: ['http://purl.org/dc/elements/1.1/title']
             },
             'http://live.dbpedia.org/sparql': {
                 resourceFocusType: ['http://dbpedia.org/ontology/University'],

@@ -8,14 +8,6 @@ export default {
 
             }
         },
-        'http://world.openfoodfacts.org/': {
-            list: [
-                'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'
-            ],
-            config: {
-
-            }
-        },
         /*
         'http://dblp.l3s.de/d2r/sparql': {
             list: [
@@ -36,12 +28,15 @@ export default {
         */
         'http://drugbank.bio2rdf.org/sparql': {
             list: [
-                'http://www.w3.org/1999/02/22-rdf-syntax-ns#type', 'http://bio2rdf.org/drugbank_vocabulary:group', 'http://bio2rdf.org/drugbank_vocabulary:affected-organism', 'http://bio2rdf.org/drugbank_vocabulary:category',
+                'http://www.w3.org/1999/02/22-rdf-syntax-ns#type', 'http://bio2rdf.org/drugbank_vocabulary:group', 'http://bio2rdf.org/drugbank_vocabulary:affected-organism->http://purl.org/dc/terms/title', 'http://bio2rdf.org/drugbank_vocabulary:category',
                 'http://bio2rdf.org/drugbank_vocabulary:target->http://bio2rdf.org/drugbank_vocabulary:gene-name'
             ],
             config: {
                 'http://bio2rdf.org/drugbank_vocabulary:target->http://bio2rdf.org/drugbank_vocabulary:gene-name' : {
                     label: ['Target Gene']
+                },
+                'http://bio2rdf.org/drugbank_vocabulary:affected-organism->http://purl.org/dc/terms/title' : {
+                    label: ['Affected Organism']
                 }
             }
         },
