@@ -73,65 +73,65 @@ class Lotus extends React.Component {
                     propList.push(<div className="item" key={key2}><a className="ui right pointing blue basic label" href={decodeURIComponent(key2)} target="_blank">{URIUtil.getURILabel(decodeURIComponent(key2))}</a> <div className="ui horizontal list">{objList}</div></div>);
                 }
                 list.push(<div className="ui segments" key={key}>
-                        <a href={decodeURIComponent(key)} target="_blank">
-                            <div className="ui segment secondary">
-                             {URIUtil.truncateMiddle(decodeURIComponent(key), 50, '')}
-                            </div>
-                        </a>
-                        <div className="ui blue segment">
-                            {propList}
+                    <a href={decodeURIComponent(key)} target="_blank">
+                        <div className="ui segment secondary">
+                            {URIUtil.truncateMiddle(decodeURIComponent(key), 50, '')}
                         </div>
-                        </div>);
+                    </a>
+                    <div className="ui blue segment">
+                        {propList}
+                    </div>
+                </div>);
             }
         }
         return (
             <div className="ui page grid" ref="lotus">
-              <div className="ui row">
-                <div className="center aligned column">
-                    <div className="ui">
-                        <div className="ui fluid category search">
-                          <div className="ui large icon input">
-                            <input ref="keyword" className="prompt" type="text" placeholder="Search on Linked Open Data..." style={{width: 500}} onKeyDown={this.handleKeyDown.bind(this)}/>
-                            <i className="search icon"></i>
-                          </div>
+                <div className="ui row">
+                    <div className="center aligned column">
+                        <div className="ui">
+                            <div className="ui fluid category search">
+                                <div className="ui large icon input">
+                                    <input ref="keyword" className="prompt" type="text" placeholder="Search on Linked Open Data..." style={{width: 500}} onKeyDown={this.handleKeyDown.bind(this)}/>
+                                    <i className="search icon"></i>
+                                </div>
                           &nbsp;<button className="ui grey circular button" onClick={this.handleSearch.bind(this)}>LOD Search</button>
                       &nbsp;{this.state.advancedMode ? <button title="hide search settings" className="circular brown ui icon button" onClick={this.handleAdvanced.bind(this)}><i className="icon settings"></i></button> : <button title="show search settings" className="circular ui icon button"onClick={this.handleAdvanced.bind(this)}><i className="icon settings"></i></button>}
-                          <div className="ui">
-                              <br/>
-                              {!this.state.advancedMode ? '' : <div><div className="ui left aligned warning message">
-                                <i className="close icon" onClick={this.handleAdvanced.bind(this)}></i>
-                                <div>
-                                    <div className="ui labeled input"><div className="ui yellow label">Max. Results Size</div><input ref="resultsSize" type="text" style={{width: 80}} defaultValue={this.state.resultsSize} onChange={this.handleResultsSize.bind(this)} /></div>
-                                    <div className="ui labeled input"><div className="ui yellow label">Language</div><input ref="langTag" type="text" style={{width: 80}} defaultValue={this.state.langTag} onChange={this.handleLanguage.bind(this)} /></div>
-                                    <div className="ui labeled input"><div className="ui yellow label">String Similarity Method</div><select style={{width: 120}} className="ui search dropdown" ref="algorithm" value={this.state.algorithm} onChange={this.handleAlgorithm.bind(this)}>
-                                        <option value="terms"> terms </option>
-                                        <option value="phrase"> phrase </option>
-                                        <option value="conjunct"> conjunct </option>
-                                        <option value="fuzzyconjunct"> fuzzyconjunct </option>
-                                    </select></div>
+                                <div className="ui">
+                                    <br/>
+                                    {!this.state.advancedMode ? '' : <div><div className="ui left aligned warning message">
+                                        <i className="close icon" onClick={this.handleAdvanced.bind(this)}></i>
+                                        <div>
+                                            <div className="ui labeled input"><div className="ui yellow label">Max. Results Size</div><input ref="resultsSize" type="text" style={{width: 80}} defaultValue={this.state.resultsSize} onChange={this.handleResultsSize.bind(this)} /></div>
+                                            <div className="ui labeled input"><div className="ui yellow label">Language</div><input ref="langTag" type="text" style={{width: 80}} defaultValue={this.state.langTag} onChange={this.handleLanguage.bind(this)} /></div>
+                                            <div className="ui labeled input"><div className="ui yellow label">String Similarity Method</div><select style={{width: 120}} className="ui search dropdown" ref="algorithm" value={this.state.algorithm} onChange={this.handleAlgorithm.bind(this)}>
+                                                <option value="terms"> terms </option>
+                                                <option value="phrase"> phrase </option>
+                                                <option value="conjunct"> conjunct </option>
+                                                <option value="fuzzyconjunct"> fuzzyconjunct </option>
+                                            </select></div>
 
+                                        </div>
+                                    </div></div>}
                                 </div>
-                              </div></div>}
-                          </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-              </div>
-              <div className="ui row">
-                <div className="column">
-                    <div className="ui relaxed">
-                        {this.props.LotusStore.isComplete ? '' : <span className="ui active"><img src="/assets/img/loader.gif" alt="loading..."/> </span>}
-                        {list.length ? <div><b>{counter}</b> resource(s) listed below: {list}</div> : ''}
+                <div className="ui row">
+                    <div className="column">
+                        <div className="ui relaxed">
+                            {this.props.LotusStore.isComplete ? '' : <span className="ui active"><img src="/assets/img/loader.gif" alt="loading..."/> </span>}
+                            {list.length ? <div><b>{counter}</b> resource(s) listed below: {list}</div> : ''}
+                        </div>
                     </div>
                 </div>
-              </div>
-              <div className="ui row">
-                <div className="center aligned column">
-                    <div className="ui relaxed">
+                <div className="ui row">
+                    <div className="center aligned column">
+                        <div className="ui relaxed">
                         powered by <a href="http://lotus.lodlaundromat.org" target="_blank">LOTUS</a>.
+                        </div>
                     </div>
                 </div>
-              </div>
             </div>
         );
     }

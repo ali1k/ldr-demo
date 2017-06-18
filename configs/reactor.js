@@ -76,7 +76,7 @@ export default {
                 readOnly: 1,
                 resourceFocusType: ['http://spinrdf.org/sp#Select', 'http://spinrdf.org/sp#Ask', 'http://spinrdf.org/sp#Construct', 'http://spinrdf.org/sp#Describe'],
                 datasetLabel: ['Linked SPARQL Queries Dataset'],
-                resourceLabelProperty : ['http://spinrdf.org/sp#text']
+                resourceLabelProperty: ['http://spinrdf.org/sp#text']
             }
         },
         resource: {
@@ -109,6 +109,11 @@ export default {
                 readOnly: 1,
                 allowPropertyDelete: 0
             },
+            'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#dataType': {
+                allowPropertyDelete: 0,
+                objectIViewer: ['PrefixBasedView'],
+                objectIEditor: ['PrefixBasedInput']
+            },
             'http://www.w3.org/1999/02/22-rdf-syntax-ns#type': {
                 allowPropertyDelete: 0,
                 objectIViewer: ['PrefixBasedView'],
@@ -118,7 +123,7 @@ export default {
         //---------depth 2------------
         dataset_resource: {
             'http://ld-r.org/users': {
-                'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#User' :{
+                'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#User': {
                     treatAsResourceType: 1,
                     resourceReactor: ['UserResource']
                 }
@@ -156,11 +161,13 @@ export default {
                     allowExtension: 1,
                     hasBlankNode: 1,
                     autoLoadDetails: 1,
-                    extensions: [
-                        {
+                    extensions: [{
                             spec: {
                                 propertyURI: 'http://rdf-vocabulary.ddialliance.org/discovery#startDate',
-                                instances: [{value: '2010-12-24', valueType: 'literal'}]
+                                instances: [{
+                                    value: '2010-12-24',
+                                    valueType: 'literal'
+                                }]
                             },
                             config: {
                                 label: ['Start date'],
@@ -171,7 +178,10 @@ export default {
                         {
                             spec: {
                                 propertyURI: 'http://rdf-vocabulary.ddialliance.org/discovery#endDate',
-                                instances: [{value: '2015-12-24', valueType: 'literal'}]
+                                instances: [{
+                                    value: '2015-12-24',
+                                    valueType: 'literal'
+                                }]
                             },
                             config: {
                                 label: ['End date'],
@@ -224,11 +234,13 @@ export default {
                     objectIEditor: ['DBpediaInput'],
                     objectIViewer: ['BasicDBpediaView'],
                     asWikipedia: 1,
-                    extensions: [
-                        {
+                    extensions: [{
                             spec: {
                                 propertyURI: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
-                                instances: [{value: 'http://xmlns.com/foaf/0.1/Person', valueType: 'uri'}]
+                                instances: [{
+                                    value: 'http://xmlns.com/foaf/0.1/Person',
+                                    valueType: 'uri'
+                                }]
                             },
                             config: {
                                 hint: ['Type of the entity'],
@@ -236,9 +248,14 @@ export default {
                                 category: ['people'],
                                 objectIViewer: ['BasicOptionView'],
                                 objectIEditor: ['BasicOptionInput'],
-                                options: [
-                                    {label: 'Person', value: 'http://xmlns.com/foaf/0.1/Person'},
-                                    {label: 'Organization', value: 'http://xmlns.com/foaf/0.1/Organization'}
+                                options: [{
+                                        label: 'Person',
+                                        value: 'http://xmlns.com/foaf/0.1/Person'
+                                    },
+                                    {
+                                        label: 'Organization',
+                                        value: 'http://xmlns.com/foaf/0.1/Organization'
+                                    }
                                 ],
                                 defaultValue: ['http://xmlns.com/foaf/0.1/Person'],
                                 allowUserDefinedValue: 1
@@ -247,7 +264,10 @@ export default {
                         {
                             spec: {
                                 propertyURI: 'http://www.w3.org/2000/01/rdf-schema#label',
-                                instances: [{value: 'Label', valueType: 'literal'}]
+                                instances: [{
+                                    value: 'Label',
+                                    valueType: 'literal'
+                                }]
                             },
                             config: {
                                 hint: ['A descriptor label for the URI'],
@@ -258,7 +278,10 @@ export default {
                         {
                             spec: {
                                 propertyURI: 'http://xmlns.com/foaf/0.1/mbox',
-                                instances: [{value: 'email address', valueType: 'literal'}]
+                                instances: [{
+                                    value: 'email address',
+                                    valueType: 'literal'
+                                }]
                             },
                             config: {
                                 hint: ['A corresponding email address'],
@@ -277,11 +300,13 @@ export default {
                     objectIEditor: ['DBpediaInput'],
                     objectIViewer: ['BasicDBpediaView'],
                     asWikipedia: 1,
-                    extensions: [
-                        {
+                    extensions: [{
                             spec: {
                                 propertyURI: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
-                                instances: [{value: 'http://xmlns.com/foaf/0.1/Person', valueType: 'uri'}]
+                                instances: [{
+                                    value: 'http://xmlns.com/foaf/0.1/Person',
+                                    valueType: 'uri'
+                                }]
                             },
                             config: {
                                 hint: ['Type of the entity'],
@@ -289,9 +314,14 @@ export default {
                                 label: ['Type'],
                                 objectIViewer: ['BasicOptionView'],
                                 objectIEditor: ['BasicOptionInput'],
-                                options: [
-                                    {label: 'Person', value: 'http://xmlns.com/foaf/0.1/Person'},
-                                    {label: 'Organization', value: 'http://xmlns.com/foaf/0.1/Organization'}
+                                options: [{
+                                        label: 'Person',
+                                        value: 'http://xmlns.com/foaf/0.1/Person'
+                                    },
+                                    {
+                                        label: 'Organization',
+                                        value: 'http://xmlns.com/foaf/0.1/Organization'
+                                    }
                                 ],
                                 defaultValue: ['http://xmlns.com/foaf/0.1/Person'],
                                 allowUserDefinedValue: 1
@@ -300,7 +330,10 @@ export default {
                         {
                             spec: {
                                 propertyURI: 'http://www.w3.org/2000/01/rdf-schema#label',
-                                instances: [{value: 'Label', valueType: 'literal'}]
+                                instances: [{
+                                    value: 'Label',
+                                    valueType: 'literal'
+                                }]
                             },
                             config: {
                                 hint: ['A descriptor label for the URI'],
@@ -311,7 +344,10 @@ export default {
                         {
                             spec: {
                                 propertyURI: 'http://xmlns.com/foaf/0.1/mbox',
-                                instances: [{value: 'email address', valueType: 'literal'}]
+                                instances: [{
+                                    value: 'email address',
+                                    valueType: 'literal'
+                                }]
                             },
                             config: {
                                 hint: ['A corresponding email address'],
@@ -330,11 +366,13 @@ export default {
                     objectIEditor: ['DBpediaInput'],
                     objectIViewer: ['BasicDBpediaView'],
                     asWikipedia: 1,
-                    extensions: [
-                        {
+                    extensions: [{
                             spec: {
                                 propertyURI: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
-                                instances: [{value: 'http://xmlns.com/foaf/0.1/Person', valueType: 'uri'}]
+                                instances: [{
+                                    value: 'http://xmlns.com/foaf/0.1/Person',
+                                    valueType: 'uri'
+                                }]
                             },
                             config: {
                                 hint: ['Type of the entity'],
@@ -342,9 +380,14 @@ export default {
                                 label: ['Type'],
                                 objectIViewer: ['BasicOptionView'],
                                 objectIEditor: ['BasicOptionInput'],
-                                options: [
-                                    {label: 'Person', value: 'http://xmlns.com/foaf/0.1/Person'},
-                                    {label: 'Organization', value: 'http://xmlns.com/foaf/0.1/Organization'}
+                                options: [{
+                                        label: 'Person',
+                                        value: 'http://xmlns.com/foaf/0.1/Person'
+                                    },
+                                    {
+                                        label: 'Organization',
+                                        value: 'http://xmlns.com/foaf/0.1/Organization'
+                                    }
                                 ],
                                 defaultValue: ['http://xmlns.com/foaf/0.1/Person'],
                                 allowUserDefinedValue: 1
@@ -353,7 +396,10 @@ export default {
                         {
                             spec: {
                                 propertyURI: 'http://www.w3.org/2000/01/rdf-schema#label',
-                                instances: [{value: 'Label', valueType: 'literal'}]
+                                instances: [{
+                                    value: 'Label',
+                                    valueType: 'literal'
+                                }]
                             },
                             config: {
                                 hint: ['A descriptor label for the URI'],
@@ -364,7 +410,10 @@ export default {
                         {
                             spec: {
                                 propertyURI: 'http://xmlns.com/foaf/0.1/mbox',
-                                instances: [{value: 'email address', valueType: 'literal'}]
+                                instances: [{
+                                    value: 'email address',
+                                    valueType: 'literal'
+                                }]
                             },
                             config: {
                                 hint: ['A corresponding email address'],
@@ -402,13 +451,30 @@ export default {
                     allowNewValue: 1,
                     objectIViewer: ['BasicOptionView'],
                     objectIEditor: ['BasicOptionInput'],
-                    options: [
-                        {label: 'Open Data Commons Public Domain Dedication and License (PDDL)', value: 'http://www.opendatacommons.org/licenses/pddl/'},
-                        {label: 'Open Data Commons Attribution License', value: 'http://www.opendatacommons.org/licenses/by/'},
-                        {label: 'Open Data Commons Open Database License (ODbL)', value: 'http://www.opendatacommons.org/licenses/odbl/'},
-                        {label: 'Creative Commons Public Domain Dedication', value: 'http://creativecommons.org/publicdomain/zero/1.0/'},
-                        {label: 'Creative Commons Attribution-ShareAlike', value: 'http://creativecommons.org/licenses/by-sa/3.0/'},
-                        {label: 'GNU Free Documentation License', value: 'http://www.gnu.org/copyleft/fdl.html'}
+                    options: [{
+                            label: 'Open Data Commons Public Domain Dedication and License (PDDL)',
+                            value: 'http://www.opendatacommons.org/licenses/pddl/'
+                        },
+                        {
+                            label: 'Open Data Commons Attribution License',
+                            value: 'http://www.opendatacommons.org/licenses/by/'
+                        },
+                        {
+                            label: 'Open Data Commons Open Database License (ODbL)',
+                            value: 'http://www.opendatacommons.org/licenses/odbl/'
+                        },
+                        {
+                            label: 'Creative Commons Public Domain Dedication',
+                            value: 'http://creativecommons.org/publicdomain/zero/1.0/'
+                        },
+                        {
+                            label: 'Creative Commons Attribution-ShareAlike',
+                            value: 'http://creativecommons.org/licenses/by-sa/3.0/'
+                        },
+                        {
+                            label: 'GNU Free Documentation License',
+                            value: 'http://www.gnu.org/copyleft/fdl.html'
+                        }
                     ],
                     defaultValue: ['http://creativecommons.org/licenses/by-sa/3.0/'],
                     allowUserDefinedValue: 1
@@ -491,11 +557,22 @@ export default {
                     allowNewValue: 1,
                     objectIViewer: ['BasicOptionView'],
                     objectIEditor: ['BasicOptionInput'],
-                    options: [
-                        {label: 'Relational Model', value: 'Relational Model'},
-                        {label: 'RDF Model', value: 'RDF Model'},
-                        {label: 'Tabular (Spreadsheet) Model', value: 'Tabular Model'},
-                        {label: 'Unstructured', value: 'Unstructured'}
+                    options: [{
+                            label: 'Relational Model',
+                            value: 'Relational Model'
+                        },
+                        {
+                            label: 'RDF Model',
+                            value: 'RDF Model'
+                        },
+                        {
+                            label: 'Tabular (Spreadsheet) Model',
+                            value: 'Tabular Model'
+                        },
+                        {
+                            label: 'Unstructured',
+                            value: 'Unstructured'
+                        }
                     ],
                     placeholder: ['Enter the value for other data model...'],
                     defaultValue: ['Relational Model'],
@@ -508,30 +585,67 @@ export default {
                     allowNewValue: 1,
                     allowExtension: 1,
                     hasBlankNode: 1,
-                    extensions: [
-                        {
+                    extensions: [{
                             spec: {
                                 propertyURI: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
-                                instances: [{value: 'http://xmlns.com/foaf/0.1/Person', valueType: 'uri'}]
+                                instances: [{
+                                    value: 'http://xmlns.com/foaf/0.1/Person',
+                                    valueType: 'uri'
+                                }]
                             },
                             config: {
                                 label: ['Type'],
                                 objectIViewer: ['BasicOptionView'],
                                 objectIEditor: ['BasicOptionInput'],
                                 category: ['structuralAspects'],
-                                options: [
-                                    {label: 'Person', value: 'http://xmlns.com/foaf/0.1/Person'},
-                                    {label: 'Organization', value: 'http://xmlns.com/foaf/0.1/Organization'},
-                                    {label: 'Higher Education Institution', value: 'http://purl.org/vocab/aiiso/schema#Institution'},
-                                    {label: 'Firm', value: 'http://rdf.risis.eu/metadata/Firm'},
-                                    {label: 'Funding Body', value: 'http://vivoweb.org/ontology/core#FundingOrganization'},
-                                    {label: 'Publication', value: 'http://purl.org/cerif/frapo/Publication'},
-                                    {label: 'Patent', value: 'http://purl.org/ontology/bibo/Patent'},
-                                    {label: 'Project', value: 'http://purl.org/cerif/frapo/Project'},
-                                    {label: 'Investment', value: 'http://purl.org/cerif/frapo/Investment'},
-                                    {label: 'FundingProgramme', value: 'http://purl.org/cerif/frapo/FundingProgramme'},
-                                    {label: 'Policy', value: 'http://purl.org/dc/terms/Policy'},
-                                    {label: 'Policy Evaluation', value: 'http://rdf.risis.eu/metadata/PolicyEvaluation'}
+                                options: [{
+                                        label: 'Person',
+                                        value: 'http://xmlns.com/foaf/0.1/Person'
+                                    },
+                                    {
+                                        label: 'Organization',
+                                        value: 'http://xmlns.com/foaf/0.1/Organization'
+                                    },
+                                    {
+                                        label: 'Higher Education Institution',
+                                        value: 'http://purl.org/vocab/aiiso/schema#Institution'
+                                    },
+                                    {
+                                        label: 'Firm',
+                                        value: 'http://rdf.risis.eu/metadata/Firm'
+                                    },
+                                    {
+                                        label: 'Funding Body',
+                                        value: 'http://vivoweb.org/ontology/core#FundingOrganization'
+                                    },
+                                    {
+                                        label: 'Publication',
+                                        value: 'http://purl.org/cerif/frapo/Publication'
+                                    },
+                                    {
+                                        label: 'Patent',
+                                        value: 'http://purl.org/ontology/bibo/Patent'
+                                    },
+                                    {
+                                        label: 'Project',
+                                        value: 'http://purl.org/cerif/frapo/Project'
+                                    },
+                                    {
+                                        label: 'Investment',
+                                        value: 'http://purl.org/cerif/frapo/Investment'
+                                    },
+                                    {
+                                        label: 'FundingProgramme',
+                                        value: 'http://purl.org/cerif/frapo/FundingProgramme'
+                                    },
+                                    {
+                                        label: 'Policy',
+                                        value: 'http://purl.org/dc/terms/Policy'
+                                    },
+                                    {
+                                        label: 'Policy Evaluation',
+                                        value: 'http://rdf.risis.eu/metadata/PolicyEvaluation'
+                                    }
                                 ],
                                 placeholder: ['Enter the URI for your specific entity type...'],
                                 allowUserDefinedValue: 1
@@ -540,7 +654,10 @@ export default {
                         {
                             spec: {
                                 propertyURI: 'http://purl.org/dc/terms/description',
-                                instances: [{value: '', valueType: 'literal'}]
+                                instances: [{
+                                    value: '',
+                                    valueType: 'literal'
+                                }]
                             },
                             config: {
                                 label: ['Description'],
@@ -551,7 +668,10 @@ export default {
                         {
                             spec: {
                                 propertyURI: 'http://rdfs.org/ns/void#property',
-                                instances: [{value: '', valueType: 'literal'}]
+                                instances: [{
+                                    value: '',
+                                    valueType: 'literal'
+                                }]
                             },
                             config: {
                                 category: ['structuralAspects'],
@@ -561,7 +681,10 @@ export default {
                         {
                             spec: {
                                 propertyURI: 'http://purl.org/dc/terms/temporal',
-                                instances: [{value: 'http://example.org/temporal', valueType: 'uri'}]
+                                instances: [{
+                                    value: 'http://example.org/temporal',
+                                    valueType: 'uri'
+                                }]
                             },
                             config: {
                                 category: ['structuralAspects'],
@@ -569,22 +692,28 @@ export default {
                                 hasBlankNode: 1,
                                 autoLoadDetails: 1,
                                 allowExtension: 1,
-                                extensions: [
-                                    {
+                                extensions: [{
                                         spec: {
                                             propertyURI: 'http://rdf-vocabulary.ddialliance.org/discovery#startDate',
-                                            instances: [{value: '2010-12-24', valueType: 'literal'}]
+                                            instances: [{
+                                                value: '2010-12-24',
+                                                valueType: 'literal'
+                                            }]
                                         },
                                         config: {
                                             label: ['Start date'],
                                             category: ['date'],
                                             hint: ['Start date of the time coverage.'],
-                                            objectIEditor: ['BasicCalendarInput']                                        }
+                                            objectIEditor: ['BasicCalendarInput']
+                                        }
                                     },
                                     {
                                         spec: {
                                             propertyURI: 'http://rdf-vocabulary.ddialliance.org/discovery#endDate',
-                                            instances: [{value: '2015-12-24', valueType: 'literal'}]
+                                            instances: [{
+                                                value: '2015-12-24',
+                                                valueType: 'literal'
+                                            }]
                                         },
                                         config: {
                                             label: ['End date'],
@@ -599,7 +728,10 @@ export default {
                         {
                             spec: {
                                 propertyURI: 'http://purl.org/dc/terms/spatial',
-                                instances: [{value: 'http://dbpedia.org/resource/Germany', valueType: 'uri'}]
+                                instances: [{
+                                    value: 'http://dbpedia.org/resource/Germany',
+                                    valueType: 'uri'
+                                }]
                             },
                             config: {
                                 category: ['structuralAspects'],
@@ -631,14 +763,34 @@ export default {
                     hint: ['Determines the type of scope in LD-R'],
                     objectIEditor: ['BasicOptionInput'],
                     objectIViewer: ['BasicOptionView'],
-                    options: [
-                        {label: 'Dataset', value: 'D'},
-                        {label: 'Resource', value: 'R'},
-                        {label: 'Property', value: 'P'},
-                        {label: 'Dataset-Resource', value: 'DR'},
-                        {label: 'Dataset-Property', value: 'DP'},
-                        {label: 'Resource-Property', value: 'RP'},
-                        {label: 'Dataset-Resource-Property', value: 'DRP'},
+                    options: [{
+                            label: 'Dataset',
+                            value: 'D'
+                        },
+                        {
+                            label: 'Resource',
+                            value: 'R'
+                        },
+                        {
+                            label: 'Property',
+                            value: 'P'
+                        },
+                        {
+                            label: 'Dataset-Resource',
+                            value: 'DR'
+                        },
+                        {
+                            label: 'Dataset-Property',
+                            value: 'DP'
+                        },
+                        {
+                            label: 'Resource-Property',
+                            value: 'RP'
+                        },
+                        {
+                            label: 'Dataset-Resource-Property',
+                            value: 'DRP'
+                        },
                     ],
                     allowNewValue: 0
                 },
@@ -666,74 +818,16 @@ export default {
                     objectIEditor: ['PrefixBasedInput']
                 },
                 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#constraint': {
-    label: ['Constraint'],
-    allowExtension: 1,
-    hasBlankNode: 1,
-    extensions: [
-        {
-            spec: {
-                propertyURI: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
-                instances: [{value: 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#Constraint', valueType: 'uri'}]
-            },
-            config: {
-                label: ['Type'],
-                objectIViewer: ['PrefixBasedView'],
-                objectIEditor: ['PrefixBasedInput']
-            }
-        },
-        {
-            spec: {
-                propertyURI: 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#property',
-                instances: [{value: 'http://exampleProperty.com', valueType: 'uri'}]
-            },
-            config: {
-                label: ['Property'],
-                objectIViewer: ['PrefixBasedView'],
-                objectIEditor: ['PrefixBasedInput']
-            }
-        },
-        {
-            spec: {
-                propertyURI: 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#object',
-                instances: [{value: 'value', valueType: 'literal'}]
-            },
-            config: {
-                label: ['Object Value']
-            }
-        },
-        {
-            spec: {
-                propertyURI: 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#enabled',
-                instances: [{value: '1', valueType: 'literal'}]
-            },
-            config: {
-                label: ['Enabled'],
-                objectIViewer:['ToggleView'],
-                objectIEditor:['ToggleEdit'],
-                onValue: ['1'],
-                offValue: ['0'],
-            }
-        },
-    ]
-},
-                'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#config': {
-                    label: ['Configuration'],
+                    label: ['Constraint'],
                     allowExtension: 1,
                     hasBlankNode: 1,
-                    extensions: [
-                        {
-                            spec: {
-                                propertyURI: 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#label',
-                                instances: [{value: 'Label', valueType: 'literal'}]
-                            },
-                            config: {
-                                label: ['Label']
-                            }
-                        },
-                        {
+                    extensions: [{
                             spec: {
                                 propertyURI: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
-                                instances: [{value: 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#FacetsPropertyConfig', valueType: 'uri'}]
+                                instances: [{
+                                    value: 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#Constraint',
+                                    valueType: 'uri'
+                                }]
                             },
                             config: {
                                 label: ['Type'],
@@ -744,7 +838,84 @@ export default {
                         {
                             spec: {
                                 propertyURI: 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#property',
-                                instances: [{value: 'http://example.com/prop1', valueType: 'uri'}]
+                                instances: [{
+                                    value: 'http://exampleProperty.com',
+                                    valueType: 'uri'
+                                }]
+                            },
+                            config: {
+                                label: ['Property'],
+                                objectIViewer: ['PrefixBasedView'],
+                                objectIEditor: ['PrefixBasedInput']
+                            }
+                        },
+                        {
+                            spec: {
+                                propertyURI: 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#object',
+                                instances: [{
+                                    value: 'value',
+                                    valueType: 'literal'
+                                }]
+                            },
+                            config: {
+                                label: ['Object Value']
+                            }
+                        },
+                        {
+                            spec: {
+                                propertyURI: 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#enabled',
+                                instances: [{
+                                    value: '1',
+                                    valueType: 'literal'
+                                }]
+                            },
+                            config: {
+                                label: ['Enabled'],
+                                objectIViewer: ['ToggleView'],
+                                objectIEditor: ['ToggleEdit'],
+                                onValue: ['1'],
+                                offValue: ['0'],
+                            }
+                        },
+                    ]
+                },
+                'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#config': {
+                    label: ['Configuration'],
+                    allowExtension: 1,
+                    hasBlankNode: 1,
+                    extensions: [{
+                            spec: {
+                                propertyURI: 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#label',
+                                instances: [{
+                                    value: 'Label',
+                                    valueType: 'literal'
+                                }]
+                            },
+                            config: {
+                                label: ['Label']
+                            }
+                        },
+                        {
+                            spec: {
+                                propertyURI: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+                                instances: [{
+                                    value: 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#FacetsPropertyConfig',
+                                    valueType: 'uri'
+                                }]
+                            },
+                            config: {
+                                label: ['Type'],
+                                objectIViewer: ['PrefixBasedView'],
+                                objectIEditor: ['PrefixBasedInput']
+                            }
+                        },
+                        {
+                            spec: {
+                                propertyURI: 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#property',
+                                instances: [{
+                                    value: 'http://example.com/prop1',
+                                    valueType: 'uri'
+                                }]
                             },
                             config: {
                                 label: ['Property'],
@@ -762,16 +933,16 @@ export default {
                 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#treatAsResourceType': {
                     label: ['Treat as Resource Type'],
                     hint: ['If set to true, will consider resource URI as type URI for resource'],
-                    objectIViewer:['ToggleView'],
-                    objectIEditor:['ToggleEdit'],
+                    objectIViewer: ['ToggleView'],
+                    objectIEditor: ['ToggleEdit'],
                     onValue: ['1'],
                     offValue: ['0'],
                     allowNewValue: 0
                 },
                 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#useReasoning': {
                     label: ['Use Reasoning?'],
-                    objectIViewer:['ToggleView'],
-                    objectIEditor:['ToggleEdit'],
+                    objectIViewer: ['ToggleView'],
+                    objectIEditor: ['ToggleEdit'],
                     onValue: ['1'],
                     offValue: ['0'],
                     allowNewValue: 0
@@ -796,11 +967,22 @@ export default {
                     objectIEditor: ['BasicOptionInput'],
                     objectIViewer: ['BasicOptionView'],
                     allowUserDefinedValue: 1,
-                    options: [
-                        {label: 'ClioPatria', value: 'cliopatria'},
-                        {label: 'Virtuoso', value: 'virtuoso'},
-                        {label: 'Stardog', value: 'stardog'},
-                        {label: 'Sesame', value: 'sesame'}
+                    options: [{
+                            label: 'ClioPatria',
+                            value: 'cliopatria'
+                        },
+                        {
+                            label: 'Virtuoso',
+                            value: 'virtuoso'
+                        },
+                        {
+                            label: 'Stardog',
+                            value: 'stardog'
+                        },
+                        {
+                            label: 'Sesame',
+                            value: 'sesame'
+                        }
                     ]
                 }
             },
@@ -842,11 +1024,13 @@ export default {
                     allowExtension: 1,
                     hasBlankNode: 1,
                     autoLoadDetails: 1,
-                    extensions: [
-                        {
+                    extensions: [{
                             spec: {
                                 propertyURI: 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#resource',
-                                instances: [{value: 'http://exampleResource.org', valueType: 'uri'}]
+                                instances: [{
+                                    value: 'http://exampleResource.org',
+                                    valueType: 'uri'
+                                }]
                             },
                             config: {
                                 hint: ['Resource URI under which the property is exposed.'],
@@ -856,7 +1040,10 @@ export default {
                         {
                             spec: {
                                 propertyURI: 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#property',
-                                instances: [{value: 'http://exampleProperty.org', valueType: 'uri'}]
+                                instances: [{
+                                    value: 'http://exampleProperty.org',
+                                    valueType: 'uri'
+                                }]
                             },
                             config: {
                                 hint: ['Property URI'],
