@@ -4,7 +4,7 @@ import rp from 'request-promise';
 import DBpediaUtil from './utils/DBpediaUtil';
 import DBpediaQuery from './sparql/DBpediaQuery';
 const DBpediaEndpoint = 'http://dbpedia.org/sparql';
-const DBpediaLiveEndpoint = 'http://live.dbpedia.org/sparql';
+const DBpediaLiveEndpoint = 'http://dbpedia.org/sparql';
 const outputFormat = 'application/sparql-results+json';
 let query, lookupClass = '';
 let utilObject = new DBpediaUtil();
