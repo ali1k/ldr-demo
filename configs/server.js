@@ -4,10 +4,8 @@ export default {
     serverPort: [4000],
     sparqlEndpoint: {
         'generic': {
-            //host: 'localhost', port: 3020, path: '/sparql/', endpointType: 'ClioPatria'
+            host: 'localhost', port: 3020, path: '/sparql/', endpointType: 'ClioPatria'
             //host: 'localhost', port: 8890, path: '/sparql'
-            host: 'cliopatria.ali.ops.few.vu.nl', port: 80, path: '/sparql/', endpointType: 'ClioPatria'
-            //host: 'stardog.ali.ops.few.vu.nl', port: 80, path: '/LDR/query', endpointType: 'stardog', useReasoning: 1
         },
         'http://localhost:5820/testDB/query': {
             host: 'localhost', port: 5820, path: '/testDB/query', graphName: 'default', endpointType: 'stardog', useReasoning: 1
