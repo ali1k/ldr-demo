@@ -1,5 +1,4 @@
 node_modules
-build
 *.log
 logs/*.log
 tmp.js

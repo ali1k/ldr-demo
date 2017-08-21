@@ -4,9 +4,9 @@ export default {
     serverPort: [4000],
     sparqlEndpoint: {
         'generic': {
-            host: 'localhost', port: 3020, path: '/sparql/', endpointType: 'ClioPatria'
+            //host: 'localhost', port: 3020, path: '/sparql/', endpointType: 'ClioPatria'
             //host: 'localhost', port: 8890, path: '/sparql'
-            //host: 'cliopatria.ali.ops.few.vu.nl', port: 80, path: '/sparql/', endpointType: 'ClioPatria'
+            host: 'cliopatria.ali.ops.few.vu.nl', port: 80, path: '/sparql/', endpointType: 'ClioPatria'
             //host: 'stardog.ali.ops.few.vu.nl', port: 80, path: '/LDR/query', endpointType: 'stardog', useReasoning: 1
         },
         'http://localhost:5820/testDB/query': {
@@ -58,7 +58,7 @@ export default {
     //it is used only if you enabled recaptcha feature for user authentication
     //get keys from https://www.google.com/recaptcha
     googleRecaptchaService: {
-        siteKey: ['put your google recaptcha site key here...'],
-        secretKey: ['put your google recaptcha secret key here...']
+        siteKey: ['6LdtFQoUAAAAAEcwKQKf9NJ_9MrWEPIa-URX8dq4'],
+        secretKey: ['6LdtFQoUAAAAABlR5t0mxwR4OQ8C7lTT2GTVYh2p']
     }
 };
