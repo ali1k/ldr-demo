@@ -1,9 +1,9 @@
 import {BaseStore} from 'fluxible/addons';
 
-class DatasetAnnotationStore extends BaseStore {
+class TwitterAnalysisStore extends BaseStore {
     constructor(dispatcher) {
         super(dispatcher);
-        this.stats = {annotated: 0, total: 0, collected: 0};
+        this.stats = {annotated: 0, total: 0};
         this.currentText = '';
         this.annotatedText = '';
         this.currentID = '';
@@ -15,10 +15,6 @@ class DatasetAnnotationStore extends BaseStore {
     }
     updateStatsTotal(payload) {
         this.stats.total = payload.total;
-        this.emitChange();
-    }
-    updateCollected(payload) {
-        this.stats.collected = payload.collected;
         this.emitChange();
     }
     updateTags(payload) {
@@ -58,12 +54,11 @@ class DatasetAnnotationStore extends BaseStore {
     }
 }
 
-DatasetAnnotationStore.storeName = 'DatasetAnnotationStore'; // PR open in dispatchr to remove this need
-DatasetAnnotationStore.handlers = {
+TwitterAnalysisStore.storeName = 'TwitterAnalysisStore'; // PR open in dispatchr to remove this need
+TwitterAnalysisStore.handlers = {
     'UPDATE_ANNOTATION_STAT_ANNOTATED': 'updateStatsAnnotated',
     'UPDATE_ANNOTATION_STAT_TOTAL': 'updateStatsTotal',
-    'UPDATE_ANNOTATION_TAGS': 'updateTags',
-    'UPDATE_COLLECTED_TOTAL': 'updateCollected'
+    'UPDATE_ANNOTATION_TAGS': 'updateTags'
 };
 
-export default DatasetAnnotationStore;
+export default TwitterAnalysisStore;

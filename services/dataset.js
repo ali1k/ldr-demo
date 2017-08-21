@@ -9,6 +9,8 @@ import DatasetQuery from './sparql/DatasetQuery';
 import DatasetUtil from './utils/DatasetUtil';
 import Configurator from './utils/Configurator';
 import rp from 'request-promise';
+//for twitter scraping
+import TwitterScrape from 'scrape-twitter';
 /*-------------config-------------*/
 const outputFormat = 'application/sparql-results+json';
 const headers = {'Accept': 'application/sparql-results+json'};
@@ -80,6 +82,77 @@ export default {
                 });
             });
 
+        } else if (resource === 'dataset.countCollectedResources') {
+            datasetURI = (params.datasetURI ? decodeURIComponent(params.datasetURI) : 0);
+            //control access on authentication
+            if(enableAuthentication){
+                if(!req.user){
+                    callback(null, {datasetURI: datasetURI, collected: 0});
+                    return 0;
+                }else{
+                    user = req.user;
+                }
+            }else{
+                user = {accountName: 'open'};
+            }
+            //console.log(datasetURI);
+            getDynamicEndpointParameters(user, datasetURI, (endpointParameters)=>{
+                query = queryObject.countCollectedResources(endpointParameters, datasetURI, params.resourceType);
+                //console.log(query);
+                //build http uri
+                //send request
+                rp.get({uri: getHTTPGetURL(getHTTPQuery('read', query, endpointParameters, outputFormat)), headers: headers}).then(function(res){
+                    callback(null, {
+                        datasetURI: datasetURI,
+                        collected: utilObject.parseCountResourcesByType(res)
+                    });
+                }).catch(function (err) {
+                    console.log(err);
+                    callback(null, {datasetURI: datasetURI, collected: 0});
+                });
+            });
+
+        } else if (resource === 'dataset.collectData') {
+            datasetURI = (params.datasetURI ? decodeURIComponent(params.datasetURI) : 0);
+            //control access on authentication
+            if(enableAuthentication){
+                if(!req.user){
+                    callback(null, {datasetURI: datasetURI});
+                    return 0;
+                }else{
+                    user = req.user;
+                }
+            }else{
+                user = {accountName: 'open'};
+            }
+            //console.log(datasetURI);
+            getDynamicEndpointParameters(user, datasetURI, (endpointParameters)=>{
+                let source = params.source;
+                if(source === 'twitter'){
+                    let rs = new TwitterScrape.TimelineStream(params.options.screenName);
+                    let counter = 0;
+                    rs.on('data', (chunk) => {
+                        counter++;
+                        //console.log(chunk);
+                        //console.log('#####################################');
+                        query = queryObject.addTweet(datasetURI, chunk);
+                        //build http uri
+                        //send request
+                        let tmp = getHTTPQuery('update', query, endpointParameters, outputFormat);
+                        rp.post({uri: tmp.uri, form: tmp.params, headers: {}}).then(function(res){
+                            //added triple
+                            //console.log('--------------- '+counter+' ------------------');
+                        }).catch(function (err) {
+                            console.log(err);
+                            callback(null, {datasetURI: datasetURI});
+                        });
+                    });
+                    rs.on('end', () => {
+                        //console.log(counter + ' tweets were collected...');
+                        callback(null, {datasetURI: datasetURI});
+                    });
+                }
+            });
         } else if (resource === 'dataset.countResourcesByType') {
             datasetURI = (params.id ? decodeURIComponent(params.id) : 0);
             //control access on authentication

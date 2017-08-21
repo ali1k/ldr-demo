@@ -36,6 +36,7 @@ export default {
     //if set, wil allow users to create new datasets
     //only works if enableDynamicReactorConfiguration is set to 1 and triple store allows update qureies
     enableAddingNewDatasets: 1,
+    enableDatasetAnnotation: 1,
     //graph that stores your configurations
     configDatasetURI: ['http://ld-r.org/configurations'],
     //will enable/disable auto config

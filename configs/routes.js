@@ -45,6 +45,15 @@ export default {
             context.executeAction(loadDatasets, {pageTitle: 'Annotate a dataset'}, done);
         }
     },
+    twitterAnalysis: {
+        path: '/twitterAnalysis',
+        method: 'get',
+        handler: require('../components/TwitterAnalysis'),
+        label: 'TwitterAnalysis',
+        action: (context, payload, done) => {
+            context.executeAction(loadDatasets, {pageTitle: 'Twitter Analysis'}, done);
+        }
+    },
     facets: {
         path: '/browse/:id?',
         method: 'get',

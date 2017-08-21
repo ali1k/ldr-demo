@@ -118,6 +118,18 @@ class DatasetQuery{
         `;
         return this.prefixes + this.query;
     }
+    countCollectedResources(endpointParameters, graphName, type) {
+        let self = this;
+        //go to default graph if no graph name is given
+        this.query = `
+        SELECT (count(?resource) AS ?total) WHERE {
+            GRAPH <${graphName}> {
+                ?resource a ${type} .
+            }
+        }
+        `;
+        return this.prefixes + this.query;
+    }
     getResourcesByType(endpointParameters, graphName, searchTerm, rconfig, limit, offset) {
         let self = this;
         let {gStart, gEnd} = this.prepareGraphName(graphName);
@@ -310,6 +322,60 @@ class DatasetQuery{
         }
         `;
         return this.prefixes + this.query;
+    }
+    addTweet(datasetURI, tweetObj){
+        this.query = `
+        INSERT DATA {
+            GRAPH <${datasetURI}> {
+                ${this.tweetToRDF(tweetObj)}
+            }
+        }
+        `;
+        return this.prefixes + this.query;
+    }
+    tweetToRDF(tweetObj){
+        let uri = `https://twitter.com/${tweetObj.screenName}/status/${tweetObj.id}`;
+        let triples = `<${uri}> a ldr:Tweet ; ldr:id ${tweetObj.id} ; `;
+        triples = triples + ` ldr:text """${tweetObj.text.replace(/"/g, '&quot;')}""" ; `;
+        triples = triples + ` ldr:replyCount ${tweetObj.replyCount} ; `;
+        triples = triples + ` ldr:retweetCount ${tweetObj.retweetCount} ; `;
+        triples = triples + ` ldr:favoriteCount ${tweetObj.favoriteCount} ; `;
+        let tmp = [];
+        if(tweetObj.hashtags.length){
+            tmp = [];
+            tweetObj.hashtags.forEach((h)=>{
+                tmp.push('<https://twitter.com/hashtag/'+h.hashtag+'>');
+            });
+            triples = triples + ` ldr:hashTags ${tmp.join(',')} ; `;
+        }
+        if(tweetObj.urls.length){
+            tmp = [];
+            tweetObj.urls.forEach((h)=>{
+                tmp.push('<' + h.url + '>');
+            });
+            triples = triples + ` ldr:URLs ${tmp.join(',')} ; `;
+        }
+        if(tweetObj.userMentions.length){
+            tmp = [];
+            tweetObj.userMentions.forEach((h)=>{
+                tmp.push('<https://twitter.com/' + h.screenName + '>');
+            });
+            triples = triples + ` ldr:userMentions ${tmp.join(',')} ; `;
+        }
+        if(tweetObj.images.length){
+            tmp = [];
+            tweetObj.images.forEach((h)=>{
+                tmp.push('<' + h + '>');
+            });
+            triples = triples + ` ldr:images ${tmp.join(',')} ; `;
+        }
+        let da = tweetObj.time.split('T');
+        let dparts = da[0].split('-');
+        triples = triples + ` ldr:year ${parseInt(dparts[0])} ; `;
+        triples = triples + ` ldr:month ${parseInt(dparts[1])} ; `;
+        triples = triples + ` ldr:day ${parseInt(dparts[2])} ; `;
+        triples = triples + ` ldr:time "${tweetObj.time}" .`;
+        return triples;
     }
 }
 export default DatasetQuery;
