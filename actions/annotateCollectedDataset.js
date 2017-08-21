@@ -119,6 +119,7 @@ export default function annotateCollectedDataset(context, payload, done) {
                     dataset: payload.storingDataset,
                     options: {
                         annotationFacets: 1,
+                        twitterFacets: 1,
                         datasetLabel: 'Browse' + payload.options.screenName + ' tweets'
                     }
                 }, (err12, res12)=>{

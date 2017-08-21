@@ -510,6 +510,10 @@ class DynamicConfigurator {
             if(options && options.resourceFocusType){
                 resourceFocusTypeSt = ` ldr:resourceFocusType <${options.resourceFocusType}> ;`;
             }
+            let resourceLabelPropertySt='';
+            if(options && options.resourceLabelProperty){
+                resourceLabelPropertySt = ` ldr:resourceLabelProperty <${options.resourceLabelProperty}> ;`;
+            }
             let date = new Date();
             let currentDate = date.toISOString(); //"2011-12-19T15:28:46.493Z"
             let st = '';
@@ -533,6 +537,7 @@ class DynamicConfigurator {
                     rdfs:label """${datasetLabel} Reactor Config""" ;
                     ldr:dataset <${datasetURI}> ;
                     ${resourceFocusTypeSt}
+                    ${resourceLabelPropertySt}
                     ldr:datasetLabel "${datasetLabel}" ;
                     ldr:maxNumberOfResourcesOnPage "20" ;
                     `;
@@ -939,6 +944,12 @@ class DynamicConfigurator {
                 <http://ld-r.org/fpcs${rnc}> a ldr:FacetsPropertyConfig ; ldr:label "NER Entities" ; rdfs:label "NER Entities config ${rnc}" ; ldr:objectBrowser "TagListBrowser" ; ldr:property "https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#annotations->https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#surfaceForm" . ${graphEnd}
                 `;
             }
+            //to add twitter specific configs
+            let twitterSt = '';
+            if(options && options.twitterFacets){
+                twitterSt = ` ${graph} <${configURI}> ldr:list "https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#favoriteCount" , "https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#month", "https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#replyCount", "https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#retweetCount", "https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#year", "https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#URLs", "https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#hashTags", "https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#userMentions" . ${graphEnd}
+                `;
+            }
             const query = `
             INSERT DATA {
             ${graph}
@@ -951,6 +962,7 @@ class DynamicConfigurator {
                          ldr:config <http://ld-r.org/fpc${rnc}> .
             ${graphEnd}
             ${annotationSt}
+            ${twitterSt}
             }
             `;
             //send request

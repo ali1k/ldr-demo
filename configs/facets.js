@@ -40,7 +40,6 @@ export default {
                 }
             }
         },
-        */
         'http://data.semanticweb.org/sparql': {
             list: [
                 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type', 'http://swrc.ontoware.org/ontology#year'
@@ -91,6 +90,7 @@ export default {
                 }
             }
         },
+        */
         //Configuration Manager: change the graph name if you use another name in your general.js config
         'http://ld-r.org/configurations': {
             list: [

@@ -63,8 +63,13 @@ class Datasets extends React.Component {
                     </a>
                 </div>;
             }
+            let tweettDIV = <div className="item">
+                <a  className="medium ui basic icon labeled button" href="/twitterAnalysis">
+                    <i className="cubes square large yellow icon "></i> <i className="twitter black icon"></i>Analyze your tweets
+                </a>
+            </div>;
             datasetActionsDIV = <div className="ui horizontal divided list">
-                {createDatasetDIV} {annotateDatasetDIV}
+                {createDatasetDIV} {annotateDatasetDIV} {tweettDIV}
                 <br/>
             </div>;
             if(!dss.length){

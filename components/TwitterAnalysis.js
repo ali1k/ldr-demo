@@ -209,6 +209,12 @@ class TwitterAnalysis extends React.Component {
                     <div ref="tagCloud" className="tagCloud" style={{minHeight: 300, minWidth: 300}}></div>
                     {tagsDIV}
                 </div>
+                { (this.props.DatasetAnnotationStore.stats.annotated && this.props.DatasetAnnotationStore.stats.annotated===this.props.DatasetAnnotationStore.stats.total) ?
+                    <div className='ui message center aligned'>
+                        <i className="pointing right icon"></i> <a href={'/browse/' + encodeURIComponent(this.state.datasetURI)}> Browse your annotated twitter corpus</a>
+                    </div>
+                    : ''
+                }
             </div>
         }
         return (

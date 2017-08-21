@@ -13,7 +13,7 @@ export default {
                 datasetReactor: ['Dataset']
             },
             //authentication graph
-            'http://ld-r.org/users': {
+            'http://demo.ld-r.org/users': {
                 readOnly: 0,
                 resourceFocusType: ['https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#User'],
                 resourceLabelProperty: ['http://xmlns.com/foaf/0.1/accountName']
@@ -47,37 +47,6 @@ export default {
                 datasetLabel: ['Clinical Trials Dataset']
             },
             */
-            'http://data.semanticweb.org/sparql': {
-                resourceFocusType: ['http://swrc.ontoware.org/ontology#InProceedings'],
-                readOnly: 1,
-                datasetLabel: ['Semantic Web Dogfood Dataset (SW Publications)']
-            },
-            'http://live.dbpedia.org/sparql': {
-                resourceFocusType: ['http://dbpedia.org/ontology/University'],
-                readOnly: 1,
-                datasetLabel: ['Live DBpedia Dataset']
-            },
-            'http://nl.dbpedia.org': {
-                resourceFocusType: ['http://xmlns.com/foaf/0.1/Person'],
-                readOnly: 1,
-                datasetLabel: ['Dutch DBpedia Dataset']
-            },
-            'http://linkedgeodata.org': {
-                resourceFocusType: ['http://linkedgeodata.org/ontology/University'],
-                readOnly: 1,
-                datasetLabel: ['LinkedGeoData Dataset']
-            },
-            'http://lodlaundromat.org/sparql/': {
-                readOnly: 1,
-                resourceFocusType: ['http://lodlaundromat.org/ontology/ArchiveEntry'],
-                datasetLabel: ['LODLaundromat Dataset']
-            },
-            'http://lsq.aksw.org/sparql': {
-                readOnly: 1,
-                resourceFocusType: ['http://spinrdf.org/sp#Select', 'http://spinrdf.org/sp#Ask', 'http://spinrdf.org/sp#Construct', 'http://spinrdf.org/sp#Describe'],
-                datasetLabel: ['Linked SPARQL Queries Dataset'],
-                resourceLabelProperty: ['http://spinrdf.org/sp#text']
-            }
         },
         resource: {
             'generic': {
@@ -122,7 +91,7 @@ export default {
         },
         //---------depth 2------------
         dataset_resource: {
-            'http://ld-r.org/users': {
+            'http://demo.ld-r.org/users': {
                 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#User': {
                     treatAsResourceType: 1,
                     resourceReactor: ['UserResource']
@@ -987,7 +956,7 @@ export default {
                 }
             },
             //for user page
-            'http://ld-r.org/users': {
+            'http://demo.ld-r.org/users': {
                 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type': {
                     isHidden: 1
                 },

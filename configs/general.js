@@ -1,6 +1,6 @@
 export default {
     //full page title
-    appFullTitle: ['Linked Data Reactor'],
+    appFullTitle: ['Linked Data Reactor Demo'],
     //short page title
     appShortTitle: ['LD-R'],
 
@@ -8,17 +8,17 @@ export default {
     defaultDatasetURI: ['http://ld-r.org/datasets/void'],
 
     //will prevent access if not logged in
-    enableAuthentication: 0,
+    enableAuthentication: 1,
     //graph that stores users data, must be loaded beforehand
-    authDatasetURI: ['http://ld-r.org/users'],
+    authDatasetURI: ['http://demo.ld-r.org/users'],
     //will allow super users to confirm and activate regiastered users
     enableUserConfirmation: 0,
     //if enabled will allow a recaptcha box in the registration form
     //note: if it is enabled, you need to set the key parameteres for recaptcha in the  server.js file
-    useGoogleRecaptcha: 0,
+    useGoogleRecaptcha: 1,
 
     //the domain name under which basic dynamic resources and user resources will be defined
-    baseResourceDomain: ['http://ld-r.org'],
+    baseResourceDomain: ['http://demo.ld-r.org/user'],
 
     //will enable email notifications
     enableEmailNotifications: 0,
