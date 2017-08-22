@@ -128,7 +128,7 @@ class TwitterAnalysis extends React.Component {
                 datasetLabel: self.state.screenName + ' tweets',
                 noDynamicConfig: 0,
                 source: 'twitter',
-                options: {screenName: this.state.screenName.trim()},
+                options: {screenName: this.state.screenName.trim().toLowerCase()},
             });
         }
     }
