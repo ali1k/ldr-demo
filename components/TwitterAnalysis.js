@@ -111,7 +111,7 @@ class TwitterAnalysis extends React.Component {
             this.context.executeAction(collectData, {
                 datasetURI: newDatasetURI,
                 source: 'twitter',
-                options: {screenName: this.state.screenName.trim()},
+                options: {screenName: this.state.screenName.trim().toLowerCase()},
             });
         }
     }
