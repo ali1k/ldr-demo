@@ -18,7 +18,7 @@ export default {
     useGoogleRecaptcha: 1,
 
     //the domain name under which basic dynamic resources and user resources will be defined
-    baseResourceDomain: ['http://demo.ld-r.org/user'],
+    baseResourceDomain: ['http://demo.ld-r.org'],
 
     //will enable email notifications
     enableEmailNotifications: 0,
