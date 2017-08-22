@@ -91,7 +91,6 @@ class TwitterAnalysis extends React.Component {
                 if(cCounter[cCounter.length-1] === cCounter[cCounter.length-2] && cCounter[cCounter.length-1] === cCounter[cCounter.length-3] && cCounter[cCounter.length-1] === cCounter[cCounter.length-4] && cCounter[cCounter.length-1] === cCounter[cCounter.length-5]){
                     clearInterval(intervalId);
                     self.handleAnnotateDataset();
-                    self.setState({mode: 'annotation'});
                 }
             }
         }, 2200);
@@ -118,9 +117,9 @@ class TwitterAnalysis extends React.Component {
     }
     handleAnnotateDataset() {
         let self=this;
+        self.setState({mode: 'annotation'});
         if(self.state.datasetURI){
             self.startInterval();
-            self.setState({mode: 'annotatation'});
             self.context.executeAction(annotateCollectedDataset, {
                 id: self.state.datasetURI,
                 resourceType: 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#Tweet',
@@ -133,7 +132,11 @@ class TwitterAnalysis extends React.Component {
             });
         }
     }
-
+    handleKeyPress(e){
+        if (e.key === 'Enter') {
+            this.handleCollectTweets();
+        }
+    }
     handleScreenNameChange(event) {
         this.setState({screenName: event.target.value});
     }
@@ -153,7 +156,7 @@ class TwitterAnalysis extends React.Component {
             if(this.state.mode === 'form'){
                 formDIV =
                 <Form size='big'>
-                    <input ref="screenName" type="text" value={this.state.screenName} placeholder="Your twitter screen name" onChange={this.handleScreenNameChange.bind(this)} />
+                    <input onKeyPress={this.handleKeyPress.bind(this)} ref="screenName" type="text" value={this.state.screenName} placeholder="Your twitter screen name" onChange={this.handleScreenNameChange.bind(this)} />
                     <Divider hidden />
                     <div className='ui big blue button' onClick={this.handleCollectTweets.bind(this)}>Collect and Analyze</div>
                     <Divider hidden />
@@ -193,7 +196,7 @@ class TwitterAnalysis extends React.Component {
                     :
                     <div>
                         <Progress percent={this.props.DatasetAnnotationStore.stats.annotated ? Math.floor((this.props.DatasetAnnotationStore.stats.annotated / this.props.DatasetAnnotationStore.stats.total) * 100) : 0} progress active color='blue'>
-                            Enriched {this.props.DatasetAnnotationStore.stats.annotated} out of {this.props.DatasetAnnotationStore.stats.total} items
+                            Enriched {this.props.DatasetAnnotationStore.stats.annotated} out of {this.props.DatasetAnnotationStore.stats.total} items <a className="ui button mini circular" onClick={this.handleAnnotateDataset.bind(this)}><i className="ui icon blue refresh"></i> refresh</a>
                         </Progress>
                         <div className="ui raised stacked segments">
                             <div className="ui secondary compact segment">
