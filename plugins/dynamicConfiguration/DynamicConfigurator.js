@@ -498,9 +498,15 @@ class DynamicConfigurator {
                 graphEnd = '';
             }
             let rnc = configDatasetURI[0] + '/rcf' + Math.round(+new Date() / 1000);
+            if(options && options.screenName){
+                rnc = configDatasetURI[0] + '/rcf/' + options.screenName +  Math.round(+new Date() / 1000);
+            }
             //do not add two slashes
             if(configDatasetURI[0].slice(-1) === '/'){
                 rnc = configDatasetURI[0] + 'rcf' + Math.round(+new Date() / 1000);
+                if(options && options.screenName){
+                    rnc = configDatasetURI[0] + 'rcf/' + options.screenName + Math.round(+new Date() / 1000);
+                }
             }
             let datasetLabel = datasetURI;
             if(options && options.datasetLabel){
@@ -903,6 +909,7 @@ class DynamicConfigurator {
         }
 
     }
+    //
     createASampleFacetsConfig(user, configURI, datasetURI, options, callback) {
         //do not config if disabled
         if(!enableDynamicReactorConfiguration){

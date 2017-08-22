@@ -108,6 +108,7 @@ export default function annotateCollectedDataset(context, payload, done) {
                     dataset: payload.storingDataset,
                     scope: 'D',
                     options: {
+                        screenName: payload.options.screenName,
                         resourceFocusType: 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#Tweet',
                         datasetLabel: payload.options.screenName + ' tweets',
                         resourceLabelProperty: 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#text'
@@ -118,6 +119,7 @@ export default function annotateCollectedDataset(context, payload, done) {
                 context.executeAction(createASampleFacetsConfig, {
                     dataset: payload.storingDataset,
                     options: {
+                        screenName: payload.options.screenName,
                         annotationFacets: 1,
                         twitterFacets: 1,
                         datasetLabel: 'Browse ' + payload.options.screenName + ' tweets'

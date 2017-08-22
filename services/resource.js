@@ -410,6 +410,9 @@ export default {
             });
         }else if (resource === 'resource.newFacetsConfig') {
             let sresourceURI = configDatasetURI[0] + '/fcf' + Math.round(+new Date() / 1000);
+            if(params.screenName){
+                sresourceURI = configDatasetURI[0] + '/fcf/' + params.screenName + '' + Math.round(+new Date() / 1000);
+            }
             createASampleFacetsConfig(req.user, sresourceURI, params.dataset, params.options, (res)=>{
                 callback(null, {datasetURI: configDatasetURI[0], resourceURI: sresourceURI, redirect: params.redirect});
             });
