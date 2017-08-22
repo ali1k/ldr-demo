@@ -962,7 +962,17 @@ export default {
                 },
                 'http://xmlns.com/foaf/0.1/accountName': {
                     label: ['Username'],
-                    readOnly: 1
+                    readOnlyProperty: 1
+                },
+                'http://xmlns.com/foaf/0.1/member': {
+                    label: ['Member of'],
+                    objectIEditor: ['BasicOptionInput'],
+                    objectIViewer: ['BasicOptionView'],
+                    options: [
+                        {label: 'Normal User', value: 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#NormalUser'},
+                        {label: 'Special User', value: 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#SpecialUser'}
+                    ],
+                    allowNewValue: 1
                 },
                 'http://xmlns.com/foaf/0.1/firstName': {
                     label: ['First Name']
@@ -970,9 +980,13 @@ export default {
                 'http://xmlns.com/foaf/0.1/lastName': {
                     label: ['Last Name']
                 },
+                'http://purl.org/dc/terms/created': {
+                    label: ['Created at'],
+                    readOnlyProperty: 1
+                },
                 'http://xmlns.com/foaf/0.1/mbox': {
                     label: ['Email Address'],
-                    readOnly: 1
+                    readOnlyProperty: 1
                 },
                 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#password': {
                     label: ['Password'],
@@ -1101,55 +1115,6 @@ export default {
                                 label: ['Property'],
                                 objectIEditor: ['PrefixBasedInput'],
                                 objectIViewer: ['PrefixBasedView']
-                            }
-                        }
-                    ]
-                },
-                'http://xmlns.com/foaf/0.1/organization': {
-                    label: ['Organization'],
-                    allowNewValue: 1,
-                    objectIViewer: ['BasicDBpediaView'],
-                    objectIEditor: ['DBpediaInput']
-                }
-                },
-                'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#editorOfDataset': {
-                    label: ['Editor of Dataset'],
-                    allowNewValue: 1
-                },
-                'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#editorOfResource': {
-                    label: ['Editor of Resource'],
-                    allowNewValue: 1
-                },
-                'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#editorOfProperty': {
-                    label: ['Editor of Property'],
-                    allowNewValue: 1,
-                    allowExtension: 1,
-                    hasBlankNode: 1,
-                    autoLoadDetails: 1,
-                    extensions: [{
-                            spec: {
-                                propertyURI: 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#resource',
-                                instances: [{
-                                    value: 'http://exampleResource.org',
-                                    valueType: 'uri'
-                                }]
-                            },
-                            config: {
-                                hint: ['Resource URI under which the property is exposed.'],
-                                label: ['Resource']
-                            }
-                        },
-                        {
-                            spec: {
-                                propertyURI: 'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#property',
-                                instances: [{
-                                    value: 'http://exampleProperty.org',
-                                    valueType: 'uri'
-                                }]
-                            },
-                            config: {
-                                hint: ['Property URI'],
-                                label: ['Property']
                             }
                         }
                     ]
