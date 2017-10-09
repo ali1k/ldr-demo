@@ -50,9 +50,13 @@ class Nav extends React.Component {
                 configMenu = '';
             }
         }
+        let navbarColor = 'blue';
+        if(this.props.loading ){
+            navbarColor = 'grey';
+        }
         return (
             <div className="ui fluid container" ref="defaultNavbar">
-                <nav ref="defaultNavbar" className="ui blue menu inverted navbar grid">
+                <nav ref="defaultNavbar" className={'ui menu inverted navbar grid ' + navbarColor}>
                     <NavLink routeName="home" className="brand item" href='http://ld-r.org'>
                         {this.props.loading
                             ? <img src="/assets/img/loader.gif" alt="loading..." style={{
