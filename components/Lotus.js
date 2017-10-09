@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import LotusStore from '../stores/LotusStore';
 import {navigateAction} from 'fluxible-router';
@@ -137,8 +138,8 @@ class Lotus extends React.Component {
     }
 }
 Lotus.contextTypes = {
-    executeAction: React.PropTypes.func.isRequired,
-    getUser: React.PropTypes.func
+    executeAction: PropTypes.func.isRequired,
+    getUser: PropTypes.func
 };
 Lotus = connectToStores(Lotus, [LotusStore], function (context, props) {
     return {
