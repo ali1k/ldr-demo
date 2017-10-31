@@ -17,7 +17,6 @@ class FacetedBrowserStore extends BaseStore {
         //all the filters and constraints applied to the facet: used for pivot change
         this.facetQueryConstraints = {};
         this.page = 1;
-        this.graphName = '';
         this.datasetURI = '';
         this.datasetConfig= {};
         this.config = {};
@@ -80,7 +79,6 @@ class FacetedBrowserStore extends BaseStore {
         this.resources = payload.facets.items;
         this.total = payload.total;
         this.page = payload.page;
-        this.graphName = payload.graphName;
         this.datasetURI = payload.datasetURI;
         this.resourceQuery = payload.resourceQuery;
         this.error = payload.error;
@@ -98,7 +96,6 @@ class FacetedBrowserStore extends BaseStore {
             delete this.facetQueryConstraints[payload.facets.propertyURI];
         }
         this.page = payload.page;
-        this.graphName = payload.graphName;
         this.datasetURI = payload.datasetURI;
         this.emitChange();
     }
@@ -112,6 +109,18 @@ class FacetedBrowserStore extends BaseStore {
         this.facetsCount[payload.propertyURI] = payload.total;
         this.emitChange();
     }
+    loadMasterFacetsFromState(payload) {
+        this.datasetURI = payload.id;
+        this.config ={list: [], config: {}};
+        for(let prop in payload.selection){
+            this.facets[prop] = payload.selection[prop];
+            this.facetsCount[prop] = payload.selection[prop].length;
+            if(this.config.list.indexOf(prop) === -1){
+                this.config.list.push(prop);
+            }
+        }
+        this.emitChange();
+    }
     handleFacetSideEffectsCount(payload) {
         this.facetsCount[payload.propertyURI] = payload.total;
         this.emitChange();
@@ -121,7 +130,6 @@ class FacetedBrowserStore extends BaseStore {
         this.facetQuery[payload.facets.propertyURI] = payload.facets.facetQuery;
         this.facetQueryConstraints[payload.facets.propertyURI] = payload.facets.facetQueryConstraints;
         this.page = payload.page;
-        this.graphName = payload.graphName;
         this.datasetURI = payload.datasetURI;
         this.emitChange();
     }
@@ -130,7 +138,6 @@ class FacetedBrowserStore extends BaseStore {
         return {
             facets: this.facets,
             facetsCount: this.facetsCount,
-            graphName: this.graphName,
             datasetURI: this.datasetURI,
             datasetConfig: this.datasetConfig,
             config: this.config,
@@ -149,7 +156,6 @@ class FacetedBrowserStore extends BaseStore {
     rehydrate(state) {
         this.facets = state.facets;
         this.facetsCount = state.facetsCount;
-        this.graphName = state.graphName;
         this.datasetURI = state.datasetURI;
         this.datasetConfig = state.datasetConfig;
         this.config = state.config;
@@ -169,6 +175,7 @@ FacetedBrowserStore.handlers = {
     'LOAD_MASTER_FACETS_SUCCESS': 'updateMasterFacets',
     'LOAD_MASTER_MORE_FACETS_SUCCESS': 'updateMoreMasterFacets',
     'LOAD_MASTER_FACETS_COUNT_SUCCESS': 'updateMasterFacetsCount',
+    'LOAD_MASTER_FROM_STATE_SUCCESS': 'loadMasterFacetsFromState',
     'LOAD_SIDE_EFFECTS_FACETS_SUCCESS': 'handleFacetSideEffects',
     'LOAD_SIDE_EFFECTS_COUNT_FACETS_SUCCESS': 'handleFacetSideEffectsCount',
     'LOAD_FACETS_CONFIG': 'loadFacetConfigs',
