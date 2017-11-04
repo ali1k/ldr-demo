@@ -3,6 +3,7 @@ import loadDataset from '../actions/loadDataset';
 import loadResource from '../actions/loadResource';
 import loadUsersList from '../actions/loadUsersList';
 import loadFacets from '../actions/loadFacets';
+import loadEnvStates from '../actions/loadEnvStates';
 import {appFullTitle, appShortTitle, authDatasetURI, baseResourceDomain} from '../configs/general';
 
 export default {
@@ -54,18 +55,31 @@ export default {
             context.executeAction(loadDatasets, {pageTitle: 'Twitter Analysis'}, done);
         }
     },
+    wysiwyq: {
+        path: '/wysiwyq',
+        method: 'get',
+        handler: require('../components/WYSIWYQ'),
+        label: 'ImportQuery',
+        action: (context, payload, done) => {
+            context.executeAction(loadEnvStates, {pageTitle: 'Import a Query | WYSIWYQ mode'}, done);
+        }
+    },
     facets: {
-        path: '/browse/:id?',
+        path: '/browse/:id?/:stateURI?',
         method: 'get',
         handler: require('../components/dataset/FacetedBrowser'),
         label: 'Faceted Browser',
         action: (context, payload, done) => {
-            let datasetURI, page;
+            let datasetURI, page, stateURI;
             datasetURI = payload.params.id;
+            stateURI = payload.params.stateURI;
             if (!datasetURI) {
                 datasetURI = 0;
             }
-            context.executeAction(loadFacets, {mode: 'init', id: decodeURIComponent(datasetURI), selection: 0, page: 1}, done);
+            if (!stateURI) {
+                stateURI = 0;
+            }
+            context.executeAction(loadFacets, {mode: 'init', id: decodeURIComponent(datasetURI), stateURI: stateURI, selection: 0, page: 1}, done);
         }
     },
     datasets: {

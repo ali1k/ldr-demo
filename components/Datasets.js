@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import {navigateAction} from 'fluxible-router';
+import {navigateAction, NavLink} from 'fluxible-router';
 import {connectToStores} from 'fluxible-addons-react';
-import {enableAuthentication, defaultDatasetURI, enableAddingNewDatasets, enableDatasetAnnotation} from '../configs/general';
+import {enableAuthentication, defaultDatasetURI, enableAddingNewDatasets, enableDatasetAnnotation, enableQuerySaveImport} from '../configs/general';
 import {checkViewAccess, checkEditAccess} from '../services/utils/accessManagement';
 import DatasetsStore from '../stores/DatasetsStore';
 import URIUtil from './utils/URIUtil';
@@ -42,6 +42,7 @@ class Datasets extends React.Component {
         let createDatasetDIV = '';
         let annotateDatasetDIV = '';
         let datasetActionsDIV = '';
+        let queryImportDIV = '';
         let info = <div className="ui blue message">
                         The list contains only the datasets for which at least one <b>config scope</b> is found!
         </div>;
@@ -68,8 +69,15 @@ class Datasets extends React.Component {
                     <i className="cubes square large yellow icon "></i> <i className="twitter black icon"></i>Analyze your tweets
                 </a>
             </div>;
+            if(enableQuerySaveImport){
+                queryImportDIV = <div className="item">
+                    <NavLink  className="medium ui basic icon labeled button" href="/wysiwyq">
+                        <i className="large blue level down icon"></i>Import a Query
+                    </NavLink>
+                </div>;
+            }
             datasetActionsDIV = <div className="ui horizontal divided list">
-                {createDatasetDIV} {annotateDatasetDIV} {tweettDIV}
+                {createDatasetDIV} {annotateDatasetDIV} {queryImportDIV} {tweettDIV}
                 <br/>
             </div>;
             if(!dss.length){
