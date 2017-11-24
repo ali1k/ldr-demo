@@ -5,7 +5,8 @@ export default {
     sparqlEndpoint: {
         'generic': {
             //host: 'localhost', port: 3020, path: '/sparql/', endpointType: 'ClioPatria'
-            host: 'localhost', port: 8890, path: '/sparql'
+            //host: 'localhost', port: 8890, path: '/sparql'
+            host: 'vt.ali.ops.few.vu.nl', port: 80, path: '/sparql'
         },
         'http://localhost:5820/testDB/query': {
             host: 'localhost', port: 5820, path: '/testDB/query', graphName: 'default', endpointType: 'stardog', useReasoning: 1
@@ -51,7 +52,8 @@ export default {
         { host: 'lookup.dbpedia.org' }
     ],
     dbpediaSpotlightService: [
-        { host: 'model.dbpedia-spotlight.org', port: 80, path: '/en/annotate' }
+        //{ host: 'model.dbpedia-spotlight.org', port: 80, path: '/en/annotate' }
+        { host: '145.100.59.37', port: 2222, path: '/rest/annotate' }
     ],
     //it is used only if you enabled recaptcha feature for user authentication
     //get keys from https://www.google.com/recaptcha

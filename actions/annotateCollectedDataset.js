@@ -28,7 +28,7 @@ let processData = (page, maxPerPage, totalPages, payload, done)=> {
                     progressCounter++;
                     context.executeAction(annotateText, {
                         query: resource.ov,
-                        id: resource.r
+                        id: resource.r,
                     }, (err3, res3)=>{
                         //console.log('annotateText', resource.ov, res3);
                         //create a queue for enrichment
@@ -56,8 +56,8 @@ let processData = (page, maxPerPage, totalPages, payload, done)=> {
         }
         if(asyncAnnotationTasks [page].length){
             //run tasks async: todo: increase parallel requests to dbpedia sptlight?
-            async.series(asyncAnnotationTasks [page], (err5, res5)=>{
-            //async.parallel(asyncAnnotationTasks [page], (err5, res5)=>{
+            //async.series(asyncAnnotationTasks [page], (err5, res5)=>{
+            async.parallel(asyncAnnotationTasks [page], (err5, res5)=>{
                 //console.log(asyncEnrichmentTasks);
                 //async.series(asyncEnrichmentTasks [page], (err6, res6)=>{
                 async.parallel(asyncEnrichmentTasks [page], (err6, res6)=>{
