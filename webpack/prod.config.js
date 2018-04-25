@@ -2,7 +2,6 @@ let webpack = require('webpack');
 let path = require('path');
 //plugins
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const StatsWriterPlugin = require('webpack-stats-plugin').StatsWriterPlugin;
 const Visualizer = require('webpack-visualizer-plugin');
 
@@ -47,9 +46,7 @@ let webpackConfig = {
                 exclude: /node_modules(?!(\/|\\)react-sigma)/ ,
                 loader: 'babel-loader',
                 options: {
-                    presets: [
-                        ['es2015', { modules: false }]
-                    ]
+                    babelrc: true
                 }
             },
             {
@@ -66,9 +63,6 @@ let webpackConfig = {
         setImmediate: false
     },
     plugins: [
-        new CleanWebpackPlugin([
-            'dist',
-        ]),
         // css files from the extract-text-plugin loader
         new ExtractTextPlugin({
             filename: '../css/vendor.bundle.css',
