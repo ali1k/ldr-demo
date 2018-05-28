@@ -52,8 +52,12 @@ export default {
         { host: 'lookup.dbpedia.org' }
     ],
     dbpediaSpotlightService: [
-        //{ host: 'model.dbpedia-spotlight.org', port: 80, path: '/en/annotate' }
-        { host: '145.100.59.37', port: 2222, path: '/rest/annotate' }
+      //EN
+      { host: '145.100.58.198', port: 2222, path: '/rest/annotate' },
+      //NL{
+      {host: '145.100.58.198', port: 2223, path: '/rest/annotate' }
+        //{ host: 'www.dbpedia-spotlight.com', port: 80, path: '/en/annotate' }
+        //{ host: 'spotlight.risis.data2semantics.ops.few.vu.nl', port: 80, path: '/rest/annotate' }
     ],
     //it is used only if you enabled recaptcha feature for user authentication
     //get keys from https://www.google.com/recaptcha
