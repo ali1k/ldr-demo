@@ -194,7 +194,7 @@ class DynamicConfigurator {
                 graphEnd = '';
             }
             const noAuthQuery  = `
-            SELECT DISTINCT ?config ?label ?host ?port ?path ?endpointType ?setting ?settingValue WHERE {
+            SELECT DISTINCT ?config ?label ?host ?port ?path ?protocol ?username ?password ?endpointType ?setting ?settingValue WHERE {
                 ${graph}
                     ?config a ldr:ServerConfig ;
                             ldr:dataset <${datasetURI}> ;
@@ -203,15 +203,18 @@ class DynamicConfigurator {
                             ldr:path ?path ;
                             ldr:endpointType ?endpointType ;
                             ?setting ?settingValue .
+                            OPTIONAL { ?config ldr:protocol ?protocol . }
+                            OPTIONAL { ?config ldr:username ?username . }
+                            OPTIONAL { ?config ldr:password ?password . }
                             OPTIONAL { ?config rdfs:label ?label . }
-                            FILTER (?setting !=rdf:type && ?setting !=ldr:dataset && ?setting !=ldr:host && ?setting !=ldr:port && ?setting !=ldr:path && ?setting !=ldr:endpointType)
+                            FILTER (?setting !=rdf:type && ?setting !=ldr:dataset && ?setting !=ldr:host && ?setting !=ldr:protocol && ?setting !=ldr:port && ?setting !=ldr:path && ?setting !=ldr:endpointType && ?setting !=ldr:username && ?setting !=ldr:password)
                 ${graphEnd}
             }
             `;
             let query;
             if(userSt){
                 query = `
-                SELECT DISTINCT ?config ?label ?host ?port ?path ?endpointType ?setting ?settingValue WHERE {
+                SELECT DISTINCT ?config ?label ?host ?port ?path ?protocol ?username ?password ?endpointType ?setting ?settingValue WHERE {
                     ${graph}
                     {
                         ?config a ldr:ServerConfig ;
@@ -222,8 +225,11 @@ class DynamicConfigurator {
                                 ldr:path ?path ;
                                 ldr:endpointType ?endpointType ;
                                 ?setting ?settingValue .
+                                OPTIONAL { ?config ldr:protocol ?protocol . }
+                                OPTIONAL { ?config ldr:username ?username . }
+                                OPTIONAL { ?config ldr:password ?password . }
                                 OPTIONAL { ?config rdfs:label ?label . }
-                                FILTER (?setting !=rdf:type && ?setting !=ldr:dataset && ?setting !=ldr:host && ?setting !=ldr:port && ?setting !=ldr:path && ?setting !=ldr:endpointType)
+                                FILTER (?setting !=rdf:type && ?setting !=ldr:dataset && ?setting !=ldr:host && ?setting !=ldr:protocol && ?setting !=ldr:port && ?setting !=ldr:path && ?setting !=ldr:endpointType && ?setting !=ldr:username && ?setting !=ldr:password)
                     }
                     UNION
                     {
@@ -234,8 +240,11 @@ class DynamicConfigurator {
                                 ldr:path ?path ;
                                 ldr:endpointType ?endpointType ;
                                 ?setting ?settingValue .
+                                OPTIONAL { ?config ldr:protocol ?protocol . }
+                                OPTIONAL { ?config ldr:username ?username . }
+                                OPTIONAL { ?config ldr:password ?password . }
                                 OPTIONAL { ?config rdfs:label ?label . }
-                                FILTER (?setting !=rdf:type && ?setting !=ldr:dataset && ?setting !=ldr:host && ?setting !=ldr:port && ?setting !=ldr:path && ?setting !=ldr:endpointType)
+                                FILTER (?setting !=rdf:type && ?setting !=ldr:dataset && ?setting !=ldr:host && ?setting !=ldr:protocol && ?setting !=ldr:port && ?setting !=ldr:path && ?setting !=ldr:endpointType && ?setting !=ldr:username && ?setting !=ldr:password)
                                 filter not exists {
                                     ?config ldr:createdBy ?user.
                                 }
@@ -761,6 +770,10 @@ class DynamicConfigurator {
             }
             let date = new Date();
             let currentDate = date.toISOString(); //"2011-12-19T15:28:46.493Z"
+            let protocolSTR = '';
+            if(options.protocol){
+                protocolSTR =` ldr:protocol """${options.protocol}""";`
+            }
             const query = `
             INSERT DATA { ${graph}
                 <${rnc}> a ldr:ServerConfig ;
@@ -769,6 +782,7 @@ class DynamicConfigurator {
                          ldr:host """${options.host}""";
                          ldr:port """${options.port}""";
                          ldr:path """${options.path}""";
+                         ${protocolSTR}
                          ldr:endpointType """${options.endpointType}""";
                          ldr:graphName """${options.graphName}""";
                          ${userSt}
@@ -1451,6 +1465,7 @@ class DynamicConfigurator {
             }
             output.sparqlEndpoint[datasetURI].port = el.port.value;
             output.sparqlEndpoint[datasetURI].path = el.path.value;
+            output.sparqlEndpoint[datasetURI].protocol = el.protocol && el.protocol.value ? el.protocol.value : 'http';
             output.sparqlEndpoint[datasetURI].endpointType = el.endpointType.value;
             //assume that all values will be stored in an array expect numbers: Not-a-Number
             settingProp = el.setting.value.replace(ldr_prefix, '').trim();
