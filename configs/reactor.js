@@ -29,6 +29,12 @@ export default {
                 datasetLabel: ['LD-R Configurations'],
                 resourceLabelProperty: ['http://www.w3.org/2000/01/rdf-schema#label']
             },
+            'http://ld-r.org/mappings': {
+                readOnly: 0,
+                resourceFocusType: ['https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#CSVMapping'],
+                datasetLabel: ['LD-R Mapping Configurations'],
+                resourceLabelProperty: ['http://www.w3.org/2000/01/rdf-schema#label']
+            },
             'http://ld-r.org/datasets/void': {
                 resourceFocusType: ['http://rdfs.org/ns/void#Dataset'],
                 readOnly: 0,
@@ -715,6 +721,24 @@ export default {
                             }
                         },
                     ]
+                }
+            },
+            //for mappings
+            'http://ld-r.org/mappings': {
+                'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#csvFile': {
+                    readOnlyProperty: 1,
+                    label: ['CSV File']
+                },
+                'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#SkippedColumns': {
+                    allowNewValue: 1
+                },
+                'http://www.w3.org/1999/02/22-rdf-syntax-ns#type': {
+                    readOnlyProperty: 1
+                },
+                'https://github.com/ali1k/ld-reactor/blob/master/vocabulary/index.ttl#entityType': {
+                    objectIEditor: ['PrefixBasedInput'],
+                    objectIViewer: ['PrefixBasedView'],
+                    includeOnly: ['classes']
                 }
             },
             //for configuration manager
