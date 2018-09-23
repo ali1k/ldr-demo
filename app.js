@@ -15,6 +15,7 @@ import LotusStore from './stores/LotusStore';
 import DatasetsStore from './stores/DatasetsStore';
 import DatasetAnnotationStore from './stores/DatasetAnnotationStore';
 import QueryImportStore from './stores/QueryImportStore';
+import ImportStore from './stores/ImportStore';
 
 let app = new Fluxible({
     component: Application,
@@ -31,7 +32,8 @@ let app = new Fluxible({
         FacetedBrowserStore,
         LotusStore,
         DatasetAnnotationStore,
-        QueryImportStore
+        QueryImportStore,
+        ImportStore
     ]
 });
 
