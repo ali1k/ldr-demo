@@ -971,22 +971,13 @@ export default {
                     objectIEditor: ['BasicOptionInput'],
                     objectIViewer: ['BasicOptionView'],
                     allowUserDefinedValue: 1,
-                    options: [{
-                            label: 'ClioPatria',
-                            value: 'cliopatria'
-                        },
-                        {
-                            label: 'Virtuoso',
-                            value: 'virtuoso'
-                        },
-                        {
-                            label: 'Stardog',
-                            value: 'stardog'
-                        },
-                        {
-                            label: 'Sesame',
-                            value: 'sesame'
-                        }
+                    options: [
+                        {label: 'ClioPatria', value: 'cliopatria'},
+                        {label: 'Virtuoso', value: 'virtuoso'},
+                        {label: 'Stardog', value: 'stardog'},
+                        {label: 'Blazegraph', value: 'blazegraph'},
+                        {label: 'GraphDB', value: 'graphdb'},
+                        {label: 'Sesame', value: 'sesame'}
                     ]
                 }
             },
