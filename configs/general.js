@@ -37,6 +37,8 @@ export default {
     //only works if enableDynamicReactorConfiguration is set to 1 and triple store allows update qureies
     enableAddingNewDatasets: 1,
     enableDatasetAnnotation: 1,
+    //allows users to save and import a SPARQL query from/to the system: WYSIWYQ concept
+    enableQuerySaveImport: 1,
     //graph that stores your configurations
     configDatasetURI: ['http://ld-r.org/configurations'],
     //will enable/disable auto config
