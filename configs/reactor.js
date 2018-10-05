@@ -758,7 +758,6 @@ export default {
                     objectIViewer: ['PrefixBasedView'],
                     includeOnly: ['classes']
                 }
-              }
             },
             //for configuration manager
             'http://ld-r.org/configurations': {
