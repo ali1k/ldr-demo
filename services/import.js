@@ -113,6 +113,7 @@ export default {
             //generate and upload the JSON-LD file from CSV config
             getJSONLDConfig(params.resourceURI, {}, (res)=>{
                 //console.log(res);
+                //console.log(res);
                 //start creating JOSN-LD
                 let csvPath = path.join(__dirname, '..', uploadFolder[0] + '/' + res.csvFile);
                 let jsonFileName = res.csvFile.split('\.')[0]+'.json';
@@ -204,16 +205,15 @@ export default {
                         let tmpObj = {};
                         tmpObj['@type'] = contextOptions['entityType'];
                         for(let prop in data){
-                            //console.log(line[prop]);
-                            if(prop == contextOptions['idColumn']){
+                            //console.log(prop.toLowerCase(), contextOptions['idColumn'].toLowerCase());
+                            if(prop.toLowerCase() === contextOptions['idColumn'].toLowerCase()){
                                 tmpObj['@id'] = 'r:' + encodeURIComponent(camelCase(data[prop]));
-                            } else {
-                                if(contextOptions['skippedColumns'].indexOf(camelCase(prop)) == -1){
-                                    if(contextOptions['customMappings'] && contextOptions['customMappings'][camelCase(prop)]){
-                                        tmpObj[contextOptions['customMappings'][camelCase(prop)]] = isNaN(data[prop]) ? data[prop] : Number(data[prop]) ;
-                                    }else{
-                                        tmpObj['v:'+camelCase(prop)] = isNaN(data[prop]) ? data[prop] : Number(data[prop]) ;
-                                    }
+                            }
+                            if(contextOptions['skippedColumns'].indexOf(camelCase(prop)) === -1){
+                                if(contextOptions['customMappings'] && contextOptions['customMappings'][camelCase(prop)]){
+                                    tmpObj[contextOptions['customMappings'][camelCase(prop)]] = isNaN(data[prop]) ? data[prop] : Number(data[prop]) ;
+                                }else{
+                                    tmpObj['v:'+camelCase(prop)] = isNaN(data[prop]) ? data[prop] : Number(data[prop]) ;
                                 }
                             }
                         }
