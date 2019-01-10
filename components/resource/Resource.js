@@ -99,17 +99,19 @@ class Resource extends React.Component {
         //categorize properties in different tabs
         if(this.props.config.usePropertyCategories){
             currentCategory = this.props.currentCategory;
+            let sortedCategories = this.props.config.propertyCategories;
+            sortedCategories.sort();
             if(!currentCategory){
-                currentCategory = this.props.config.propertyCategories[0];
+                currentCategory = sortedCategories[0];
             }
-            tabsDIV = this.props.config.propertyCategories.map(function(node, index) {
+            tabsDIV = sortedCategories.map(function(node, index) {
                 return (
                     <NavLink className={(node === currentCategory ? 'item link active' : 'item link')} key={index} routeName="resource" href={'/dataset/' + encodeURIComponent(self.props.datasetURI ) + '/resource/' + encodeURIComponent(self.props.resource) + '/' + node + '/' + encodeURIComponent(self.props.propertyPath)}>
                         {node}
                     </NavLink>
                 );
             });
-            tabsContentDIV = this.props.config.propertyCategories.map(function(node, index) {
+            tabsContentDIV = sortedCategories.map(function(node, index) {
                 return (
                     <div key={index} className={(node === currentCategory ? 'ui bottom attached tab segment active' : 'ui bottom attached tab segment')}>
                         <div className="ui grid">
