@@ -457,6 +457,10 @@ class FacetQuery{
                     rangeDataType = '<' + options.facetConfigs[key].dataType + '>';
                     rangeDataTypeTail = '^^' + '<' + options.facetConfigs[key].dataType + '>';
                 }
+                //add language filters
+                if(options.facetConfigs && options.facetConfigs[key] && options.facetConfigs[key].language){
+                    filters.push('(lang(?v' + i + ')="'+options.facetConfigs[key].language+'")');
+                }
                 //-----------
                 //apply range filters
                 if(tmp.length && options && options.range && options.range[key]){
@@ -690,6 +694,13 @@ class FacetQuery{
             queryheart = st;
         }
         queryheart = st_extra + ' ' + queryheart;
+        //apply other types of filter on facet
+        let facetFilters ='';
+        if(options.facetConfigs && options.facetConfigs[propertyURI] && options.facetConfigs[propertyURI].language){
+            facetFilters = `
+            FILTER(lang(?v)="${options.facetConfigs[propertyURI].language}")
+            `;
+        }
         let queryConstraint = '';
         if(options.facetConfigs && options.facetConfigs[propertyURI] && options.facetConfigs[propertyURI].pivotDataset){
             if(options.facetConfigs[propertyURI]){
@@ -710,6 +721,7 @@ class FacetQuery{
         SELECT (count(DISTINCT ?s) AS ?total) ?v WHERE {
           ${gStart}
               ${queryheart}
+              ${facetFilters}
           ${gEnd}
         } GROUP BY ?v ORDER BY DESC(?total) LIMIT 500
         `;
@@ -721,6 +733,13 @@ class FacetQuery{
         let {gStart, gEnd} = this.prepareGraphName(graphName);
         let st_extra = this.makeExtraTypeFilters(endpointParameters, rconfig);
         let st = this.getMultipleFilters(endpointParameters, graphName, prevSelection, rconfig, options);
+        //apply other types of filter on facet
+        let facetFilters ='';
+        if(options.facetConfigs && options.facetConfigs[propertyURI] && options.facetConfigs[propertyURI].language){
+            facetFilters = `
+            FILTER(lang(?v)="${options.facetConfigs[propertyURI].language}")
+            `;
+        }
         if(this.isMultiGraphFacet(propertyURI)){
             //to support browsing mutiple graphs
             queryheart = this.prepareMultiGraphQuery(endpointParameters, graphName, type, propertyURI, '', st, '');
@@ -733,6 +752,7 @@ class FacetQuery{
         SELECT (count(DISTINCT ?v) AS ?total) WHERE {
             ${gStart}
                 ${queryheart}
+                ${facetFilters}
             ${gEnd}
         }
         `;
@@ -768,18 +788,26 @@ class FacetQuery{
     handleAnalysisProps(options, endpointParameters, graphName, type){
         let self = this;
         let apLabel = '', analysisSelector = '', analysisPhrase = '', analysisPropsList= [], aCounter = 0;
+        let filters =[];
         if(options && options.analysisProps){
             for(let prop in options.analysisProps){
                 aCounter++;
                 apLabel = 'ldr_ap'+aCounter+'_' + self.getPropertyLabel(prop);
                 analysisSelector = analysisSelector + ' ?' + apLabel;
                 analysisPropsList.push(apLabel);
+                //add language filters
+                if(options.facetConfigs && options.facetConfigs[prop] && options.facetConfigs[prop].language){
+                    filters.push('(lang(?' + apLabel + ')="'+options.facetConfigs[prop].language+'")');
+                }
                 if(self.isMultiGraphFacet(prop)){
                     //to support browsing mutiple graphs
                     analysisPhrase = analysisPhrase + self.prepareMultiGraphQuery(endpointParameters, graphName, type, prop, '', '', apLabel);
                 }else{
                     analysisPhrase = analysisPhrase + '?s ' + self.filterPropertyPath(prop) + ' ?' + apLabel + ' .';
                 }
+            }
+            if(filters.length){
+                analysisPhrase = analysisPhrase + 'FILTER('+filters.join(' && ')+')';
             }
         }
         //todo: OPTIONAL for missing values
